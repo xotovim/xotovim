@@ -1,6 +1,6 @@
 -- https://github.com/lukas-reineke/indent-blankline.nvim
 
-vim.opt.list = true
+vim.opt.list = false
 
 -- vim.opt.listchars:append("space:⋅")
 -- vim.opt.listchars:append("eol:↴")
@@ -22,7 +22,7 @@ require("indent_blankline").setup {
   show_current_context_start = false,
   show_end_of_line = false,
   show_trailing_blankline_indent = false,
-  space_char_blankline = " ",
+  space_char_blankline = "",
   -- char_highlight_list = { "IndentBlanklineIndent1", "IndentBlanklineIndent2", "IndentBlanklineIndent3", "IndentBlanklineIndent4", "IndentBlanklineIndent5", "IndentBlanklineIndent6", },
   char=" ",
   -- char_highlight_list = {

@@ -1,29 +1,29 @@
 return {
     
-        {
-    "lunarvim/lunar.nvim",
-    lazy = false,
-    -- priority = 1000,
-	-- -- event = "BufEnter",
-
-    config = function()
-        -- load the colorscheme here
-        vim.cmd([[colorscheme lunar]])
-        require("config.colorscheme")
-    end
-}, 
---     {
---     "xotovim/xotonight",
---     lazy = true,
---     priority = 1000,
+--         {
+--     "lunarvim/lunar.nvim",
+--     lazy = false,
+--     -- priority = 1000,
 -- 	event = "BufEnter",
+
 --     config = function()
 --         -- load the colorscheme here
---         vim.cmd([[colorscheme xotonight]])
+--         vim.cmd([[colorscheme lunar]])
 --         require("config.colorscheme")
---         require("plugins.xotonight")
 --     end
 -- }, 
+    {
+    "xotovim/xotonight",
+    lazy = true,
+    priority = 1000,
+	event = "BufEnter",
+    config = function()
+        -- load the colorscheme here
+        vim.cmd([[colorscheme xotonight]])
+        require("config.colorscheme")
+        require("plugins.xotonight")
+    end
+}, 
 
 {
     'is0n/fm-nvim',
@@ -72,9 +72,10 @@ return {
     lazy = true,
     event = "VeryLazy",
     config = function()
-        require('hlargs').setup({
-            color = "#F7768E"
-        })
+        require('plugins.hlargs')
+        -- require('hlargs').setup({
+        --     color = "#F7768E"
+        -- })
     end
 }, 
 
@@ -127,9 +128,10 @@ return {
                     "nvim-treesitter/nvim-treesitter-textobjects", "RRethy/nvim-treesitter-textsubjects", {
         "m-demare/hlargs.nvim",
         config = function()
-            require("hlargs").setup({
-                color = "#F7768E"
-            })
+            require('plugins.hlargs')
+            -- require("hlargs").setup({
+            --     color = "#F7768E"
+            -- })
         end
     }}
 },
@@ -419,7 +421,10 @@ return {
 
 {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    lazy = true,
+    event = "VeryLazy",
+    -- lazy = false,
+    -- event = "BufReadPre",
     config = function()
         require("plugins.indent")
     end
