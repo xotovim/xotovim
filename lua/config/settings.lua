@@ -12,6 +12,7 @@ local options = {
   ignorecase     = true, --- needed for smartcase
   laststatus     = 3, --- have a global statusline at the bottom instead of one for each window
   lazyredraw     = true, --- makes macros faster & prevent errors in complicated mappings
+  foldenable     = false, --- makes macros faster & prevent errors in complicated mappings
   mouse          = "a", --- enable mouse
   number         = true, --- shows current line number
   pumheight      = 10, --- max num of items in completion menu

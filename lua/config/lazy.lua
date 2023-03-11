@@ -13,7 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "xotonight" } },
+  install = { colorscheme = { XotoVimGlobal.colorscheme } },
   checker = { enabled = true },
   performance = {
     rtp = {

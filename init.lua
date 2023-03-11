@@ -1,4 +1,4 @@
-require('config.config')
+require('config.xotovim')
 require('utils.globals')
 require('config.functions')
 require('config.settings')

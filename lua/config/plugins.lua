@@ -1,14 +1,31 @@
-return {{
-    "xotovim/xotonight",
-    lazy = true,
-    priority = 1000,
-	event = "BufEnter",
+return {
+    
+        {
+    "lunarvim/lunar.nvim",
+    lazy = false,
+    -- priority = 1000,
+	-- -- event = "BufEnter",
+
     config = function()
         -- load the colorscheme here
-        vim.cmd([[colorscheme xotonight]])
+        vim.cmd([[colorscheme lunar]])
         require("config.colorscheme")
     end
-}, {
+}, 
+--     {
+--     "xotovim/xotonight",
+--     lazy = true,
+--     priority = 1000,
+-- 	event = "BufEnter",
+--     config = function()
+--         -- load the colorscheme here
+--         vim.cmd([[colorscheme xotonight]])
+--         require("config.colorscheme")
+--         require("plugins.xotonight")
+--     end
+-- }, 
+
+{
     'is0n/fm-nvim',
     lazy = true,
     event = "VeryLazy",

@@ -1,7 +1,23 @@
 require'nvim-treesitter.configs'.setup {
   -- ensure_installed = {}, -- one of "all", or a list of languages
+  ensured_installed = {
+		"bash",
+		"comment",
+		"css",
+		"html",
+		"javascript",
+		"jsdoc",
+		"jsonc",
+		"lua",
+		"markdown",
+		"regex",
+		"scss",
+		"toml",
+		"typescript",
+		"yaml",
+	},
   auto_install = true,
-  sync_install = false,            -- install languages synchronously (only applied to `ensure_installed`)
+  sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "haskell" },  -- list of parsers to ignore installing
   highlight = {
     enable = true,
@@ -23,25 +39,25 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   },
 
+--   rainbow = {
+--     enable = true,
+--     extended_mode = true,
+--  },
   rainbow = {
     enable = true,
-    extended_mode = true,
- },
-  -- rainbow = {
-  --   enable = true,
-  --   colors = {
-  --     "#68a0b0",
-  --     "#946EaD",
-  --     "#c7aA6D",
-  --     -- "Gold",
-  --     -- "Orchid",
-  --     -- "DodgerBlue",
-  --     -- "Cornsilk",
-  --     -- "Salmon",
-  --     -- "LawnGreen",
-  --   },
-  --   disable = { "html" },
-  -- },
+    colors = {
+      "#68a0b0",
+      "#946EaD",
+      "#c7aA6D",
+      -- "Gold",
+      -- "Orchid",
+      -- "DodgerBlue",
+      -- "Cornsilk",
+      -- "Salmon",
+      -- "LawnGreen",
+    },
+    disable = { "html" },
+  },
 
   context_commentstring = {
     enable = true,

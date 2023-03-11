@@ -10,7 +10,6 @@ capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-  
   properties = {
     'documentation',
     'detail',
@@ -36,7 +35,7 @@ capabilities.textDocument.codeAction = {
 }
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
-  lineFoldingOnly = false
+  lineFoldingOnly = true
 }
 
 local on_attach = function(client, bufnr)
@@ -98,7 +97,7 @@ local settings = {
       includeInlayParameterNameHints = 'all',
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
       includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = true,
+      includeInlayVariableTypeHints = false,
       includeInlayPropertyDeclarationTypeHints = true,
       includeInlayFunctionLikeReturnTypeHints = false,
       includeInlayEnumMemberValueHints = true,
@@ -109,7 +108,7 @@ local settings = {
       includeInlayParameterNameHints = 'all',
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
       includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = true,
+      includeInlayVariableTypeHints = false,
       includeInlayPropertyDeclarationTypeHints = true,
       includeInlayFunctionLikeReturnTypeHints = false,
       includeInlayEnumMemberValueHints = true,

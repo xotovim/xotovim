@@ -1,8 +1,8 @@
-local function highlight_cursorword()
-  if vim.g.cursorword_highlight ~= false then
-    vim.cmd('highlight CursorWord term=underline cterm=underline gui=underline')
-  end
-end
+-- local function highlight_cursorword()
+--   if vim.g.cursorword_highlight ~= false then
+--     vim.cmd('highlight CursorWord term=underline cterm=underline gui=underline')
+--   end
+-- end
 
 local function disable_cursorword()
   local disable_ft = {
@@ -68,7 +68,7 @@ local function cursor_moved()
   end
 end
 
-highlight_cursorword()
+-- highlight_cursorword()
 
 vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
   pattern = '*',

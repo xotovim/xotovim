@@ -9,9 +9,8 @@
 local icons = require('icons')
 -- local icons = require("utils.icons")
 
-
 XotoVimGlobal = {
-  colorscheme = 'xotonight',
+  colorscheme = 'lunar',
   -- none, single, double, shadow, rounded
   ui = { float = { border = 'single' } },
 
@@ -37,7 +36,6 @@ XotoVimGlobal = {
   },
 
   lsp = {
-    
     
     -- keep off so it wont override other configurations
     virtual_text = false, -- show virtual text (errors, warnings, info) inline messages

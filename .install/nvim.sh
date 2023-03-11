@@ -2,13 +2,15 @@
 
 ######################################### ENVIRONMENTS
 
-NEOVIM_VERSION=0.8.0
+NEOVIM_VERSION=v0.8.0
+# NEOVIM_VERSION=v0.8.3
+# NEOVIM_VERSION=v0.8.2
+# NEOVIM_VERSION=nightly # 0.9.0
 
 ################################# CLEANING
 
 SYSTEM_MACHINE=''
 SYSTEM_OS="$(uname)"
-
 
 ################################################ CASES
 
@@ -27,45 +29,30 @@ esac
 ################################################ INSTALL
 
 function installNeovim() {
-	echo ""
 	echo "🧑🏽‍💻 INSTALLING NEOVIM"
-	echo ""
-	URL="https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/${SYSTEM_MACHINE}.tar.gz"
+	URL="https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/${SYSTEM_MACHINE}.tar.gz"
 	echo $URL
-	echo ""
 	curl -LO $URL
 	tar xzvf ${SYSTEM_MACHINE}.tar.gz >/dev/null 2>&1
-	rm -rf ${SYSTEM_MACHINE}.tar.gz
-	mv ./${FILE} "${HOME}"/${FILE}
-	ln -sf "${HOME}"/${FILE}/bin/nvim /usr/local/bin/nvim
+	rm -rf ${SYSTEM_MACHINE}.tar.gz 
+	# rm -rf ${HOME}/${FILE}
+	# mkdir ${HOME}/${FILE}
+	mv ./${FILE} ${HOME}/${FILE}
+	ln -sf ${HOME}/${FILE}/bin/nvim /usr/local/bin/nvim
 }
 
 ################################################ REMOVE NVIM
 
 function removeInstalledNvim() {
-	echo ""
 	echo "❌ REMOVING NVIM"
-	echo ""
-	rm -rf "${HOME}"/nvim-macos "${HOME}"/nvim.appimage /usr/local/Cellar/nvim /usr/local/bin/nvim "${HOME}"/.cache/nvim "${HOME}"/.cache/nvim "${HOME}"/.local/share/nvim /usr/local/share/lua /usr/local/Cellar/luajit-openresty /usr/local/share/luajit-2.1.0-beta3 /usr/local/lib/lua
-	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.sh)
+	rm -rf ${HOME}/nvim-macos ${HOME}/nvim.appimage /usr/local/Cellar/nvim /usr/local/bin/nvim ${HOME}/.cache/nvim ${HOME}/.cache/nvim ${HOME}/.local/share/nvim /usr/local/share/lua /usr/local/Cellar/luajit-openresty /usr/local/share/luajit-2.1.0-beta3 /usr/local/lib/lua
+	# bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.sh)
 }
 
 ################################################ INSTALL NVIM FOLDER
 
-function installNvimFolder() {
-	if [ ! -d "${HOME}/.config" ]; then
-		echo ""
-		echo "❌ NO ./.CONFIG SO CREATING IT NOW"
-		echo ""
-		mkdir ${HOME}/.config
-	fi
-}
-
-################################################ PROCESS
-
 removeInstalledNvim
 installNeovim
-installNvimFolder
 
 echo ""
 

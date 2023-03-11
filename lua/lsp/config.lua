@@ -57,8 +57,8 @@ vim.diagnostic.config({
   signs = true,
   underline = false,
   update_in_insert = false,
-  virtual_text = {prefix = XotoVimGlobal.icons.caretRight},
-  virtual_lines = {prefix = XotoVimGlobal.icons.caretRight},
+  virtual_text = true, -- {prefix = XotoVimGlobal.icons.caretRight},
+  virtual_lines = false -- {prefix = XotoVimGlobal.icons.caretRight},
 })
 
 -- ui

@@ -1,6 +1,8 @@
 local M = {}
 
-M.filetypes = {"vue"}
+M.filetypes = {
+  "vue"
+}
 
 M.init_options = {
   config = {
@@ -31,7 +33,7 @@ M.init_options = {
         scriptInitialIndent = false,
         styleInitialIndent = false
       },
-      useWorkspaceDependencies = true,
+      useWorkspaceDependencies = false,
       validation = {
         script = true,
         style = true,
