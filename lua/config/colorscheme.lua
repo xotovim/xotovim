@@ -1,14 +1,14 @@
 -- vim.cmd('colorscheme ' .. XotoVimGlobal.colorscheme) --- Set Colorscheme
 
 local XotoVimPrimary = "#242738";
-local XotoVimPrimaryLight = "#34384f";
+local XotoVimPrimaryLight = "#34384f"; 
 local XotoVimSecondary = "#e8ab5a";
 
 local colors = require("config.colors")
 
 -- if nightly
 -- if vim.fn.has("nvim-0.8") then
-
+  
   -- xotovim global colors
   vim.api.nvim_set_hl(0, 'XotoVimPrimary', { fg = XotoVimPrimary });
   vim.api.nvim_set_hl(0, 'XotoVimPrimaryLight', { fg = XotoVimPrimaryLight });

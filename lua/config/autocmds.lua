@@ -78,3 +78,61 @@ if vim.fn.has('nvim-0.8') == 1 then
     end,
   })
 end
+
+
+-- TREE ADJUST
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(tbl)
+    local set_offset = require('bufferline.api').set_offset
+
+    local bufwinid
+    local last_width
+    local autocmd = vim.api.nvim_create_autocmd('WinScrolled', {
+      callback = function()
+        bufwinid = bufwinid or vim.fn.bufwinid(tbl.buf)
+
+        local width = vim.api.nvim_win_get_width(bufwinid) + 1
+        if width ~= last_width then
+          set_offset(width, 'FileTree')
+          last_width = width
+        end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('BufWipeout', {
+      buffer = tbl.buf,
+      callback = function()
+        vim.api.nvim_del_autocmd(autocmd)
+        set_offset(0)
+      end,
+      once = true,
+    })
+  end,
+  pattern = 'NvimTree', -- or any other filetree's `ft`
+})
+
+
+-- Smooth Cursor Modes
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd({ 'ModeChanged' }, {
+  callback = function()
+    local current_mode = vim.fn.mode()
+    if current_mode == 'n' then
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#22486b' })
+      vim.fn.sign_define('smoothcursor', { text = ' ▷' })
+    elseif current_mode == 'v' then
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#bf616a' })
+      vim.fn.sign_define('smoothcursor', { text = ' ' })
+    elseif current_mode == 'V' then
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#bf616a' })
+      vim.fn.sign_define('smoothcursor', { text = ' ' })
+    elseif current_mode == '�' then
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#bf616a' })
+      vim.fn.sign_define('smoothcursor', { text = ' ' })
+    elseif current_mode == 'i' then
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#22486b' })
+      vim.fn.sign_define('smoothcursor', { text = ' ✚' })
+    end
+  end,
+})

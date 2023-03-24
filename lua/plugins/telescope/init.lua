@@ -24,16 +24,23 @@ require('telescope').setup {
     vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
     layout_config = {
       horizontal = { preview_cutoff = 120 },
-      prompt_position = "bottom",
+      prompt_position = "top",
     },
     file_sorter = require('telescope.sorters').get_fzy_sorter,
-    prompt_prefix = '  ',
+    prompt_prefix = '   ',
     color_devicons = true,
+    selection_strategy = "reset",
+    layout_strategy = "horizontal",
+    use_less = true,
+    border = {},
+    selection_caret =  " ▷  ",
+    entry_prefix = "  ",
+    initial_mode = "normal",
+    borderchars = { '─', '│', '─', '│', '┌', '┐', "┘", "└"},
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
 
     git_icons = git_icons,
-
     sorting_strategy = "ascending",
-
     file_previewer = require('telescope.previewers').vim_buffer_cat.new,
     grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
@@ -47,7 +54,7 @@ require('telescope').setup {
         ["<C-s>"] = actions.cycle_previewers_next,
         ["<C-a>"] = actions.cycle_previewers_prev,
         ["<C-h>"] = "which_key",
-        ["<ESC>"] = actions.close,
+        -- ["<ESC>"] = actions.close,
       },
       n = {
         ["<C-s>"] = actions.cycle_previewers_next,
@@ -65,8 +72,6 @@ require('telescope').setup {
     ["ui-select"] = {
       require("telescope.themes").get_cursor {
               color_devicons = true,
-        
-        
       },
       codeactions = true,
     },

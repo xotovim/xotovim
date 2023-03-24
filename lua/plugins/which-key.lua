@@ -49,7 +49,7 @@ wk.setup {
     border = XotoVimGlobal.ui.float.border, -- none, single, double, shadow, rounded
     position = "bottom", -- bottom, top
     margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
+    padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
     -- padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
   },
 
@@ -116,9 +116,14 @@ local normal_mode_mappings = {
   -- ['E'] = { '<cmd>NvimTreeFocus<CR>', 'explorer focus' },
   ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
   ['r'] = { '<cmd>Ranger<CR>', 'ranger' },
-  ["w"] = { "<cmd>w!<CR>", "save" },
+  -- ["w"] = { "<cmd>w!<CR>", "save" },
   ["x"] = { "<cmd>q!<CR>", "quit" },
-  ["t"] = { '<cmd>ToggleTerm<CR>', 'terminal' },
+  ["T"] = { '<cmd>ToggleTerm<CR>', 'terminal' },
+  
+  
+  ["t"] = { '<cmd>vert sbnext<cr>', 'split right' },
+  ["b"] = { '<cmd>bel sbnext<cr>', 'split right' },
+
 
   [";"] = {
     name = "xotovim",
@@ -131,6 +136,14 @@ local normal_mode_mappings = {
     -- u = { "<cmd>PackerUpdate<cr>", "update" },
   },
 
+  w = {
+    name = "window",
+    -- c = { 'comment box' },
+    h = { '<C-W>h', 'focus left' },
+    j = { '<C-W>j', 'focus up' },
+    k = { '<C-W>k', 'focus down' },
+    l = { '<C-W>l', 'focus right' },
+  },
   a = {
     name = "actions",
     -- c = { 'comment box' },
@@ -143,7 +156,7 @@ local normal_mode_mappings = {
   --   name = "terminal",
   -- },
 
-  b = {
+  u = {
     name = "buffer",
     x = { '<cmd>BufferCloseAllButCurrent<CR>', 'close but current' },
     -- d = { '<cmd>BufferOrderByDirectory<CR>', 'order by directory' },

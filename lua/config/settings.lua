@@ -15,17 +15,19 @@ local options = {
   foldenable     = false, --- makes macros faster & prevent errors in complicated mappings
   mouse          = "a", --- enable mouse
   number         = true, --- shows current line number
-  pumheight      = 10, --- max num of items in completion menu
+  pumheight      = 12, --- max num of items in completion menu
   relativenumber = false, --- enables relative number
   scrolloff      = 8, --- always keep space when scrolling to bottom/top edge
   shiftwidth     = 2, --- change a number of space characeters inseted for indentation
   showtabline    = 2, --- always show tabs
-  signcolumn     = "yes:3", --- add extra sign column next to line number
+  signcolumn     = "yes:1", --- add extra sign column next to line number
   smartcase      = true, --- uses case in search
   smartindent    = true, --- makes indenting smart
   smarttab       = true, --- makes tabbing smarter will realize you have 2 vs 4
   softtabstop    = 2, --- insert 2 spaces for a tab
   splitbelow     = true, -- Splitting a new window below the current one
+  virtualedit    = "onemore",
+  numberwidth    = 5,
   splitright     = true, --- vertical splits will automatically be to the right
   swapfile       = false, --- swap not needed
   tabstop        = 2, --- insert 2 spaces for a tab
@@ -53,7 +55,7 @@ local options = {
 }
 
 local globals = {
-  mapleader                   = ' ', --- map leader key to spc
+  mapleader                   = " ", --- map leader key to spc
   speeddating_no_mappings     = 1, --- disable default mappings for speeddating
 }
 

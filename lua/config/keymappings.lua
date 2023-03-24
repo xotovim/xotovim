@@ -46,7 +46,7 @@ keymap("n", "<leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ i
 
 -- buffers
 
--- keymap("n", "<leader><Tab>", ":BufferNext<CR>", silent)
+keymap("n", "<leader><Tab>", "<C-W>w", silent)
 
 keymap("n", "gn", ":bn<CR>", silent)
 
@@ -117,8 +117,8 @@ keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", silent)
 -- keymap("v", "<leader>lf", "<cmd>'<.'>lua vim.lsp.buf.range_formatting()<CR>", silent)
-keymap("n", "<leader>ll", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
-keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
+keymap("n", "<leader>ll", "<cmd>lua vim.diagnostic.open_float({ border = 'single', max_width = 100 })<CR>", silent)
+keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'single', max_width = 100 })<CR>", silent)
 keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
 keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", silent)
 keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", silent)

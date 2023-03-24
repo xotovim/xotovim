@@ -14,10 +14,8 @@ local colors = require("config.colors")
 
 xotonight.setup({
   style = "night",
-
   transparent = true, --- Enable this to disable setting the background color
   terminal_colors = true, --- Configure the colors used when opening a `:terminal` in Neovim
-  light_style = "day", --- The theme is used when the background is set to light
 
   styles = {
     --- Style to be applied to different syntax groups
@@ -40,7 +38,7 @@ xotonight.setup({
   --- You can override specific color groups to use other groups or a hex color
   --- function will be called with a ColorScheme table
     on_colors = function(xotoGroupColor)
-      xotoGroupColor.hint = xotoGroupColor.orange
+      -- xotoGroupColor.hint = xotoGroupColor.orange
       --- xotoGroupColor.error = "#ff0000"
       xotoGroupColor.border = "#34384f"
     end,

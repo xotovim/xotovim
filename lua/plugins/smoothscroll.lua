@@ -8,7 +8,7 @@ function M.config()
 
   neoscroll.setup {
     -- all these keys will be mapped to their corresponding default scrolling animation
-    mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
+    -- mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
     hide_cursor = true, -- hide cursor while scrolling
     stop_eof = true, -- stop at <eof> when scrolling downwards
     use_local_scrolloff = false, -- use the local scope of scrolloff instead of the global scope

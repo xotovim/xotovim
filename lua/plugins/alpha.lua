@@ -179,16 +179,10 @@ local section = {
 local opts = {
 
   layout = {
-    {type = "padding", val = 5},
-    section.header,
-    {type = "padding", val = 1},
-    section.hi_top_section,
-    section.hi_middle_section,
-    section.hi_bottom_section,
-    {type = "padding", val = 2},
-    section.buttons,
-    {type = "padding", val = 5},
-    section.footer,
+    {type = "padding", val = 1}, section.header,
+    {type = "padding", val = 1}, section.hi_top_section, section.hi_middle_section, section.hi_bottom_section,
+    {type = "padding", val = 1}, section.buttons,
+    {type = "padding", val = 1}, section.footer,
   },
 
   opts = {

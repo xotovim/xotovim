@@ -2,7 +2,7 @@ require('nvim-autopairs').setup({
   check_ts = true,
   active = true,
   on_config_done = nil,
-  enable_check_bracket_line = false,
+  enable_check_bracket_line = true,
   map_char = { all = "(", tex = "{" },
   ts_config = { lua = { "string", "source" }, javascript = { "string", "template_string" }, java = false },
   disable_filetype = { "TelescopePrompt", "spectre_panel" },

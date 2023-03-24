@@ -1,29 +1,29 @@
 return {
     
-        {
-    "lunarvim/lunar.nvim",
-    lazy = false,
-    -- priority = 1000,
-	-- -- event = "BufEnter",
-
-    config = function()
-        -- load the colorscheme here
-        vim.cmd([[colorscheme lunar]])
-        require("config.colorscheme")
-    end
-}, 
---     {
---     "xotovim/xotonight",
---     lazy = true,
---     priority = 1000,
+--         {
+--     "lunarvim/lunar.nvim",
+--     lazy = false,
+--     -- priority = 1000,
 -- 	event = "BufEnter",
+
 --     config = function()
 --         -- load the colorscheme here
---         vim.cmd([[colorscheme xotonight]])
+--         vim.cmd([[colorscheme lunar]])
 --         require("config.colorscheme")
---         require("plugins.xotonight")
 --     end
 -- }, 
+    {
+    "xotovim/xotonight",
+    lazy = true,
+    priority = 1000,
+	event = "BufEnter",
+    config = function()
+        -- load the colorscheme here
+        vim.cmd([[colorscheme xotonight]])
+        require("config.colorscheme")
+        require("plugins.xotonight")
+    end
+}, 
 
 {
     'is0n/fm-nvim',
@@ -32,14 +32,29 @@ return {
     config = function()
         require("plugins.fmnvim")
     end
-}, {
+}, 
+
+{
+    'christoomey/vim-tmux-navigator',
+    lazy = false,
+}, 
+{
     'petertriho/nvim-scrollbar',
     lazy = true,
     event = "VeryLazy",
     config = function()
         require('plugins.scrollbar')
     end
-}, {
+},
+
+{ 'gen740/SmoothCursor.nvim',
+lazy = true,
+event = "VeryLazy",
+  config = function()
+    require('plugins.smoothcursor')
+  end
+},
+{
     'karb94/neoscroll.nvim',
     lazy = true,
     event = "VeryLazy",
@@ -60,21 +75,37 @@ return {
     config = function()
         require('plugins.fmnvim')
     end
-}, {
-    'lilibyte/tabhula.nvim',
-    lazy = true,
-    event = "VeryLazy",
+}, 
+-- {
+--     'lilibyte/tabhula.nvim',
+--     lazy = false,
+--     -- event = "VeryLazy",
+--     wants = {'nvim-treesitter'}, -- or require if not used so far
+-- 	after = {'nvim-cmp'}, -- if a completion plugin is using tabs load it before
+--     config = function()
+--         require('plugins.tabula')
+--     end
+-- }, 
+{
+    'abecodes/tabout.nvim',
+    lazy = false,
+    -- event = "VeryLazy",
+    wants = {'nvim-treesitter'}, -- or require if not used so far
+	after = {'nvim-cmp'}, -- if a completion plugin is using tabs load it before
     config = function()
         require('plugins.tabula')
     end
-}, {
+}, 
+{
     'm-demare/hlargs.nvim',
     lazy = true,
     event = "VeryLazy",
+   
     config = function()
-        require('hlargs').setup({
-            color = "#F7768E"
-        })
+        require('plugins.hlargs')
+        -- require('hlargs').setup({
+        --     color = "#F7768E"
+        -- })
     end
 }, 
 
@@ -127,9 +158,10 @@ return {
                     "nvim-treesitter/nvim-treesitter-textobjects", "RRethy/nvim-treesitter-textsubjects", {
         "m-demare/hlargs.nvim",
         config = function()
-            require("hlargs").setup({
-                color = "#F7768E"
-            })
+            require('plugins.hlargs')
+            -- require("hlargs").setup({
+            --     color = "#F7768E"
+            -- })
         end
     }}
 },
@@ -211,9 +243,7 @@ return {
     }, {
         "zbirenbaum/copilot-cmp",
 		after = { "copilot.lua", "nvim-cmp" },
-
         disable = not XotoVimGlobal.plugins.copilot.enabled,
- 
         config = function()
             require("copilot_cmp").setup({
 				formatters = {
@@ -419,7 +449,10 @@ return {
 
 {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    lazy = true,
+    event = "VeryLazy",
+    -- lazy = false,
+    -- event = "BufReadPre",
     config = function()
         require("plugins.indent")
     end
@@ -432,7 +465,9 @@ return {
     config = function()
         require("plugins.autopairs")
     end
-}, {
+}, 
+
+{
     "NvChad/nvim-colorizer.lua",
     config = function()
         require("plugins.colorizer")
@@ -445,11 +480,43 @@ return {
     event = "InsertEnter",
 	-- config = true
     config = function()
-        vim.g.copilot_tab_fallback = ""
-        vim.g.copilot_assume_mapped = true
-        vim.g.copilot_no_tab_map = true
-        local copilotObject = require("plugins.copilot")
-        require("copilot").setup({copilotObject})
+        -- vim.g.copilot_tab_fallback = ""
+        -- vim.g.copilot_assume_mapped = true
+        -- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+        -- vim.g.copilot_no_tab_map = true
+        -- local copilotObject = require("plugins.copilot")
+        -- require("copilot").setup({copilotObject})
+        require("copilot").setup({
+            panel = {
+              enabled = true,
+              auto_refresh = true,
+              layout = {
+                position = "bottom", 
+                ratio = 0.4
+              },
+            },
+            suggestion = {
+              enabled = true,
+              auto_trigger = true,
+              debounce = 75,
+            
+            },
+            filetypes = {
+              javascript = true, 
+                typescript = true, 
+              yaml = false,
+              markdown = false,
+              help = false,
+              gitcommit = false,
+              gitrebase = false,
+              hgcommit = false,
+              svn = false,
+              cvs = false,
+              ["."] = false,
+            },
+            copilot_node_command = 'node', 
+          }
+          )
       end,
 }, 
 -- Git

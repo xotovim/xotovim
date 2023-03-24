@@ -1,11 +1,12 @@
-#!/bin/sh
+# 
+/bin/sh
 
 ######################################### ENVIRONMENTS
 
-NEOVIM_VERSION=v0.8.0
-# NEOVIM_VERSION=v0.8.3
-# NEOVIM_VERSION=v0.8.2
-# NEOVIM_VERSION=nightly # 0.9.0
+# NEOVIM_VERSION="v0.8.0"
+NEOVIM_VERSION="v0.8.3"
+# NEOVIM_VERSION="v0.8.2"
+# NEOVIM_VERSION="nightly" # 0.9.0
 
 ################################# CLEANING
 
