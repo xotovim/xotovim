@@ -123,6 +123,8 @@ keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
 keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", silent)
 keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", silent)
 
+-- keymap('i', '^[[9;8~', '::') 
+
 keymap("n", "K", function()
     local winid = require('ufo').peekFoldedLinesUnderCursor()
     if not winid then

@@ -61,6 +61,14 @@ local globals = {
 
 vim.opt.shortmess:append('c');
 
+-- reset cursor 
+vim.cmd
+[[
+    augroup change_cursor
+        au!
+        au ExitPre * :set guicursor=a:ver90
+    augroup END
+]] 
 -- vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 -- vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 -- vim.opt.formatoptions:remove('c');

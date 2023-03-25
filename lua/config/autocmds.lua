@@ -38,8 +38,6 @@ if vim.fn.has('nvim-0.8') == 1 then
         "Outline",
         "spectre_panel",
         "TelescopePrompt",
-        -- "DressingInput",
-        -- "DressingSelect",
         "neotest-summary",
       }
 

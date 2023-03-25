@@ -90,18 +90,22 @@ cmp.setup {
     -- ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
     -- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ['<S-CR>'] =  cmp.mapping(function(fallback)
-    
-    if copilot.is_visible()  then
-      copilot.accept()
-    end
-  end, { "i", "s" }),
+    --   ['<C-Space>'] =  cmp.mapping(function(fallback)
+
+    --   if tabnine.is_visible()  then
+    --     tabnine.accept()
+    --   end
+
+    --   if copilot.is_visible()  then
+    --     copilot.accept()
+    --   end
+    -- end, { "i", "s" }),
     ['<Esc>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
     ['<CR>'] = cmp.mapping.confirm({ select = XotoVimGlobal.plugins.completion.select_first_on_enter, behavior = cmp.ConfirmBehavior.Replace, }),
     -- ["<S-Space>"] = cmp.config.disable,
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() and copilot.is_visible() then
-        cmp.select_next_item()
+        cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
       -- elseif luasnip.expandable() then
       --   luasnip.expand()
       -- elseif luasnip.expand_or_jumpable() then
@@ -118,10 +122,12 @@ cmp.setup {
     end, { "i", "s" }),
     
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      -- if cmp.visible() then
+      --   cmp.select_prev_item()
+      -- elseif luasnip.jumpable(-1) then
+      --   luasnip.jump(-1)
+      if copilot.is_visible() then
+          copilot.accept()
 
       else
         fallback()
