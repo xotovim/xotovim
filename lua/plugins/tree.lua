@@ -12,8 +12,16 @@ if not status_ok then
   return
 end
 
+-- { key = "<LeftRelease>", action= "single_click_edit", action_cb = single_click_edit},
+
 local keymappings = {
-  { key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit" },
+
+  
+  -- { key = { '<leftmouse>' }, cb = tree_cb("edit") },
+
+  -- { key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit" },
+  { key = {"<CR>", "o", "<LeftRelease>"}, action = "edit" },
+  -- { key = {"<CR>", "o", "<1-LeftMouse>"}, action = "edit" },
   -- <C-e> keymapping cannot be set because it's used for toggling nvim-tree
   -- { key = "<C-e>",                        action = "edit_in_place" },
   { key = {"O"},                          action = "edit_no_picker" },

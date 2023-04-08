@@ -11,7 +11,7 @@ local options = {
   foldlevelstart = 99, --- expand all folds by default
   ignorecase     = true, --- needed for smartcase
   laststatus     = 3, --- have a global statusline at the bottom instead of one for each window
-  lazyredraw     = true, --- makes macros faster & prevent errors in complicated mappings
+  -- lazyredraw     = true, --- makes macros faster & prevent errors in complicated mappings
   foldenable     = false, --- makes macros faster & prevent errors in complicated mappings
   mouse          = "a", --- enable mouse
   number         = true, --- shows current line number
@@ -62,22 +62,58 @@ local globals = {
 vim.opt.shortmess:append('c');
 
 -- reset cursor 
-vim.cmd
-[[
-    augroup change_cursor
-        au!
-        au ExitPre * :set guicursor=a:ver90
-    augroup END
-]] 
+-- vim.cmd
+-- [[
+--     augroup change_cursor
+--         au!
+--         au ExitPre * :set guicursor=a:ver90
+--         au ExitPre * hi Cursor guibg=green
+        
+--     augroup END
+-- ]] 
+
+-- vim.cmd
+-- [[
+--     augroup change_cursor
+--       au!
+--       autocmd ExitPre silent echo -ne "\033]12;red\007"
+--     augroup END
+-- ]] 
+
+-- vim.cmd
+-- [[
+--     augroup change_cursor
+--         au!
+--         au ExitPre * :set guicursor=a:ver90
+--     augroup END
+-- ]] 
+-- vim.cmd[[ augroup myCmds au! au ExitPre * silent echo -ne '\e[1 q' augroup END ]] 
+-- vim.cmd[[ augroup myCmds au! au EnterPre * silent echo -ne '\e[5 q' augroup END ]] 
+
+-- au EnterPre * silent echo -ne '\e[1 q'
+
+-- vim.cmd("autocmd VimEnter * silent exec "! echo -ne '\e[1 q'")
+-- vim.cmd("autocmd VimLeave * silent exec "! echo -ne '\e[5 q'") 
 -- vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 -- vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 -- vim.opt.formatoptions:remove('c');
 -- vim.opt.formatoptions:remove('r');
 -- vim.opt.formatoptions:remove('o');
 
+-- -- Change aspect if in insert mode or not
+-- vim.cmd('highlight Cursorline cterm=NONE gui=NONE guibg=NONE')
+-- vim.cmd('autocmd InsertEnter * highlight Cursorline cterm=underline gui=underline')
+-- vim.cmd('autocmd InsertLeave * highlight Cursorline cterm=NONE gui=NONE')
+
 vim.api.nvim_create_autocmd("BufEnter", { 
   callback = function() 
     vim.opt.formatoptions = vim.opt.formatoptions - { "c","r","o" } 
+  end, 
+})
+
+vim.api.nvim_create_autocmd("ExitPre", { 
+  callback = function() 
+    vim.opt.guicursor = "a:ver90"
   end, 
 })
 

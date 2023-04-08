@@ -15,12 +15,13 @@ local colors = require("config.colors")
   vim.api.nvim_set_hl(0, 'XotoVimSecondary', { fg = XotoVimSecondary });
   vim.api.nvim_set_hl(0, 'CursorLine', { bg = XotoVimPrimary });
 
-  vim.api.nvim_set_hl(0, 'XotoVimPrimaryBold', { bold = true, fg = XotoVimPrimary });
-  vim.api.nvim_set_hl(0, 'XotoVimSecondaryBold', { bold = true, fg = XotoVimSecondary });
+  vim.api.nvim_set_hl(0, 'XotoVimPrimaryBold', { bold = false, fg = XotoVimPrimary });
+  vim.api.nvim_set_hl(0, 'XotoVimSecondaryBold', { bold = false, fg = XotoVimSecondary });
 
-  vim.api.nvim_set_hl(0, 'XotoVimHeader', { bold = true, fg = XotoVimPrimaryLight });
-  vim.api.nvim_set_hl(0, 'XotoVimHeaderInfo', { bold = true, fg = XotoVimSecondary });
-  vim.api.nvim_set_hl(0, 'XotoVimFooter', { bold = true, fg = XotoVimSecondary });
+  vim.api.nvim_set_hl(0, 'SmoothCursor', { bg = "None", bold = false, fg = XotoVimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'XotoVimHeader', { bold = false, fg = XotoVimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'XotoVimHeaderInfo', { bold = false, fg = XotoVimSecondary });
+  vim.api.nvim_set_hl(0, 'XotoVimFooter', { bold = false, fg = XotoVimSecondary });
 
   -- xotonight colorscheme override
   -- if XotoVimGlobal.colorscheme == 'xotonight' then

@@ -6,13 +6,13 @@ require'bufferline'.setup {
     closable = true, -- enable/disable close button
     clickable = true, -- enables/disable clickable tabs --  - left-click: go to buffer --  - middle-click: delete buffer
     exclude_ft = {'qf'}, -- excludes buffers from the tabline -- exclude_name = ['package.json'],
-    icons = 'both', -- enable/disable icons -- if set to 'numbers', will show buffer index in the tabline -- if set to 'both', will show buffer index and icons in the tabline
+    -- icons = 'both', -- enable/disable icons -- if set to 'numbers', will show buffer index in the tabline -- if set to 'both', will show buffer index and icons in the tabline
     icon_custom_colors = false, -- if set, the icon color will follow its corresponding buffer -- highlight group. by default, the buffer*icon group is linked to the -- buffer* group (see highlighting below). otherwise, it will take its -- default value as defined by devicons.
-    icon_separator_active = '', -- configure icons on the bufferline.
-    icon_separator_inactive = '',
-    icon_close_tab = ' ',
-    icon_close_tab_modified = '● ',
-    icon_pinned = '車 ',
+    -- icon_separator_active = '', -- configure icons on the bufferline.
+    -- icon_separator_inactive = '',
+    -- icon_close_tab = ' ',
+    -- icon_close_tab_modified = '● ',
+    -- icon_pinned = '車 ',
     insert_at_end = true, -- if true, new buffers will be inserted at the end of the list. -- default is to insert after current buffer.
     maximum_padding = 2, -- sets the maximum padding width with which to surround each tab
     maximum_length = 30, -- sets the maximum buffer name length.

@@ -1,20 +1,20 @@
 require('smoothcursor').setup({
     autostart = true,
-    cursor = "",              -- cursor shape (need nerd font)
+    cursor = " ▷",              -- cursor shape (need nerd font)
     texthl = "SmoothCursor",   -- highlight group, default is { bg = nil, fg = "#FFD400" }
     linehl = nil,              -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
     type = "default",          -- define cursor movement calculate function, "default" or "exp" (exponential).
     fancy = {
-        enable = false,        -- enable fancy mode
+        enable = true,        -- enable fancy mode
         head = { cursor = " ▷", texthl = "SmoothCursor", linehl = nil },
         body = {
-            { cursor = " ", texthl = "SmoothCursorRed" },
-            { cursor = " ", texthl = "SmoothCursorOrange" },
-            { cursor = " ●", texthl = "SmoothCursorYellow" },
-            { cursor = " ●", texthl = "SmoothCursorGreen" },
-            { cursor = " •", texthl = "SmoothCursorAqua" },
-            { cursor = " .", texthl = "SmoothCursorBlue" },
-            { cursor = " .", texthl = "SmoothCursorPurple" },
+            -- { cursor = " ", texthl = "SmoothCursorRed" },
+            -- { cursor = " ", texthl = "SmoothCursorOrange" },
+            -- { cursor = " ●", texthl = "SmoothCursorYellow" },
+            -- { cursor = " ●", texthl = "SmoothCursorGreen" },
+            -- { cursor = " •", texthl = "SmoothCursorAqua" },
+            -- { cursor = " .", texthl = "SmoothCursorBlue" },
+            -- { cursor = " .", texthl = "SmoothCursorPurple" },
         },
         tail = { cursor = nil, texthl = "SmoothCursor" }
     },
@@ -26,5 +26,5 @@ require('smoothcursor').setup({
     threshold = 3,             -- animate if threshold lines jump
     disable_float_win = true, -- disable on float window
     enabled_filetypes = nil,  -- example: { "lua", "vim" },
-    disabled_filetypes =  {"prompt", "noice", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},  -- this option will be skipped if enabled_filetypes is set. example: { "TelescopePrompt", "NvimTree" }
+    disabled_filetypes =  {"prompt", "DiffviewFilePanel", "noice", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},  -- this option will be skipped if enabled_filetypes is set. example: { "TelescopePrompt", "NvimTree" }
 })

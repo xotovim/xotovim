@@ -117,19 +117,19 @@ autocmd({ 'ModeChanged' }, {
   callback = function()
     local current_mode = vim.fn.mode()
     if current_mode == 'n' then
-      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#22486b' })
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#34384f' })
       vim.fn.sign_define('smoothcursor', { text = ' ▷' })
     elseif current_mode == 'v' then
-      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#bf616a' })
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#34384f' })
       vim.fn.sign_define('smoothcursor', { text = ' ' })
     elseif current_mode == 'V' then
-      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#bf616a' })
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#34384f' })
       vim.fn.sign_define('smoothcursor', { text = ' ' })
     elseif current_mode == '�' then
-      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#bf616a' })
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#34384f' })
       vim.fn.sign_define('smoothcursor', { text = ' ' })
     elseif current_mode == 'i' then
-      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#22486b' })
+      vim.api.nvim_set_hl(0, 'SmoothCursor', { fg = '#34384f' })
       vim.fn.sign_define('smoothcursor', { text = ' ✚' })
     end
   end,

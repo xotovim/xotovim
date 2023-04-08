@@ -20,6 +20,8 @@ if not copilot_ok then
   return
 end
 
+
+
 require("luasnip/loaders/from_vscode").lazy_load()
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -27,15 +29,45 @@ require("luasnip/loaders/from_vscode").lazy_load()
 -- ╰──────────────────────────────────────────────────────────╯
 local types = require("cmp.types")
 
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+
+-- local check_backspace = function()
+--   local col = vim.fn.col "." - 1
+--   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+-- end
+
+-- local function deprioritize_snippet(entry1, entry2)
+--   if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then return false end
+--   if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then return true end
+-- end
+
+local function limit_lsp_types(entry, ctx)
+	local kind = entry:get_kind()
+	local line = ctx.cursor.line
+	local col = ctx.cursor.col
+	local char_before_cursor = string.sub(line, col - 1, col - 1)
+	local char_after_dot = string.sub(line, col, col)
+
+	if char_before_cursor == "." and char_after_dot:match("[a-zA-Z]") then
+		if
+			kind == types.lsp.CompletionItemKind.Method
+			or kind == types.lsp.CompletionItemKind.Field
+			or kind == types.lsp.CompletionItemKind.Property
+		then
+			return true
+		else
+			return false
+		end
+	elseif string.match(line, "^%s+%w+$") then
+		if kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable then
+			return true
+		else
+			return false
+		end
+	end
+
+	return true
 end
 
-local function deprioritize_snippet(entry1, entry2)
-  if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then return false end
-  if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then return true end
-end
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ setup                                                    │
@@ -67,6 +99,10 @@ local buffer_option = { -- complete from all visible buffers (splits)
 cmp.setup {
   
   enabled = function()
+    
+    buftype = vim.api.nvim_buf_get_option(0, "buftype")
+    if buftype == "prompt" then return false end
+    
     local lnum, col = vim.fn.line('.'), math.min(vim.fn.col('.'), #vim.fn.getline('.'))
     for _, syn_id in ipairs(vim.fn.synstack(lnum, col)) do
       syn_id = vim.fn.synIDtrans(syn_id) -- Resolve :highlight links
@@ -75,6 +111,9 @@ cmp.setup {
       end
     end
     return true
+    
+
+    
   end,
   
   snippet = {
@@ -101,10 +140,10 @@ cmp.setup {
     --   end
     -- end, { "i", "s" }),
     ['<Esc>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
-    ['<CR>'] = cmp.mapping.confirm({ select = XotoVimGlobal.plugins.completion.select_first_on_enter, behavior = cmp.ConfirmBehavior.Replace, }),
+    ['<CR>'] = cmp.mapping.confirm({ select = XotoVimGlobal.plugins.completion.select_first_on_enter, behavior = cmp.ConfirmBehavior.Replace }),
     -- ["<S-Space>"] = cmp.config.disable,
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() and copilot.is_visible() then
+      if cmp.visible() then
         cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
       -- elseif luasnip.expandable() then
       --   luasnip.expand()
@@ -188,7 +227,9 @@ cmp.setup {
 
   -- TODO : You should specify your *installed* sources.
   sources = {
-    { name = 'nvim_lsp', priority = 9, },
+    { name = 'nvim_lsp', priority = 10,
+    entry_filter = limit_lsp_types,
+  },
     { name = 'npm', priority = 9, },
     { name = 'cmp_tabnine', priority = 8,  max_num_results = 3 },
     { name = 'luasnip', priority = 7,  max_item_count = 8 },
@@ -203,7 +244,7 @@ cmp.setup {
   sorting = {
     comparators = {
       -- require("copilot_cmp.comparators").prioritize,
-      deprioritize_snippet,
+      -- deprioritize_snippet,
       cmp.config.compare.exact,
       cmp.config.compare.locality,
       cmp.config.compare.recently_used,
@@ -264,3 +305,25 @@ tabnine:setup({
   ignored_file_types = {};
 })
  
+
+
+
+-- " Setup buffer configuration (nvim-lua source only enables in Lua filetype).
+-- autocmd FileType lua lua require'cmp'.setup.buffer {
+--   sources = {
+--     { name = 'buffer' },
+--     { name = 'nvim_lua' },
+--   },
+-- }
+
+-- autocmd FileType TelescopePrompt lua print('In TelP')
+
+-- autocmd FileType TelescopePrompt lua 
+-- require'cmp'.setup.buffer {
+--     completion = { autocomplete = false }
+--   }
+
+-- autocmd FileType TelescopePrompt lua require'cmp_tabnine.config'.setup {
+--    max_lines = 0
+--    max_num_results = 0
+-- }

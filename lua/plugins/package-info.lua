@@ -16,7 +16,7 @@ require('package-info').setup
         
       },
 
-      autostart = true, -- whether to autostart when `package.json` is opened
+      autostart = false, -- whether to autostart when `package.json` is opened
       hide_up_to_date = true, -- it hides up to date versions when displaying virtual text
       hide_unstable_versions = true, -- it hides unstable versions from version list e.g next-11.1.3-canary3
 

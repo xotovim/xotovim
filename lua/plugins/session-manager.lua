@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd({ 'User' }, {
   pattern = "SessionLoadPost",
   group = config_group,
   callback = function()
-    require('nvim-tree').toggle(false, true)
+    require('nvim-tree.api').tree.toggle(false, true)
     require('notify')('session loaded!', 'info', { title = 'Session Manager' })
   end,
 })
@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({ 'User' }, {
   group = config_group,
   callback = function()
     require('notify')('session saved!', 'info', { title = 'Session Manager', bufid = 0 })
-    require('nvim-tree').toggle(false, true)
+    require('nvim-tree.api').tree.toggle(false, true)
   end,
 })
 

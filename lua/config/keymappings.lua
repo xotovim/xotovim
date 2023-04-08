@@ -90,8 +90,8 @@ vim.cmd [[
 -- keymap("n", "<leader>q", "<cmd>lua require('utils').toggle_quicklist()<CR>", silent)
 
 -- Easyalign
-keymap("n", "ga", "<Plug>(EasyAlign)", silent)
-keymap("x", "ga", "<Plug>(EasyAlign)", silent)
+-- keymap("n", "ga", "<Plug>(EasyAlign)", silent)
+-- keymap("x", "ga", "<Plug>(EasyAlign)", silent)
 
 -- Manually invoke speeddating in case switch.vim didn't work
 keymap("n", "<C-a>", ":if !switch#Switch() <bar> call speeddating#increment(v:count1) <bar> endif<CR>", silent)

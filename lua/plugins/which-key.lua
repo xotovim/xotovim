@@ -107,11 +107,22 @@ local normal_mode_mappings = {
   ["9"] = "which_key_ignore",
 
   -- single
+  
+  
+    -- single
   ["/"] = { "<Plug>(comment_toggle_linewise_current)", "comment" },
-  ["="] = { '<cmd>vertical resize + 5<CR>', 'resize + 5' },
-  ["-"] = { '<cmd>vertical resize - 5<CR>', 'resize - 5' },
-  ["v"] = { '<C-W>v', 'split right' },
-  -- ["b"] = { '<C-W>s', 'split below' },
+    
+    -- ['='] = { '<cmd>vertical resize +5<CR>',               'resize +5' },
+    -- ['-'] = { '<cmd>vertical resize -5<CR>',               'resize +5' },
+    ['v'] = { '<C-W>v',                                    'split right' },
+    ['V'] = { '<C-W>s',                                    'split below' },
+    ['q'] = { 'quicklist' },
+
+    
+  -- ["="] = { '<cmd>vertical resize + 5<CR>', 'resize + 5' },
+  -- ["-"] = { '<cmd>vertical resize - 5<CR>', 'resize - 5' },
+  -- ["v"] = { '<C-W>v', 'split right' },
+  -- -- ["b"] = { '<C-W>s', 'split below' },
   -- ["q"] = { 'quicklist' },
   -- ['E'] = { '<cmd>NvimTreeFocus<CR>', 'explorer focus' },
   ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
@@ -233,7 +244,7 @@ local normal_mode_mappings = {
     name = "git",
     a = { '<cmd>!git add %:p<CR>', 'add current' },
     A = { '<cmd>!git add .<CR>', 'add all' },
-    b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
+    -- b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
     B = { '<cmd>Telescope git_branches<CR>', 'branches' },
     c = {
       name = 'conflict',
@@ -273,23 +284,23 @@ local normal_mode_mappings = {
     }
   },
 
-  G = {
-    name = "git v2",
-    -- g = { '<cmd>lua require "lvim.core.terminal'.lazygit_toggle()<cr>', 'lazygit' },
-    j = { '<cmd>lua require "gitsigns".next_hunk({navigation_message = false})<cr>', 'next hunk' },
-    k = { '<cmd>lua require "gitsigns".prev_hunk({navigation_message = false})<cr>', 'prev hunk' },
-    l = { '<cmd>lua require "gitsigns".blame_line()<cr>', 'blame' },
-    p = { '<cmd>lua require "gitsigns".preview_hunk()<cr>', 'preview hunk' },
-    r = { '<cmd>lua require "gitsigns".reset_hunk()<cr>', 'reset hunk' },
-    R = { '<cmd>lua require "gitsigns".reset_buffer()<cr>', 'reset buffer' },
-    s = { '<cmd>lua require "gitsigns".stage_hunk()<cr>', 'stage hunk' },
-    u = { '<cmd>lua require "gitsigns".undo_stage_hunk()<cr>', 'undo stage hunk', },
-    o = { '<cmd>Telescope git_status<cr>', 'open changed file' },
-    b = { '<cmd>Telescope git_branches<cr>', 'checkout branch' },
-    c = { '<cmd>Telescope git_commits<cr>', 'checkout commit' },
-    C = { '<cmd>Telescope git_bcommits<cr>', 'checkout commit(for current file)', },
-    d = { '<cmd>Gitsigns diffthis HEAD<cr>', 'git diff', },
-  },
+  -- G = {
+  --   name = "git v2",
+  --   -- g = { '<cmd>lua require "lvim.core.terminal'.lazygit_toggle()<cr>', 'lazygit' },
+  --   j = { '<cmd>lua require "gitsigns".next_hunk({navigation_message = false})<cr>', 'next hunk' },
+  --   k = { '<cmd>lua require "gitsigns".prev_hunk({navigation_message = false})<cr>', 'prev hunk' },
+  --   l = { '<cmd>lua require "gitsigns".blame_line()<cr>', 'blame' },
+  --   p = { '<cmd>lua require "gitsigns".preview_hunk()<cr>', 'preview hunk' },
+  --   r = { '<cmd>lua require "gitsigns".reset_hunk()<cr>', 'reset hunk' },
+  --   R = { '<cmd>lua require "gitsigns".reset_buffer()<cr>', 'reset buffer' },
+  --   s = { '<cmd>lua require "gitsigns".stage_hunk()<cr>', 'stage hunk' },
+  --   u = { '<cmd>lua require "gitsigns".undo_stage_hunk()<cr>', 'undo stage hunk', },
+  --   o = { '<cmd>Telescope git_status<cr>', 'open changed file' },
+  --   b = { '<cmd>Telescope git_branches<cr>', 'checkout branch' },
+  --   c = { '<cmd>Telescope git_commits<cr>', 'checkout commit' },
+  --   C = { '<cmd>Telescope git_bcommits<cr>', 'checkout commit(for current file)', },
+  --   d = { '<cmd>Gitsigns diffthis HEAD<cr>', 'git diff', },
+  -- },
 
   p = {
     name = "project",

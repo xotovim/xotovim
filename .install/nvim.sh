@@ -3,10 +3,7 @@
 
 ######################################### ENVIRONMENTS
 
-# NEOVIM_VERSION="v0.8.0"
 NEOVIM_VERSION="v0.8.3"
-# NEOVIM_VERSION="v0.8.2"
-# NEOVIM_VERSION="nightly" # 0.9.0
 
 ################################# CLEANING
 
@@ -36,8 +33,6 @@ function installNeovim() {
 	curl -LO $URL
 	tar xzvf ${SYSTEM_MACHINE}.tar.gz >/dev/null 2>&1
 	rm -rf ${SYSTEM_MACHINE}.tar.gz 
-	# rm -rf ${HOME}/${FILE}
-	# mkdir ${HOME}/${FILE}
 	mv ./${FILE} ${HOME}/${FILE}
 	ln -sf ${HOME}/${FILE}/bin/nvim /usr/local/bin/nvim
 }

@@ -8,6 +8,7 @@ require('telescope').load_extension('repo')
 require('telescope').load_extension('projects')
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("ui-select")
+require("telescope").load_extension("package_info")
 
 local git_icons = {
   added = icons.gitAdd,
@@ -75,6 +76,10 @@ require('telescope').setup {
       },
       codeactions = true,
     },
+      package_info = {
+          -- Optional theme (the extension doesn't set a default theme)
+          theme = "ivy",
+      },
   }
 }
 

@@ -48,8 +48,9 @@ return {
 },
 
 { 'gen740/SmoothCursor.nvim',
-lazy = true,
-event = "VeryLazy",
+  lazy = true,
+--   event = "VeryLazy",
+  event = "BufEnter",
   config = function()
     require('plugins.smoothcursor')
   end
@@ -167,7 +168,7 @@ event = "VeryLazy",
 },
 
 -- Navigating (Telescope/Tree/Refactor)
-
+{"nvim-pack/nvim-spectre"}, 
 {
     "nvim-telescope/telescope.nvim",
     lazy = false,
@@ -178,15 +179,14 @@ event = "VeryLazy",
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make"
     }, {"cljoly/telescope-repo.nvim"}}
-}, {"nvim-pack/nvim-spectre"}, {
+}, 
+{
     "nvim-tree/nvim-tree.lua",
     lazy = true,
     event = "BufEnter",
-    keys = {{
-        "<C-e>",
-        "<cmd>lua require'nvim-tree'.toggle()<CR>",
-        desc = "NvimTree"
-    }},
+    keys = {
+        { "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" },
+    },
     config = function()
         require("plugins.tree")
     end
@@ -206,28 +206,36 @@ event = "VeryLazy",
 }, {
     "williamboman/mason.nvim",
     cmd = "Mason",
+    
     keys = {{
-        "<leader>cm",
-        "<cmd>Mason<cr>",
-        desc = "Mason"
+        "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" 
+        
     }}
 }, -- Formatters
 {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
+    event = "BufNewFile",
+    -- event = "BufReadPre",
     dependencies = {"mason.nvim"},
+},
+{
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+        "williamboman/mason.nvim",
+        "jose-elias-alvarez/null-ls.nvim",
+    },
     config = function()
-        local nls = require("null-ls")
-        nls.setup({
-            sources = { 
-			-- nls.builtins.formatting.prettierd,
-            nls.builtins.formatting.stylua, nls.builtins.diagnostics.flake8}
-        })
-    end
-}, -- LSP Cmp
+        require("plugins.null-ls")
+    end,
+},
 {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
+    config = function()
+        require("plugins.cmp")
+    end,
+    
     dependencies = {"hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path",
                     "hrsh7th/cmp-cmdline", "hrsh7th/cmp-calc", "saadparwaiz1/cmp_luasnip", {
         "tzachar/cmp-tabnine",
@@ -255,9 +263,7 @@ event = "VeryLazy",
 			})
         end
     }},
-    config = function()
-        require("plugins.cmp")
-    end
+
 }, 
 
 -- LSP Addons
@@ -286,13 +292,45 @@ event = "VeryLazy",
         require("plugins.inlay-hints")
     end
 }, -- General
+
+
+{
+    "barrett-ruth/import-cost.nvim",
+    build = "sh install.sh yarn",
+    ft = {
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact",
+    },
+    config = true,
+},
 {
     "AndrewRadev/switch.vim",
     lazy = false
-}, {
-    "AndrewRadev/splitjoin.vim",
-    lazy = false
-}, {
+}, 
+{
+    "Wansmer/treesj",
+    lazy = true,
+    cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
+    keys = {
+        { "gJ", "<cmd>TSJToggle<CR>", desc = "Trigger Toggle Split/Join" },
+    },
+    config = true,
+},
+
+
+-- {
+--     "AndrewRadev/splitjoin.vim",
+--     lazy = false
+-- }, 
+
+-- {
+--     "AndrewRadev/splitjoin.vim",
+--     lazy = false
+-- }, 
+
+{
     "numToStr/Comment.nvim",
     lazy = false,
     branch = "jsx",
@@ -347,6 +385,7 @@ event = "VeryLazy",
     disable = not XotoVimGlobal.plugins.zen.enabled
 }, {
     "ggandor/lightspeed.nvim",
+    keys = "s",
     config = function()
         require("plugins.lightspeed")
     end
@@ -370,12 +409,19 @@ event = "VeryLazy",
     "rcarriga/nvim-notify",
     config = function()
         require("notify").setup({
-            background_colour = "#000000"
+		-- timeout = 500,
+            
+            type = "desktop",
+            background_colour = 'NotifyBackground', -- for stages that change opacity this is treated as the highlight behind the window. set this to either a highlight group, an rgb hex value e.g. "#000000" or a function returning an rgb code for dynamic values
+            stages = "fade",
         })
     end,
     init = function()
-        local banned_messages = {"no information available",
-                                 "lsp[tsserver] inlay hints request failed. requires typescript 4.4+."}
+        local banned_messages = {
+            "No information available",
+            "LSP[tsserver] Inlay Hints request failed. Requires TypeScript 4.4+.",
+            "LSP[tsserver] Inlay Hints request failed. File not opened in the editor."
+                                }
         vim.notify = function(msg, ...)
             for _, banned in ipairs(banned_messages) do
                 if msg == banned then
@@ -384,26 +430,42 @@ event = "VeryLazy",
             end
             require("notify")(msg, ...)
         end
-    end
+    end,
+    opts = {
+
+		max_height = function()
+			return math.floor(vim.o.lines * 0.75)
+		end,
+		max_width = function()
+			return math.floor(vim.o.columns * 0.75)
+		end,
+	},
 }, {
     "vuki656/package-info.nvim",
+    dependencies = "MunifTanjim/nui.nvim",
     event = "BufEnter package.json",
     config = function()
         require("plugins.package-info")
     end
-}, {
+}, 
+
+{
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
     setup = function()
         vim.g.mkdp_filetypes = {"markdown"}
     end,
     ft = {"markdown"}
-}, {
-    "declancm/cinnamon.nvim",
-    config = function()
-        require("plugins.cinnamon")
-    end
-}, {
+}, 
+-- {
+--     "declancm/cinnamon.nvim",
+--     disable = true,
+--     config = function()
+--         require("plugins.cinnamon")
+--     end
+-- }, 
+
+{
     "airblade/vim-rooter",
     setup = function()
         vim.g.rooter_patterns = XotoVimGlobal.plugins.rooter.patterns
@@ -441,7 +503,15 @@ event = "VeryLazy",
     end
 }, {
     "rareitems/printer.nvim",
-    lazy = false,
+    event = "BufEnter",
+		ft = {
+			"lua",
+			"javascript",
+			"typescript",
+			"javascriptreact",
+			"typescriptreact",
+		},
+    -- lazy = false,
     config = function()
         require("plugins.printer")
     end
@@ -529,12 +599,15 @@ event = "VeryLazy",
     end
 }, {
     "sindrets/diffview.nvim",
+    lazy = false,
     event = "BufRead",
+    -- event = "BufRead",
     config = function()
         require("plugins.git.diffview")
     end
 }, {
     "akinsho/git-conflict.nvim",
+    lazy = false,
     config = function()
         require("plugins.git.conflict")
     end
@@ -559,6 +632,23 @@ event = "VeryLazy",
         require("plugins.neotest")
     end
 }, -- DAP
+{
+    "andythigpen/nvim-coverage",
+    dependencies = "nvim-lua/plenary.nvim",
+    cmd = {
+        "Coverage",
+        "CoverageSummary",
+        "CoverageLoad",
+        "CoverageShow",
+        "CoverageHide",
+        "CoverageToggle",
+        "CoverageClear",
+    },
+    config = function()
+        require("coverage").setup()
+    end,
+},
+
 {
     "mfussenegger/nvim-dap",
     config = function()
