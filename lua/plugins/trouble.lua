@@ -1,4 +1,4 @@
-local icons = XotoVimGlobal.icons
+local icons = xotovim.icons
 
 require("trouble").setup {
   position = "right", -- position of the list can be: bottom, top, left, right
@@ -10,9 +10,9 @@ require("trouble").setup {
   fold_closed = "", -- icon used for closed folds
   group = true, -- group results by file
   padding = true, -- add an extra new line on top of the list
-
   action_keys = { -- key mappings for actions in the trouble list
-      -- close = {}, -- map to {} to remove a mapping, for example:
+      -- map to {} to remove a mapping, for example:
+      -- close = {},
       close = "q", -- close the list
       cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
       refresh = "r", -- manually refresh

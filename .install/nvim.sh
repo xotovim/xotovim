@@ -3,7 +3,7 @@
 
 ######################################### ENVIRONMENTS
 
-NEOVIM_VERSION="v0.8.3"
+NEOVIM_VERSION="v0.9.0"
 
 ################################# CLEANING
 

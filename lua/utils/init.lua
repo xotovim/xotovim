@@ -24,13 +24,13 @@ M.sleep = function(n)
   os.execute("sleep " .. tonumber(n))
 end
 
--- M.toggle_quicklist = function()
---   if fn.empty(fn.filter(fn.getwininfo(), 'v:val.quickfix')) == 1 then
---     vim.cmd('open')
---   else
---     vim.cmd('close')
---   end
--- end
+M.toggle_quicklist = function()
+  if fn.empty(fn.filter(fn.getwininfo(), 'v:val.quickfix')) == 1 then
+    vim.cmd('copen')
+  else
+    vim.cmd('cclose')
+  end
+end
 
 M.starts_with = function(str, start)
   return str:sub(1, #start) == start
@@ -122,6 +122,20 @@ end
 
 M.add_whitespaces = function(number)
   return string.rep(" ", number)
+end
+
+M.closeOtherBuffers = function()
+  for _, e in ipairs(require("bufferline").get_elements().elements) do
+    vim.schedule(function()
+      if e.id == vim.api.nvim_get_current_buf() then
+        return
+      elseif pcall(require, 'mini.bufremove') then
+        require('mini.bufremove').delete(e.id, false)
+      else
+        vim.cmd("bd " .. e.id)
+      end
+    end)
+  end
 end
 
 return M

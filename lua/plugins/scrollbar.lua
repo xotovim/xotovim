@@ -111,7 +111,8 @@ require("scrollbar").setup({
         },
     },
     excluded_buftypes = {"terminal", "telescope", "nofile"},
-    excluded_filetypes = {"prompt", "noice", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},
+    excluded_filetypes = {"prompt", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},
+    -- excluded_filetypes = {"prompt", "noice", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},
 
     autocmd = {
         render = {

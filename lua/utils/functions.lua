@@ -13,10 +13,11 @@ M.first_xotovim_run = function()
 
   if is_first_run then
     async.run(function()
-      require('notify')("welcome to xotovim! hope you'll have a nice experience!", "info", { title = "xotovim", timeout = 5000 })
+      require('notify')("Welcome to xotovim! Hope you'll have a nice experience!", "info", { title = "xotovim", timeout = 5000 })
+      require('notify')("Please install treesitter servers manually by :TSInstall command.", "info", { title = "Installation", timeout = 10000 })
     end)
     local suc = os.remove('/tmp/first-xotovim-run')
-    if (not suc) then print("error: couldn't remove /tmp/first-xotovim-run!") end
+    if (not suc) then print("Error: Couldn't remove /tmp/first-xotovim-run!") end
   end
 end
 
@@ -30,7 +31,7 @@ end
 local _default_opts = win.default_opts
 win.default_opts = function(options)
   local opts = _default_opts(options)
-  opts.border = XotoVimGlobal.ui.float.border
+  opts.border = xotovim.ui.float.border
   return opts
 end
 

@@ -2,6 +2,8 @@ local present_dapui, dapui = pcall(require, "dapui")
 local present_dap, dap = pcall(require, "dap")
 local present_virtual_text, dap_vt = pcall(require, "nvim-dap-virtual-text")
 local _, shade = pcall(require, "shade")
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 if not present_dapui or not present_dap or not present_virtual_text then
   return
@@ -75,7 +77,7 @@ dapui.setup({
   floating = {
     max_height = nil,                           -- These can be integers or a float between 0 and 1.
     max_width = nil,                            -- Floats will be treated as percentage of your screen.
-    border = XotoVimGlobal.ui.float.border or "rounded", -- Border style. Can be "single", "double" or "rounded"
+    border = xotovim.ui.float.border or "single", -- Border style. Can be "single", "double" or "single"
     mappings = {
       close = { "q", "<Esc>" },
     },
@@ -89,114 +91,131 @@ dapui.setup({
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ dap setup                                                │
 -- ╰──────────────────────────────────────────────────────────╯
-dap.set_log_level('TRACE');
+dap.set_log_level("TRACE")
 
--- automatically open ui
-dap.listeners.after.event_initialized['dapui_config'] = function()
-  dapui.open();
-  shade.toggle();
+-- Automatically open UI
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+  -- shade.toggle()
 end
-dap.listeners.before.event_terminated['dapui_config'] = function()
-  dapui.close();
-  shade.toggle();
+dap.listeners.after.event_terminated["dapui_config"] = function()
+  dapui.close()
+  -- shade.toggle()
 end
-dap.listeners.before.event_exited['dapui_config'] = function()
-  dapui.close();
-  shade.toggle();
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+  -- shade.toggle()
 end
 
--- enable virtual text
+-- Enable virtual text
 vim.g.dap_virtual_text = true
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ icons                                                    │
+-- │ Icons                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
-vim.fn.sign_define('DapStopped', { text = '⭐️', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ keybindings                                              │
+-- │ Keybindings                                              │
 -- ╰──────────────────────────────────────────────────────────╯
-vim.api.nvim_set_keymap("n", "<Leader>db", "<CMD>lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>dc", "<CMD>lua require('dap').continue()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>dd", "<CMD>lua require('dap').continue()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>dh", "<CMD>lua require('dapui').eval()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>di", "<CMD>lua require('dap').step_into()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>do", "<CMD>lua require('dap').step_out()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>dO", "<CMD>lua require('dap').step_over()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>dt", "<CMD>lua require('dap').terminate()<CR>", { noremap = true, silent = true })
+keymap("n", "<Leader>db", "<CMD>lua require('dap').toggle_breakpoint()<CR>", opts)
+keymap("n", "<Leader>dc", "<CMD>lua require('dap').continue()<CR>", opts)
+keymap("n", "<Leader>dd", "<CMD>lua require('dap').continue()<CR>", opts)
+keymap("n", "<Leader>dh", "<CMD>lua require('dapui').eval()<CR>", opts)
+keymap("n", "<Leader>di", "<CMD>lua require('dap').step_into()<CR>", opts)
+keymap("n", "<Leader>do", "<CMD>lua require('dap').step_out()<CR>", opts)
+keymap("n", "<Leader>dO", "<CMD>lua require('dap').step_over()<CR>", opts)
+keymap("n", "<Leader>dt", "<CMD>lua require('dap').terminate()<CR>", opts)
+keymap("n", "<Leader>dC", "<CMD>lua require('dapui').close()<CR>", opts)
+
+keymap("n", "<Leader>dw", "<CMD>lua require('dapui').float_element('watches', { enter = true })<CR>", opts)
+keymap("n", "<Leader>ds", "<CMD>lua require('dapui').float_element('scopes', { enter = true })<CR>", opts)
+keymap("n", "<Leader>dr", "<CMD>lua require('dapui').float_element('repl', { enter = true })<CR>", opts)
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ adapters                                                 │
+-- │ Adapters                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
--- node / typescript
+
+-- NODE
 dap.adapters.node2 = {
-  type = 'executable';
-  command = 'node',
-  args = { vim.fn.stdpath "data" .. '/mason/packages/node-debug2-adapter/out/src/nodeDebug.js' };
+  type = "executable",
+  command = "node",
+  args = { vim.fn.stdpath("data") .. "/mason/packages/node-debug2-adapter/out/src/nodeDebug.js" },
 }
 
--- chrome
+-- Chrome
 dap.adapters.chrome = {
-  type = 'executable',
-  command = 'node',
-  args = { vim.fn.stdpath "data" .. '/mason/packages/chrome-debug-adapter/out/src/chromeDebug.js' };
+  type = "executable",
+  command = "node",
+  args = { vim.fn.stdpath("data") .. "/mason/packages/chrome-debug-adapter/out/src/chromeDebug.js" },
 }
+
+-- VSCODE JS
+require("dap-vscode-js").setup({
+  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
+  debugger_cmd = { "js-debug-adapter" },
+  adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
+})
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ configurations                                           │
+-- │ Configurations                                           │
 -- ╰──────────────────────────────────────────────────────────╯
 dap.configurations.javascript = {
   {
-    type = 'node2';
-    request = 'launch';
-    program = '${file}';
-    cwd = vim.fn.getcwd();
-    sourceMaps = true;
-    protocol = 'inspector';
-    console = 'integratedTerminal';
-  }
-}
-
-dap.configurations.javascript = {
-  {
-    type = 'chrome',
-    request = 'attach',
-    program = '${file}',
+    name = "Node.js",
+    type = "node2",
+    request = "launch",
+    program = "${file}",
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
-    protocol = 'inspector',
+    protocol = "inspector",
+    console = "integratedTerminal",
+  },
+}
+
+dap.configurations.javascript = {
+  {
+    name = "Chrome (9222)",
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
     port = 9222,
-    webRoot = '${workspaceFolder}'
-  }
+    webRoot = "${workspaceFolder}",
+  },
 }
 
 dap.configurations.javascriptreact = {
   {
-    type = 'chrome',
-    request = 'attach',
-    program = '${file}',
+    name = "Chrome (9222)",
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
-    protocol = 'inspector',
+    protocol = "inspector",
     port = 9222,
-    webRoot = '${workspaceFolder}'
-  }
+    webRoot = "${workspaceFolder}",
+  },
 }
 
 dap.configurations.typescriptreact = {
   {
-    type = 'chrome',
-    request = 'attach',
-    program = '${file}',
+    name = "Chrome (9222)",
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
-    protocol = 'inspector',
+    protocol = "inspector",
     port = 9222,
-    webRoot = '${workspaceFolder}'
+    webRoot = "${workspaceFolder}",
   },
   {
-    name = "React Native",
+    name = "React Native (8081) (Node2)",
     type = "node2",
     request = "attach",
     program = "${file}",
@@ -204,6 +223,18 @@ dap.configurations.typescriptreact = {
     sourceMaps = true,
     protocol = "inspector",
     console = "integratedTerminal",
-    port = 35000,
-  }
+    port = 8081,
+  },
+  {
+    name = "Attach React Native (8081)",
+    type = "pwa-node",
+    request = "attach",
+    processId = require('dap.utils').pick_process,
+    cwd = vim.fn.getcwd(),
+    rootPath = '${workspaceFolder}',
+    skipFiles = { "<node_internals>/**", "node_modules/**" },
+    sourceMaps = true,
+    protocol = "inspector",
+    console = "integratedTerminal",
+  },
 }

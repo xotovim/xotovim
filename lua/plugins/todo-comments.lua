@@ -16,7 +16,6 @@ todo_comments.setup {
     WARN = { alt = { "WARNING" } },
     PERF = { alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
   },
-
   highlight = {
     before = "", -- "fg" or "bg" or empty
     keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
@@ -26,7 +25,6 @@ todo_comments.setup {
     max_line_len = 400, -- ignore lines longer than this
     exclude = {}, -- list of file types to exclude highlighting
   },
-
 }
 
 -- ╭──────────────────────────────────────────────────────────╮

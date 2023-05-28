@@ -34,7 +34,7 @@ require("zen-mode").setup({
 		-- - allow_remote_control socket-only
 		-- - listen_on unix:/tmp/kitty
 		kitty = {
-			enabled = EcoVim.plugins.zen.kitty_enabled or false,
+			enabled = xotovim.plugins.zen.kitty_enabled or false,
 			font = "+3", -- font size increment
 		},
 	},
@@ -44,7 +44,7 @@ require("zen-mode").setup({
 		require("gitsigns.actions").toggle_current_line_blame()
 		require("indent_blankline.commands").disable()
 		vim.opt.relativenumber = false
-		require("hlargs").disable()
+		-- require("hlargs").disable()
 		require("gitsigns.actions").refresh()
 	end,
 
@@ -53,7 +53,7 @@ require("zen-mode").setup({
 		require("gitsigns.actions").toggle_current_line_blame()
 		require("indent_blankline.commands").enable()
 		vim.opt.relativenumber = true
-		require("hlargs").enable()
+		-- require("hlargs").enable()
 		require("gitsigns.actions").refresh()
 	end,
 })

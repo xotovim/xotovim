@@ -12,7 +12,6 @@ local M = {}
 ---call to `fn` within the timeframe. Default: Use arguments of the last call.
 --@returns (function, timer) Debounced function and timer. Remember to call
 ---`timer:close()` at the end or you will leak memory!
-
 function M.debounce_trailing(fn, ms, first)
 	local timer = vim.loop.new_timer()
 	local wrapped_fn

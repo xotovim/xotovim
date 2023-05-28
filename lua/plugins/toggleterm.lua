@@ -1,16 +1,21 @@
 require("toggleterm").setup {
-  
-  size = function(term) -- size can be a number or function which is passed the current terminal
+  -- size can be a number or function which is passed the current terminal
+  size = function(term)
     if term.direction == "horizontal" then
       return 20
     elseif term.direction == "vertical" then
       return vim.o.columns * 0.4
     end
   end,
-
   open_mapping = [[<F12>]],
-  hide_numbers = true, -- hide the number column in toggleterm buffers
-
+  ---@diagnostic disable-next-line: unused-local
+  on_open = function(term)
+    require('shade').toggle();
+  end,
+  ---@diagnostic disable-next-line: unused-local
+  on_close = function(term)
+    require('shade').toggle();
+  end,
   highlights = {
     -- highlights which map to a highlight group name and a table of it's values -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
     Normal = { link = 'Normal'},
@@ -34,11 +39,9 @@ require("toggleterm").setup {
     width = math.floor(1.0 * vim.fn.winwidth(0)),
     height = math.floor(0.8 * vim.fn.winheight(0))
   },
-
   winbar = {
     enabled = true,
   },
-
 }
 
 function _G.set_terminal_keymaps()

@@ -5,6 +5,3 @@
     (#eq? @_name "template")
   value: (template_string) @html
 )
-
-
-

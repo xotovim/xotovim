@@ -1,7 +1,7 @@
-local actions = require('telescope.actions')
+local actions    = require('telescope.actions')
 local previewers = require('telescope.previewers')
-local builtin = require('telescope.builtin')
-local icons = XotoVimGlobal.icons;
+local builtin    = require('telescope.builtin')
+local icons      = xotovim.icons
 
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('repo')
@@ -74,6 +74,9 @@ require('telescope').setup {
       require("telescope.themes").get_cursor {
               color_devicons = true,
       },
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      },
       codeactions = true,
     },
       package_info = {
@@ -83,12 +86,14 @@ require('telescope').setup {
   }
 }
 
--- implement delta as previewer for diffs
+-- Implement delta as previewer for diffs
+
 local M = {}
 
 local delta_bcommits = previewers.new_termopen_previewer {
   get_command = function(entry)
-    return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value .. '^!', '--', entry.current_file }
+    return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value .. '^!', '--',
+      entry.current_file }
   end
 }
 
@@ -121,18 +126,23 @@ M.my_git_bcommits = function(opts)
 end
 
 -- Custom pickers
+
 M.edit_neovim = function()
-  builtin.git_files (
+  builtin.git_files(
     require('telescope.themes').get_dropdown({
-      color_devicons = true,
-      cwd = "~/.config/nvim",
-      previewer = false,
-      prompt_title = "xotovim dotfiles",
+      color_devicons   = true,
+      cwd              = "~/.config/nvim",
+      previewer        = false,
+      prompt_title     = "xotovim dotfiles",
       sorting_strategy = "ascending",
       winblend = 0,
-      layout_config = {
-        horizontal = { mirror = false },
-        vertical = { mirror = false },
+      layout_config    = {
+        horizontal = {
+          mirror = false,
+        },
+        vertical = {
+          mirror = false,
+        },
         prompt_position = "top",
       },
     }))
@@ -145,7 +155,7 @@ M.project_files = function(opts)
 end
 
 M.command_history = function()
-  builtin.command_history (
+  builtin.command_history(
     require('telescope.themes').get_dropdown({
       color_devicons = true,
       winblend = 0,
@@ -154,7 +164,6 @@ M.command_history = function()
         width = function(_, max_columns, _)
           return math.min(max_columns, 150)
         end,
-
         height = function(_, _, max_lines)
           return math.min(max_lines, 15)
         end,

@@ -11,22 +11,19 @@ neotest.setup({
     require("neotest-jest")({
       jestCommand = "npm test --",
       env = { CI = true },
-      cwd = function()
+      cwd = function(path)
         return vim.fn.getcwd()
       end,
     }),
   },
-
   diagnostic = {
     enabled = true
   },
-
   floating = {
-    border = XotoVimGlobal.ui.float.border,
+    border = xotovim.ui.float.border or "single",
     max_height = 0.6,
     max_width = 0.6
   },
-
   highlights = {
     adapter_name = "NeotestAdapterName",
     border = "NeotestBorder",
@@ -42,9 +39,8 @@ neotest.setup({
     skipped = "NeotestSkipped",
     test = "NeotestTest"
   },
-
   icons = {
-    child_indent = "|",
+    child_indent = "│",
     child_prefix = "├",
     collapsed = "─",
     expanded = "╮",
@@ -57,27 +53,22 @@ neotest.setup({
     skipped = "ﰸ",
     unknown = "?"
   },
-
   output = {
     enabled = true,
     open_on_run = true,
   },
-
   run = {
     enabled = true
   },
-
   status = {
     enabled = true
   },
-
   strategies = {
     integrated = {
       height = 40,
       width = 120
     }
   },
-
   summary = {
     enabled = true,
     expand_errors = true,

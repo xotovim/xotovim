@@ -13,7 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { XotoVimGlobal.colorscheme } },
+  install = { colorscheme = { xotovim.colorscheme } },
   checker = { enabled = true },
   performance = {
     rtp = {
@@ -29,8 +29,8 @@ require("lazy").setup("config.plugins", {
   },
   debug = false,
   ui = {
-    border = XotoVimGlobal.ui.float.border,
+    border = xotovim.ui.float.border,
   }
 })
 
--- vim.keymap.set("n", "<leader>/l", "<cmd>:Lazy<cr>")
+vim.keymap.set("n", "<leader>/l", "<cmd>:Lazy<cr>")

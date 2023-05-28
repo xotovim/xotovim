@@ -1,6 +1,6 @@
 local present, conflict = pcall(require, "git-conflict")
 if not present then
-  return
+	return
 end
 
 conflict.setup({
@@ -12,7 +12,6 @@ conflict.setup({
 		current = "DiffAdd",
 	},
 })
-
 
 vim.api.nvim_create_autocmd("User", {
 	pattern = "GitConflictDetected",

@@ -8,12 +8,12 @@ function M.enable_format_on_save()
 		end,
 		group = group,
 	})
-	require("notify")("enabled format on save", "info", { title = "LSP", timeout = 2000 })
+	require("notify")("Enabled format on save", "info", { title = "LSP", timeout = 2000 })
 end
 
 function M.disable_format_on_save()
 	vim.api.nvim_del_augroup_by_name("format_on_save")
-	require("notify")("disabled format on save", "info", { title = "LSP", timeout = 2000 })
+	require("notify")("Disabled format on save", "info", { title = "LSP", timeout = 2000 })
 end
 
 function M.toggle_format_on_save()
@@ -34,7 +34,7 @@ function M.custom_hover_handler(_, result)
 
 			local lines = vim.split(result.contents.value, "\n")
 			local bufnr =
-				vim.lsp.util.open_floating_preview(lines, "markdown", { border = XotoVimGlobal.ui.float.border })
+				vim.lsp.util.open_floating_preview(lines, "markdown", { border = xotovim.ui.float.border or "single" })
 			colorizer.highlight_buffer(bufnr, nil, vim.list_slice(lines, 2, #lines), 0, colorizer.get_buffer_options(0))
 		end
 	end

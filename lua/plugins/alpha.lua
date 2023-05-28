@@ -4,7 +4,7 @@ if not present then
 end
 
 local dashboard = require("alpha.themes.dashboard")
-local icons = require("icons")
+local icons = require("utils.icons")
 local if_nil = vim.F.if_nil
 local fn = vim.fn
 local config_dir = fn.stdpath('config')
@@ -14,22 +14,26 @@ local config_dir = fn.stdpath('config')
 -- ╰──────────────────────────────────────────────────────────╯
 
 local header = {
-"                                                      ███                 ",
-"                        ███                                               ",
-" █████ █████  ██████  ███████    ██████  █████ █████ ████  █████████████  ",
-"░░███ ░░███  ███░░███░░░███░    ███░░███░░███ ░░███ ░░███ ░░███░░███░░███ ",
-" ░░░█████░  ░███ ░███  ░███    ░███ ░███ ░███  ░███  ░███  ░███ ░███ ░███ ",
-"  ███░░░███ ░███ ░███  ░███ ███░███ ░███ ░░███ ███   ░███  ░███ ░███ ░███ ",
-" █████ █████░░██████   ░░█████ ░░██████   ░░█████    █████ █████░███ █████",
-"░░░░░ ░░░░░  ░░░░░░     ░░░░░   ░░░░░░     ░░░░░    ░░░░░ ░░░░░ ░░░ ░░░░░ ",
-}
+  "                                                      ███                 ",
+  "                        ███                                               ",
+  " █████ █████  ██████  ███████    ██████  █████ █████ ████  █████████████  ",
+  "░░███ ░░███  ███░░███░░░███░    ███░░███░░███ ░░███ ░░███ ░░███░░███░░███ ",
+  " ░░░█████░  ░███ ░███  ░███    ░███ ░███ ░███  ░███  ░███  ░███ ░███ ░███ ",
+  "  ███░░░███ ░███ ░███  ░███ ███░███ ░███ ░░███ ███   ░███  ░███ ░███ ░███ ",
+  " █████ █████░░██████   ░░█████ ░░██████   ░░█████    █████ █████░███ █████",
+  "░░░░░ ░░░░░  ░░░░░░     ░░░░░   ░░░░░░     ░░░░░    ░░░░░ ░░░░░ ░░░ ░░░░░ ",
+  }
+  
 
 dashboard.section.header.type = "text";
 dashboard.section.header.val = header;
-dashboard.section.header.opts = { position = "center", hl = "XotoVimHeader" }
+dashboard.section.header.opts = {
+  position = "center",
+  hl = "xotovimHeader",
+}
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ heading info                                             │
+-- │ Heading Info                                             │
 -- ╰──────────────────────────────────────────────────────────╯
 
 local thingy = io.popen('echo "$(LANG=en_us_88591; date +%a) $(date +%d) $(LANG=en_us_88591; date +%b)" | tr -d "\n"')
@@ -44,7 +48,7 @@ local hi_top_section = {
   val =  "┌────────────   Today is " .. date .. " ────────────┐",
   opts = {
     position = "center",
-    hl = "XotoVimHeaderInfo"
+    hl = "xotovimHeaderInfo"
   }
 }
 
@@ -53,7 +57,7 @@ local hi_middle_section = {
   val = "│                                                │",
   opts = {
     position = "center",
-    hl = "XotoVimHeaderInfo"
+    hl = "xotovimHeaderInfo"
   }
 }
 
@@ -62,7 +66,7 @@ local hi_bottom_section = {
   val = "└──────────────────  " .. datetime .. "  ───────────────────┘",
   opts = {
     position = "center",
-    hl = "XotoVimHeaderInfo"
+    hl = "xotovimHeaderInfo"
   }
 }
 
@@ -70,6 +74,7 @@ local hi_bottom_section = {
 -- │ buttons                                                  │
 -- ╰──────────────────────────────────────────────────────────╯
 -- Copied from Alpha.nvim source code
+
 local leader = "SPC"
 
 --- @param sc string
@@ -85,7 +90,7 @@ local function button(sc, txt, keybind, keybind_opts)
         cursor = 5,
         width = 50,
         align_shortcut = "right",
-        hl_shortcut = "XotoVimPrimary",
+        hl_shortcut = "xotovimPrimary",
     }
     if keybind then
         keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
@@ -107,33 +112,20 @@ local function button(sc, txt, keybind, keybind_opts)
 end
 
 dashboard.section.buttons.val = {
-  button("f", icons.reference .. " " .. "find file", "<CMD>Telescope find_files<CR>", {}),
-  button("n", icons.newFile .. " " .. "new file", "<CMD>ene!<CR>", {}),
-  button("p", icons.project .. " " .. "projects ", "<CMD>Telescope projects<CR>", {}),
-  button("r", icons.history .. " " .. "recent files", ":Telescope oldfiles <CR>", {}),
-  button("t", icons.text .. " " .. "find text", "<CMD>Telescope live_grep<CR>", {}),
-  -- button("<C-P>", icons.fileNoBg .. " " .. "find file", "<cmd>lua require('plugins.telescope').project_files()<CR>", {}),
-  -- button("<Leader>P", icons.t .. " " .. "find word", "<cmd>lua require('plugins.telescope.pickers.multi-rg')()<CR>", {}),
-  button("SPC s h", icons.fileRecent .. " " .. "recents", "<cmd>Telescope oldfiles hidden=true<CR>", {}),
-  button("SPC / s d", icons.timer .. " " .. "load current dir session", "<cmd>SessionManager load_current_dir_session<CR>", {}),
-  -- button("SPC / u", icons.container .. " " .. "update plugins", "<cmd>PackerSync<CR>", {}),
-  -- button("SPC / i", icons.container .. " " .. "install plugins", "<cmd>PackerInstall<CR>", {}),
-  button("SPC / c", icons.cog .. " " .. "settings", "<cmd>e $MYVIMRC<CR>", {}),
-  button("-", icons.exit .. " " .. "exit", "<cmd>exit<CR>", {}),
-  
-  -- button("<C-P>", icons.fileNoBg .. " " .. "Find File", "<cmd>lua require('plugins.telescope').project_files()<CR>", {}),
-  -- button("<S-P>", icons.t .. " " .. "Find Word", "<cmd>lua require('plugins.telescope.pickers.multi-rg')()<CR>", {}),
-  -- button("SPC s h", icons.fileRecent .. " " .. "Recents", "<cmd>Telescope oldfiles hidden=true<CR>", {}),
-  -- button("SPC / s d", icons.timer .. " " .. "Load Current Dir Session", "<cmd>SessionManager load_current_dir_session<CR>", {}),
-  -- button("SPC / u", icons.container .. " " .. "Update Plugins", "<cmd>Lazy update<CR>", {}),
-  -- button("SPC / i", icons.container .. " " .. "Manage Plugins", "<cmd>Lazy<CR>", {}),
-  -- button("SPC / c", icons.cog .. " " .. "Settings", "<cmd>e $MYVIMRC<CR>", {}),
-  -- button("-", icons.exit .. " " .. "Exit", "<cmd>exit<CR>", {}),
+  button("<C-P>", icons.fileNoBg .. " " .. "Find File", "<cmd>lua require('plugins.telescope').project_files()<CR>", {}),
+  button("<S-P>", icons.t .. " " .. "Find Word", "<cmd>lua require('plugins.telescope.pickers.multi-rg')()<CR>", {}),
+  button("SPC s h", icons.fileRecent .. " " .. "Recents", "<cmd>Telescope oldfiles hidden=true<CR>", {}),
+  button("SPC / s d", icons.timer .. " " .. "Load Current Dir Session", "<cmd>SessionManager load_current_dir_session<CR>", {}),
+  button("SPC / u", icons.container .. " " .. "Update Plugins", "<cmd>Lazy update<CR>", {}),
+  button("SPC / i", icons.container .. " " .. "Manage Plugins", "<cmd>Lazy<CR>", {}),
+  button("SPC / c", icons.cog .. " " .. "Settings", "<cmd>e $MYVIMRC<CR>", {}),
+  button("-", icons.exit .. " " .. "Exit", "<cmd>exit<CR>", {}),
 }
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ footer                                                   │
 -- ╰──────────────────────────────────────────────────────────╯
+
 local function file_exists(file)
   local f = io.open(file, "rb")
   if f then f:close() end
@@ -161,7 +153,7 @@ dashboard.section.footer.val = {
 }
 dashboard.section.footer.opts = {
   position = "center",
-  hl = "XotoVimFooter",
+  hl = "xotovimFooter",
 }
 
 local section = {
@@ -176,6 +168,7 @@ local section = {
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ setup                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
+
 local opts = {
 
   layout = {
@@ -184,7 +177,6 @@ local opts = {
     {type = "padding", val = 1}, section.buttons,
     {type = "padding", val = 1}, section.footer,
   },
-
   opts = {
     margin = 5
   },

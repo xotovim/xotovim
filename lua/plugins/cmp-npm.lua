@@ -3,7 +3,7 @@ require('cmp-npm').setup({
   only_semantic_versions = true,
   only_latest_version = false,
   sources = {
-    { name = 'npm', keyword_length = 4 },
+    { name = 'npm', keyword_length = 3 },
   }
 })
 

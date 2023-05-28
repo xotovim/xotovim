@@ -1,8 +1,8 @@
--- vim.cmd('colorscheme ' .. XotoVimGlobal.colorscheme) --- Set Colorscheme
+-- vim.cmd('colorscheme ' .. xotovim.colorscheme) --- Set Colorscheme
 
-local XotoVimPrimary = "#242738";
-local XotoVimPrimaryLight = "#34384f"; 
-local XotoVimSecondary = "#e8ab5a";
+local xotovimPrimary = "#242738";
+local xotovimPrimaryLight = "#34384f"; 
+local xotovimSecondary = "#e8ab5a";
 
 local colors = require("config.colors")
 
@@ -10,42 +10,42 @@ local colors = require("config.colors")
 -- if vim.fn.has("nvim-0.8") then
   
   -- xotovim global colors
-  vim.api.nvim_set_hl(0, 'XotoVimPrimary', { fg = XotoVimPrimary });
-  vim.api.nvim_set_hl(0, 'XotoVimPrimaryLight', { fg = XotoVimPrimaryLight });
-  vim.api.nvim_set_hl(0, 'XotoVimSecondary', { fg = XotoVimSecondary });
-  vim.api.nvim_set_hl(0, 'CursorLine', { bg = XotoVimPrimary });
+  vim.api.nvim_set_hl(0, 'xotovimPrimary', { fg = xotovimPrimary });
+  vim.api.nvim_set_hl(0, 'xotovimPrimaryLight', { fg = xotovimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'xotovimSecondary', { fg = xotovimSecondary });
+  vim.api.nvim_set_hl(0, 'CursorLine', { bg = xotovimPrimary });
 
-  vim.api.nvim_set_hl(0, 'XotoVimPrimaryBold', { bold = false, fg = XotoVimPrimary });
-  vim.api.nvim_set_hl(0, 'XotoVimSecondaryBold', { bold = false, fg = XotoVimSecondary });
+  vim.api.nvim_set_hl(0, 'xotovimPrimaryBold', { bold = false, fg = xotovimPrimary });
+  vim.api.nvim_set_hl(0, 'xotovimSecondaryBold', { bold = false, fg = xotovimSecondary });
 
-  vim.api.nvim_set_hl(0, 'SmoothCursor', { bg = "None", bold = false, fg = XotoVimPrimaryLight });
-  vim.api.nvim_set_hl(0, 'XotoVimHeader', { bold = false, fg = XotoVimPrimaryLight });
-  vim.api.nvim_set_hl(0, 'XotoVimHeaderInfo', { bold = false, fg = XotoVimSecondary });
-  vim.api.nvim_set_hl(0, 'XotoVimFooter', { bold = false, fg = XotoVimSecondary });
+  vim.api.nvim_set_hl(0, 'SmoothCursor', { bg = "None", bold = false, fg = xotovimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'xotovimHeader', { bold = false, fg = xotovimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'xotovimHeaderInfo', { bold = false, fg = xotovimSecondary });
+  vim.api.nvim_set_hl(0, 'xotovimFooter', { bold = false, fg = xotovimSecondary });
 
   -- xotonight colorscheme override
-  -- if XotoVimGlobal.colorscheme == 'xotonight' then
+  -- if xotovim.colorscheme == 'xotonight' then
 
     -- lines
-    vim.api.nvim_set_hl(0, 'CursorLineNR', { link = 'XotoVimSecondary' })
+    vim.api.nvim_set_hl(0, 'CursorLineNR', { link = 'xotovimSecondary' })
     vim.api.nvim_set_hl(0, 'LineNr', { link = 'Comment' })
 
     -- floats/windows
     vim.api.nvim_set_hl(0, 'NormalFloat', { bg = "None", fg = "None" });
     vim.api.nvim_set_hl(0, 'RegistersWindow', { bg = "None", fg = "None" });
-    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = "None", fg = XotoVimPrimaryLight });
-    vim.api.nvim_set_hl(0, 'NotifyBackground', { bg = XotoVimPrimaryLight, fg = "None" });
-    vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = "None", fg = XotoVimPrimary });
+    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = "None", fg = xotovimPrimaryLight });
+    vim.api.nvim_set_hl(0, 'NotifyBackground', { bg = xotovimPrimaryLight, fg = "None" });
+    vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = "None", fg = xotovimPrimary });
     vim.api.nvim_set_hl(0, 'BufferTabpageFill', { fg = "None" });
-    vim.api.nvim_set_hl(0, 'VertSplit', { bg = "None", fg = XotoVimPrimary });
+    vim.api.nvim_set_hl(0, 'VertSplit', { bg = "None", fg = xotovimPrimary });
     vim.api.nvim_set_hl(0, 'BqfPreviewBorder', { link = 'FloatBorder' })
 
     -- telescope
-    vim.api.nvim_set_hl(0, 'TelescopeTitle', { link = 'XotoVimSecondary' });
+    vim.api.nvim_set_hl(0, 'TelescopeTitle', { link = 'xotovimSecondary' });
     vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg =  "None" , fg = "None" });
-    vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = "None", fg = XotoVimPrimaryLight });
-    vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = XotoVimPrimary, fg = "None" });
-    vim.api.nvim_set_hl(0, 'TelescopeMatching', { link = 'XotoVimSecondary' });
+    vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = "None", fg = xotovimPrimaryLight });
+    vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = xotovimPrimary, fg = "None" });
+    vim.api.nvim_set_hl(0, 'TelescopeMatching', { link = 'xotovimSecondary' });
 
     -- autopilot
     vim.api.nvim_set_hl(0, 'CopilotSuggestion', { bg = "None", fg = colors.dark3 });
@@ -56,7 +56,7 @@ local colors = require("config.colors")
     vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = "None" });
     vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.blue, ctermfg = 9 });
     vim.api.nvim_set_hl(0, 'Boolean', { fg = "#F7768E" });
-    vim.api.nvim_set_hl(0, 'BufferOffset', { link = 'XotoVimSecondary' });
+    vim.api.nvim_set_hl(0, 'BufferOffset', { link = 'xotovimSecondary' });
 
     -- completion menu colors
     local highlights = {
@@ -77,7 +77,7 @@ local colors = require("config.colors")
       CmpItemAbbrMatchFuzzy = { fg = "#569CD6", bg = "NONE" },
     }
 
-    vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = colors.blue0, bg = XotoVimPrimaryLight })
+    vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = colors.blue0, bg = xotovimPrimaryLight })
 
     for group, hl in pairs(highlights) do
       vim.api.nvim_set_hl(0, group, hl)

@@ -1,9 +1,9 @@
-# XotoVim: Neovim Config
+# xotovim: Neovim Config
 
 [![Last commit](https://img.shields.io/github/last-commit/xotovim/xotovim?style=for-the-badge)](https://github.com/xotovim/xotovim/commits/development)
 ![Stars](https://img.shields.io/github/stars/xotovim/xotovim?style=for-the-badge)
 ![License](https://img.shields.io/github/license/xotovim/xotovim?style=for-the-badge)
-![Neovim Version](https://img.shields.io/badge/For%20Neovim-0.8+-yellowgreen?style=for-the-badge&logo=neovim&logoColor=d8abbb&color=d8abbb)
+![Neovim Version](https://img.shields.io/badge/For%20Neovim-0.9+-yellowgreen?style=for-the-badge&logo=neovim&logoColor=d8abbb&color=d8abbb)
 
 ### A non-minimal Neovim config built to work most efficiently with any development
 
@@ -49,6 +49,6 @@ After install configuration:
 
 ## Configuration 💻
 
-To change XotoVim related config use the `config.lua` file.\
+To change xotovim related config use the `config.lua` file.\
 To change vim settings use the `settings.lua` file.
 

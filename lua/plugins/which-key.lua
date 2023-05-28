@@ -10,7 +10,6 @@ wk.setup {
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
-
     spelling = {
       enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
       suggestions = 20, -- how many suggestions should be shown in the list?
@@ -25,12 +24,9 @@ wk.setup {
       g = false, -- bindings for prefixed with g
     },
   },
-
   -- add operators that will trigger motion and text object completion
   -- to enable all native operators, set the preset / operators plugin above
-
   operators = { gc = "Comments" },
-
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
@@ -38,34 +34,29 @@ wk.setup {
     -- ["<cr>"] = "RET",
     -- ["<tab>"] = "TAB",
   },
-
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
     separator = "➜", -- symbol used between a key and it's label
     group = "+", -- symbol prepended to a group
   },
-
   window = {
-    border = XotoVimGlobal.ui.float.border, -- none, single, double, shadow, rounded
+    border = xotovim.ui.float.border or "single", -- none, single, double, shadow, single
     position = "bottom", -- bottom, top
     margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
     padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
     -- padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
   },
-
   layout = {
     height = { min = 4, max = 25 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 4, -- spacing between columns
     align = "left", -- align columns left, center or right
   },
-
   ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
   -- triggers = "auto", -- automatically setup triggers
   triggers = {"<leader>"}, -- or specify a list manually
-
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -170,6 +161,7 @@ local normal_mode_mappings = {
   u = {
     name = "buffer",
     x = { '<cmd>BufferCloseAllButCurrent<CR>', 'close but current' },
+    c = { '<cmd>lua require("utils").closeOtherBuffers()<CR>', 'Close but current' },
     -- d = { '<cmd>BufferOrderByDirectory<CR>', 'order by directory' },
     -- f = { '<cmd>bfirst<CR>', 'first buffer' },
     l = { '<cmd>BufferCloseBuffersLeft<CR>', 'close left' },
@@ -378,6 +370,8 @@ local visual_mode_mappings = {
   }, ]]
 }
 
+
+
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ register                                                 │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -388,12 +382,12 @@ wk.register(visual_mode_mappings, visual_opts)
 local function attach_markdown(bufnr)
   wk.register({
     a = {
-      name = "actions",
+      name = "Actions",
       m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
     }
   }, {
     buffer = bufnr ,
-    mode = "n", -- normal mode
+    mode = "n", -- NORMAL mode
     prefix = "<leader>",
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -401,40 +395,41 @@ local function attach_markdown(bufnr)
   })
 end
 
--- local function attach_typescript(bufnr)
---   wk.register({
---     l = {
---       name = "lsp",
---       a = { '<cmd>TypescriptFixAll<CR>', 'fix all' },
---       i = { '<cmd>TypescriptAddMissingImports<CR>', 'import all'},
---       o = { '<cmd>TypescriptOrganizeImports<CR>', 'organize imports'},
---       r = { '<cmd>TypescriptRemoveUnused<CR>', 'remove unused' },
---     }
---   }, {
---     buffer = bufnr ,
---     mode = "n", -- normal mode
---     prefix = "<leader>",
---     silent = true, -- use `silent` when creating keymaps
---     noremap = true, -- use `noremap` when creating keymaps
---     nowait = false, -- use `nowait` when creating keymaps
---   })
--- end
+local function attach_typescript(bufnr)
+  wk.register({
+    c = {
+      name = "LSP",
+      e = { '<cmd>TSC<CR>',                                'workspace errors (TSC)'},
+      F = { '<cmd>TypescriptFixAll<CR>',                   'fix all' },
+      i = { '<cmd>TypescriptAddMissingImports<CR>',        'import all'},
+      o = { '<cmd>TypescriptOrganizeImports<CR>',          'organize imports'},
+      u = { '<cmd>TypescriptRemoveUnused<CR>',             'remove unused' },
+    }
+  }, {
+    buffer = bufnr ,
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
 
 local function attach_npm(bufnr)
   wk.register({
     n = {
-      name = "npm",
+      name = "NPM",
       c = { '<cmd>lua require("package-info").change_version()<CR>', 'change version' },
-      d = { '<cmd>lua require("package-info").delete()<CR>', 'delete package' },
-      h = { "<cmd>lua require('package-info').hide()<CR>", 'hide'},
-      i = { '<cmd>lua require("package-info").install()<CR>', 'install new package' },
-      r = { '<cmd>lua require("package-info").reinstall()<CR>', 'reinstall dependencies' },
-      s = { '<cmd>lua require("package-info").show()<CR>', 'show' },
-      u = { '<cmd>lua require("package-info").update()<CR>', 'update package'},
+      d = { '<cmd>lua require("package-info").delete()<CR>',         'delete package' },
+      h = { "<cmd>lua require('package-info').hide()<CR>",           'hide'},
+      i = { '<cmd>lua require("package-info").install()<CR>',        'install new package' },
+      r = { '<cmd>lua require("package-info").reinstall()<CR>',      'reinstall dependencies' },
+      s = { '<cmd>lua require("package-info").show()<CR>',           'show' },
+      u = { '<cmd>lua require("package-info").update()<CR>',         'update package'},
     }
   }, {
     buffer = bufnr,
-    mode = "n", -- normal mode
+    mode = "n", -- NORMAL mode
     prefix = "<leader>",
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -444,10 +439,10 @@ end
 
 local function attach_zen(bufnr)
   wk.register({
-    ["z"] = { '<cmd>ZenMode<CR>', 'zen' },
+    ["z"] = { '<cmd>ZenMode<CR>',               'zen' },
   }, {
     buffer = bufnr,
-    mode = "n", -- normal mode
+    mode = "n", -- NORMAL mode
     prefix = "<leader>",
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -478,13 +473,27 @@ end
 
 local function attach_spectre(bufnr)
   wk.register({
-    ["r"] = { '[SPECTRE] replace all'},
-    ["o"] = { '[SPECTRE] show options'},
-    ["q"] = { '[SPECTRE] send all to quicklist'},
-    ["v"] = { '[SPECTRE] change view mode'},
+    ["r"] = { '[SPECTRE] Replace all'},
+    ["o"] = { '[SPECTRE] Show options'},
+    ["q"] = { '[SPECTRE] Send all to quicklist'},
+    ["v"] = { '[SPECTRE] Change view mode'},
   }, {
     buffer = bufnr,
-    mode = "n", -- normal mode
+    mode = "n", -- NORMAL mode
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+  })
+end
+
+local function attach_nvim_tree(bufnr)
+  wk.register({
+    ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
+    ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
+  }, {
+    buffer = bufnr,
+    mode = "n",   -- NORMAL mode
     prefix = "<leader>",
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -494,9 +503,10 @@ end
 
 return {
   attach_markdown = attach_markdown,
-  -- attach_typescript = attach_typescript,
+  attach_typescript = attach_typescript,
   attach_npm = attach_npm,
   attach_zen = attach_zen,
   attach_jest = attach_jest,
   attach_spectre = attach_spectre,
+  attach_nvim_tree = attach_nvim_tree,
 }

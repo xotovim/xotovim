@@ -39,7 +39,7 @@ function main() {
 
   while [ true ]; do
     msg
-    read -p $'Do you wish to install XotoVim now? \e[33m[y/n]\e[0m: ' yn
+    read -p $'Do you wish to install xotovim now? \e[33m[y/n]\e[0m: ' yn
     case $yn in
         [Yy]* ) break;;
         [Nn]* ) exit;;
@@ -183,14 +183,14 @@ function remove_current_repo() {
 }
 
 function clone_repo() {
-  msg "${BOLD}Cloning XotoVim configuration... ${NC}" "1"
+  msg "${BOLD}Cloning xotovim configuration... ${NC}" "1"
   if ! git clone --branch "$GIT_BRANCH" \
     --depth 1 "https://github.com/${GIT_REMOTE}" "$CONFIG_DIR"; then
     echo "Failed to clone repository. Installation failed."
     exit 1
   fi
   echo -e "${GREEN}${BOLD}Done${NC}"
-  msg "${BOLD}Moving to XotoVim directory... ${NC}"
+  msg "${BOLD}Moving to xotovim directory... ${NC}"
   cd "$CONFIG_DIR" || exit
   echo "${GREEN}${BOLD}Done${NC}"
 }
@@ -210,8 +210,8 @@ function install_packer() {
 
 function finish () {
   touch /tmp/first-xotovim-run
-  msg "${BOLD}${GREEN}Thank you for installing my ${BLUE}XotoVim${NC}${BOLD}${GREEN} config! Please support me by giving a star :)${NC}" 1
-  echo -e "${BOLD}${GREEN}Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts].\nI recommend Fira Code for XotoVim setup.${NC}"
+  msg "${BOLD}${GREEN}Thank you for installing my ${BLUE}xotovim${NC}${BOLD}${GREEN} config! Please support me by giving a star :)${NC}" 1
+  echo -e "${BOLD}${GREEN}Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts].\nI recommend Fira Code for xotovim setup.${NC}"
 }
 
 function setup() {

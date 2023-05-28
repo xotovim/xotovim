@@ -26,14 +26,14 @@ worktree.setup({
 -- <c-f> - toggles forcing of the next deletion
 keymap("n", "<Leader>gww", "<CMD>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>", silent)
 
--- first a telescope git branch window will appear.
--- presing enter will choose the selected branch for the branch name.
--- if no branch is selected, then the prompt will be used as the branch name.
+-- First a telescope git branch window will appear.
+-- Presing enter will choose the selected branch for the branch name.
+-- If no branch is selected, then the prompt will be used as the branch name.
 
--- after the git branch window,
+-- After the git branch window,
 -- a prompt will be presented to enter the path name to write the worktree to.
 
--- as of now you can not specify the upstream in the telescope create workflow,
+-- As of now you can not specify the upstream in the telescope create workflow,
 -- however if it finds a branch of the same name in the origin it will use it
 keymap("n", "<Leader>gwc", "<CMD>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", silent)
 
@@ -55,7 +55,7 @@ keymap("n", "<Leader>gwc", "<CMD>lua require('telescope').extensions.git_worktre
 worktree.on_tree_change(function(op, metadata)
   if op == worktree.Operations.Switch then
     utils.log("Switched from " .. metadata.prev_path .. " to " .. metadata.path, "Git Worktree")
-    vim.cmd ('BufferCloseAllButCurrent')
+    utils.closeOtherBuffers()
     vim.cmd ('e')
   end
 end)

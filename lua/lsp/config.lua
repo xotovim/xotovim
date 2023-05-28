@@ -1,32 +1,28 @@
 -- Diagnostic config
 
 local codes = {
-  -- lua
-  no_matching_function = { message = " Can't find a matching function", "redundant-parameter", "ovl_no_viable_function_in_call" },
-  empty_block = { message = " That shouldn't be empty here", "empty-block" },
-  missing_symbol = { message = " Here should be a symbol", "miss-symbol" },
-  expected_semi_colon = { message = " Please put the `;` or `,`", "expected_semi_declaration", "miss-sep-in-table", "invalid_token_after_toplevel_declarator" },
-  redefinition = { message = " That variable was defined before", icon = "", "redefinition", "redefined-local", "no-duplicate-imports", "@typescript-eslint/no-redeclare", "import/no-duplicates" },
-  no_matching_variable = { message = " Can't find that variable", "undefined-global", "reportUndefinedVariable" },
-  trailing_whitespace = { message = "  Whitespaces are useless", "trailing-whitespace", "trailing-space" },
-  unused_variable = { message = "  Don't define variables you don't use", icon = "", "unused-local", "@typescript-eslint/no-unused-vars", "no-unused-vars" },
-  unused_function = { message = "  Don't define functions you don't use", "unused-function" },
-  useless_symbols = { message = " Remove that useless symbols", "unknown-symbol" },
-  wrong_type = { message = " Try to use the correct types", "init_conversion_failed" },
-  undeclared_variable = { message = " Have you delcared that variable somewhere?", "undeclared_var_use" },
-  lowercase_global = { message = " Should that be a global? (if so make it uppercase)", "lowercase-global" },
-
-  -- typescript
-  no_console = { icon = "", "no-console" },
-
-  -- prettier
-  prettier = { icon = "", "prettier/prettier" }
+  -- Lua
+  no_matching_function = {message = " Can't find a matching function", "redundant-parameter", "ovl_no_viable_function_in_call", },
+  empty_block = {message = " That shouldn't be empty here", "empty-block", },
+  missing_symbol = {message = " Here should be a symbol", "miss-symbol", },
+  expected_semi_colon = {message = " Please put the `;` or `,`", "expected_semi_declaration", "miss-sep-in-table", "invalid_token_after_toplevel_declarator", },
+  redefinition = {message = " That variable was defined before",icon = " ", "redefinition", "redefined-local", "no-duplicate-imports", "@typescript-eslint/no-redeclare", "import/no-duplicates" },
+  no_matching_variable = {message = " Can't find that variable", "undefined-global", "reportUndefinedVariable", },
+  trailing_whitespace = {message = "  Whitespaces are useless", "trailing-whitespace", "trailing-space", },
+  unused_variable = {message = "  Don't define variables you don't use",icon = "  ", "unused-local", "@typescript-eslint/no-unused-vars", "no-unused-vars" },
+  unused_function = {message = "  Don't define functions you don't use", "unused-function", },
+  useless_symbols = {message = " Remove that useless symbols", "unknown-symbol", },
+  wrong_type = {message = " Try to use the correct types", "init_conversion_failed", },
+  undeclared_variable = {message = " Have you delcared that variable somewhere?", "undeclared_var_use", },
+  lowercase_global = {message = " Should that be a global? (if so make it uppercase)", "lowercase-global", },
+  no_console = {icon = "  ", "no-console", },
+  prettier = {icon = "  ", "prettier/prettier" }
 }
 
 vim.diagnostic.config({
-  
   float = {
     source = "if_many",  -- Or "if_many" or false
+    -- source = false,
     format = function(diagnostic)
       local code = diagnostic.user_data.lsp.code
 
@@ -40,6 +36,7 @@ vim.diagnostic.config({
             return string.format('%s [%s]', table.icon .. diagnostic.message, code)
           end
         end
+
         return string.format('%s [%s]', diagnostic.message, code)
       end
 
@@ -52,19 +49,24 @@ vim.diagnostic.config({
       return string.format('%s [%s]', diagnostic.message, diagnostic.source)
     end
   },
-
   severity_sort = true,
   signs = true,
   underline = false,
-  update_in_insert = false,
-  virtual_text = true, -- {prefix = XotoVimGlobal.icons.caretRight},
-  virtual_lines = false -- {prefix = XotoVimGlobal.icons.caretRight},
+  update_in_insert = true,
+  virtual_text = true, -- {prefix = xotovim.icons.caretRight},
+  virtual_lines = false -- {prefix = xotovim.icons.caretRight},
+  -- virtual_text = {
+  --   prefix = xotovim.icons.circle,
+  -- }
 })
 
--- ui
+-- UI
+
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
+
+require('lspconfig.ui.windows').default_options.border = xotovim.ui.float.border or 'single'
