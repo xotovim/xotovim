@@ -1,8 +1,5 @@
 local default_config = {
-  inlay_hints = {
-    -- highlight group
-    highlight = "LspCodeLens",
-  },
+  inlay_hints = { highlight = "LspCodeLens", },
   debug_mode = false,
 }
 

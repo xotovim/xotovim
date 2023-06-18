@@ -1,4 +1,4 @@
-require("nvim-surround").setup({ -- defines plugin keymaps
+require("nvim-surround").setup({ 
 	keymaps = {
         insert = "<C-g>s",
         insert_line = "<C-g>S",
@@ -12,7 +12,7 @@ require("nvim-surround").setup({ -- defines plugin keymaps
         change = "cs",
     },
 
-	surrounds = {  -- defines surround keys and behavior
+	surrounds = {  
 		["("] = { add = { "( ", " )" }, find = function() return M.get_selection({ motion = "a(" }) end, delete = "^(. ?)().-( ?.)()$", },
         [")"] = { add = { "(", ")" }, find = function() return M.get_selection({ motion = "a)" }) end, delete = "^(.)().-(.)()$", },
         ["{"] = { add = { "{ ", " }" }, find = function() return M.get_selection({ motion = "a{" }) end, delete = "^(. ?)().-( ?.)()$", },
@@ -26,7 +26,7 @@ require("nvim-surround").setup({ -- defines plugin keymaps
         ["`"] = { add = { "`", "`" }, find = function() return M.get_selection({ motion = "a`" }) end, delete = "^(.)().-(.)()$", },
 	},
 
-	aliases = {  -- defines aliases
+	aliases = {  
         ["a"] = ">",
         ["b"] = ")",
         ["B"] = "}",
@@ -35,9 +35,9 @@ require("nvim-surround").setup({ -- defines plugin keymaps
         ["s"] = { "}", "]", ")", ">", '"', "'", "`" },
     },
 
-	highlight = { -- defines highlight behavior
+	highlight = { 
 		duration = 200
 	},
 
-	move_cursor = true -- defines cursor behavior,
+	move_cursor = true 
 })

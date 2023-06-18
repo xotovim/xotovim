@@ -1,7 +1,5 @@
 local present, ls = pcall(require, "luasnip")
-if not present then
-  return
-end
+if not present then return end
 
 local fmt = require("luasnip.extras.fmt").fmt
 local snippet = ls.snippet
@@ -11,16 +9,6 @@ local dynamic_node = ls.dynamic_node
 local snippet_node = ls.snippet_node
 local rep = require("luasnip.extras").rep
 
--- Get a list of  the property names given an `interface_declaration`
--- treesitter *tsx* node.
--- Ie, if the treesitter node represents:
---   interface {
---     prop1: string;
---     prop2: number;
---   }
--- Then this function would return `{"prop1", "prop2"}
----@param id_node {} Stands for "interface declaration node"
----@return string[]
 local function get_prop_names(id_node)
   local object_type_node = id_node:child(2)
   if object_type_node:type() ~= "object_type" then
@@ -56,7 +44,6 @@ export const {} = ({{ {} }}: {}Props) => {{
       {
       insert_node(1, "export "),
 
-      -- Initialize component name to file name
       dynamic_node(2, function(_, snip)
         local dirname = vim.fn.expand("%"):match "([^/]+)/[^/]+$"
         local filename = vim.fn.expand("%:t")
@@ -102,10 +89,8 @@ export const {} = ({{ {} }}: {}Props) => {{
           return ""
         end
 
-        -- `node` is now surely of type "interface_declaration"
         local prop_names = get_prop_names(node)
 
-        -- Does this lua->vimscript->lua thing cause a slow down? Dunno.
         return vim.fn.join(prop_names, ", ")
       end, { 3 }),
       rep(2),

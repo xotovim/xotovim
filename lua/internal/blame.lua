@@ -1,26 +1,9 @@
 local utils = require('utils')
 local git = require('utils.git')
-
 local M = {}
-
-local config = {
-  keymaps = {
-    quit_blame = "q",
-    blame_commit = "<CR>"
-  }
-}
-
-local blame_state = {
-  file = "",
-  temp_file = "",
-  starting_win = "",
-  relative_path = "",
-  git_root = "",
-}
-
-local function blameLinechars()
-  return vim.fn.strlen(vim.fn.getline ".")
-end
+local config = { keymaps = { quit_blame = "q", blame_commit = "<CR>" } }
+local blame_state = { file = "", temp_file = "", starting_win = "", relative_path = "", git_root = "", }
+local function blameLinechars() return vim.fn.strlen(vim.fn.getline ".") end
 
 local function create_blame_win()
   vim.api.nvim_command "topleft vnew"
@@ -60,11 +43,7 @@ local function blame_syntax()
         local g = colors[3]
         local b = colors[4]
         local color = 16 + (r + 1) / 3 * 36 + (g + 1) / 3 * 6 + (b + 1) / 3
-        if color == 16 then
-          color = 235
-        elseif color == 231 then
-          color = 255
-        end
+        if color == 16 then color = 235 elseif color == 231 then color = 255 end
         hash_colors[hash] = " ctermfg=" .. tostring(color)
       else
         hash_colors[hash] = ""
@@ -88,7 +67,6 @@ local function on_blame_done(lines)
   local current_top = vim.fn.line "w0" + vim.wo.scrolloff
   local current_pos = vim.fn.line "."
 
-  -- Save the state
   blame_state.file = vim.api.nvim_buf_get_name(0)
   blame_state.starting_win = starting_win
 
@@ -97,56 +75,37 @@ local function on_blame_done(lines)
   vim.api.nvim_buf_set_lines(blame_buf, 0, -1, true, lines)
   vim.api.nvim_buf_set_option(blame_buf, "modifiable", false)
   vim.api.nvim_win_set_width(blame_win, blameLinechars() + 1)
-
   vim.cmd("execute " .. tostring(current_top))
   vim.cmd "normal! zt"
   vim.cmd("execute " .. tostring(current_pos))
-
-  -- We should call cursorbind, scrollbind here to avoid unexpected behavior
   vim.api.nvim_win_set_option(blame_win, "cursorbind", true)
   vim.api.nvim_win_set_option(blame_win, "scrollbind", true)
-
   vim.api.nvim_win_set_option(starting_win, "scrollbind", true)
   vim.api.nvim_win_set_option(starting_win, "cursorbind", true)
 
-  -- Keymaps
-  local options = {
-    noremap = true,
-    silent = true,
-    expr = false,
-  }
+  local options = { noremap = true, silent = true, expr = false, }
 
   vim.api.nvim_buf_set_keymap(0, "n", config.keymaps.quit_blame, "<CMD>q<CR>", options)
-  vim.api.nvim_buf_set_keymap(
-    0,
-    "n",
-    config.keymaps.blame_commit,
-    "<CMD>lua require('internal.blame').blame_commit()<CR>",
-    options
-  )
+  vim.api.nvim_buf_set_keymap( 0, "n", config.keymaps.blame_commit, "<CMD>lua require('internal.blame').blame_commit()<CR>", options )
   vim.api.nvim_command "autocmd BufWinLeave <buffer> lua require('internal.blame').blame_quit()"
 
   blame_syntax()
 end
 
 local function on_blame_commit_done(commit_hash, lines)
-  -- TODO: Find a better way to handle this case
+ 
   local idx = 1
-  while idx <= #lines and not utils.starts_with(lines[idx], "diff") do
-    idx = idx + 1
-  end
+  while idx <= #lines and not utils.starts_with(lines[idx], "diff") do idx = idx + 1 end
   table.insert(lines, idx, "")
 
   local temp_file = vim.fn.tempname()
   blame_state.temp_file = temp_file
   vim.fn.writefile(lines, temp_file)
 
-  -- Close blame window
   local win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_close(win, true)
-
   vim.api.nvim_command("silent! e" .. temp_file)
-
+  
   local buf = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_name(buf, commit_hash)
   vim.api.nvim_buf_set_option(buf, "buftype", "nofile")
@@ -166,55 +125,25 @@ end
 function M.blame_commit()
   local line = vim.fn.getline "."
   local commit = vim.fn.matchstr(line, [[^\^\=[?*]*\zs\x\+]])
-  if string.match(commit, "^0+$") then
-    utils.warnlog("Not Committed Yet", "Git")
-    return
-  end
+  if string.match(commit, "^0+$") then utils.warnlog("Not Committed Yet", "Git") return end
 
-  local commit_hash = git.run_git_cmd(
-    "git -C " .. blame_state.git_root .. " --literal-pathspecs rev-parse --verify " .. commit .. " --"
-  )
-  if commit_hash == nil then
-    utils.warnlog("Commit hash not found", "Git")
-    return
-  end
+  local commit_hash = git.run_git_cmd("git -C " .. blame_state.git_root .. " --literal-pathspecs rev-parse --verify " .. commit .. " --")
+  if commit_hash == nil then utils.warnlog("Commit hash not found", "Git") return end
 
   commit_hash = string.gsub(commit_hash, "\n", "")
-  local diff_cmd = "git -C "
-    .. blame_state.git_root
-    .. " --literal-pathspecs --no-pager show --no-color "
-    .. commit_hash
-    .. " -- "
-    .. blame_state.file
-
+  local diff_cmd = "git -C " .. blame_state.git_root .. " --literal-pathspecs --no-pager show --no-color " .. commit_hash .. " -- " .. blame_state.file 
   local lines = {}
   local function on_event(_, data, event)
-    -- TODO: Handle error data
     if event == "stdout" or event == "stderr" then
       data = utils.handle_job_data(data)
-      if not data then
-        return
-      end
-
-      for i = 1, #data do
-        if data[i] ~= "" then
-          table.insert(lines, data[i])
-        end
-      end
+      if not data then return end
+      for i = 1, #data do if data[i] ~= "" then table.insert(lines, data[i]) end end
     end
 
-    if event == "exit" then
-      on_blame_commit_done(commit_hash, lines)
-    end
+    if event == "exit" then on_blame_commit_done(commit_hash, lines) end
   end
 
-  vim.fn.jobstart(diff_cmd, {
-    on_stderr = on_event,
-    on_stdout = on_event,
-    on_exit = on_event,
-    stdout_buffered = true,
-    stderr_buffered = true,
-  })
+  vim.fn.jobstart(diff_cmd, { on_stderr = on_event, on_stdout = on_event, on_exit = on_event, stdout_buffered = true, stderr_buffered = true, })
 end
 
 function M.blame_quit()
@@ -224,21 +153,14 @@ end
 
 function M.open()
   local fpath = vim.api.nvim_buf_get_name(0)
-  if fpath == "" or fpath == nil then
-    return
-  end
+  if fpath == "" or fpath == nil then return end
 
   local git_root = git.get_git_repo()
-  if git_root == "" then
-    return
-  end
+  if git_root == "" then return end
   blame_state.git_root = git_root
   blame_state.relative_path = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.")
 
-  local blame_cmd = "git -C "
-    .. git_root
-    .. " --literal-pathspecs --no-pager -c blame.coloring=none -c blame.blankBoundary=false blame --show-number -- "
-    .. fpath
+  local blame_cmd = "git -C " .. git_root .. " --literal-pathspecs --no-pager -c blame.coloring=none -c blame.blankBoundary=false blame --show-number -- " .. fpath
 
   local lines = {}
   local has_error = false
@@ -246,10 +168,7 @@ function M.open()
   local function on_event(_, data, event)
     if event == "stdout" then
       data = utils.handle_job_data(data)
-      if not data then
-        return
-      end
-
+      if not data then return end
       for i = 1, #data do
         if data[i] ~= "" then
           local commit = vim.fn.matchstr(data[i], [[^\^\=[?*]*\zs\x\+]])
@@ -260,20 +179,13 @@ function M.open()
       end
     elseif event == "stderr" then
       data = utils.handle_job_data(data)
-      if not data then
-        return
-      end
-
+      if not data then return end
       has_error = true
       local error_message = ""
-      for _, line in ipairs(data) do
-        error_message = error_message .. line
-      end
+      for _, line in ipairs(data) do error_message = error_message .. line end
       utils.warnlog("Failed to open git blame window: " .. error_message, "Git")
     elseif event == "exit" then
-      if not has_error then
-        on_blame_done(lines)
-      end
+      if not has_error then on_blame_done(lines) end
     end
   end
 

@@ -1,17 +1,11 @@
 local present, alpha = pcall(require, "alpha")
-if not present then
-  return
-end
+if not present then return end
 
 local dashboard = require("alpha.themes.dashboard")
 local icons = require("utils.icons")
 local if_nil = vim.F.if_nil
 local fn = vim.fn
 local config_dir = fn.stdpath('config')
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ header                                                   │
--- ╰──────────────────────────────────────────────────────────╯
 
 local header = {
   "                                                      ███                 ",
@@ -24,17 +18,9 @@ local header = {
   "░░░░░ ░░░░░  ░░░░░░     ░░░░░   ░░░░░░     ░░░░░    ░░░░░ ░░░░░ ░░░ ░░░░░ ",
   }
   
-
 dashboard.section.header.type = "text";
 dashboard.section.header.val = header;
-dashboard.section.header.opts = {
-  position = "center",
-  hl = "xotovimHeader",
-}
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ Heading Info                                             │
--- ╰──────────────────────────────────────────────────────────╯
+dashboard.section.header.opts = { position = "center", hl = "xotovimHeader", }
 
 local thingy = io.popen('echo "$(LANG=en_us_88591; date +%a) $(date +%d) $(LANG=en_us_88591; date +%b)" | tr -d "\n"')
 if thingy == nil then return end
@@ -70,17 +56,8 @@ local hi_bottom_section = {
   }
 }
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ buttons                                                  │
--- ╰──────────────────────────────────────────────────────────╯
--- Copied from Alpha.nvim source code
-
 local leader = "SPC"
 
---- @param sc string
---- @param txt string
---- @param keybind string optional
---- @param keybind_opts table optional
 local function button(sc, txt, keybind, keybind_opts)
     local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
 
@@ -92,13 +69,13 @@ local function button(sc, txt, keybind, keybind_opts)
         align_shortcut = "right",
         hl_shortcut = "xotovimPrimary",
     }
+    
     if keybind then
         keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
         opts.keymap = { "n", sc_, keybind, keybind_opts }
     end
 
     local function on_press()
-        -- local key = vim.api.nvim_replace_termcodes(keybind .. "<Ignore>", true, false, true)
         local key = vim.api.nvim_replace_termcodes(sc_ .. "<Ignore>", true, false, true)
         vim.api.nvim_feedkeys(key, "t", false)
     end
@@ -122,10 +99,6 @@ dashboard.section.buttons.val = {
   button("-", icons.exit .. " " .. "Exit", "<cmd>exit<CR>", {}),
 }
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ footer                                                   │
--- ╰──────────────────────────────────────────────────────────╯
-
 local function file_exists(file)
   local f = io.open(file, "rb")
   if f then f:close() end
@@ -135,9 +108,7 @@ end
 local function line_from(file)
   if not file_exists(file) then return {} end
   local lines = {}
-  for line in io.lines(file) do
-    lines[#lines + 1] = line
-  end
+  for line in io.lines(file) do lines[#lines + 1] = line end
   return lines
 end
 
@@ -151,10 +122,7 @@ end
 dashboard.section.footer.val = {
   footer()
 }
-dashboard.section.footer.opts = {
-  position = "center",
-  hl = "xotovimFooter",
-}
+dashboard.section.footer.opts = { position = "center", hl = "xotovimFooter", }
 
 local section = {
   header = dashboard.section.header,
@@ -165,10 +133,6 @@ local section = {
   footer = dashboard.section.footer,
 }
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ setup                                                    │
--- ╰──────────────────────────────────────────────────────────╯
-
 local opts = {
 
   layout = {
@@ -177,16 +141,11 @@ local opts = {
     {type = "padding", val = 1}, section.buttons,
     {type = "padding", val = 1}, section.footer,
   },
-  opts = {
-    margin = 5
-  },
+  opts = { margin = 5 },
 }
 
 alpha.setup(opts)
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ hide tabline and statusline on startup screen            │
--- ╰──────────────────────────────────────────────────────────╯
 vim.api.nvim_create_augroup("alpha_tabline", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -198,11 +157,5 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = "alpha_tabline",
   pattern = "alpha",
-  callback = function()
-    vim.api.nvim_create_autocmd("BufUnload", {
-      group = "alpha_tabline",
-      buffer = 0,
-      command = "set showtabline=2 ruler laststatus=3",
-    })
-  end,
+  callback = function() vim.api.nvim_create_autocmd("BufUnload", { group = "alpha_tabline", buffer = 0, command = "set showtabline=2 ruler laststatus=3", }) end,
 })

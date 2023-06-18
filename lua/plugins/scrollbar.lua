@@ -1,151 +1,42 @@
 local colors = require("config.colors")
-
-
 require("scrollbar").setup({
     show = true,
     show_in_active_only = false,
     set_highlights = true,
-    folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
-    max_lines = false, -- disables if no. of lines in buffer exceeds this
-    hide_if_all_visible = false, -- Hides everything if all lines are visible
+    folds = 1000,
+    max_lines = false,
+    hide_if_all_visible = false,
     throttle_ms = 100,
-    
     handle = {
         color = colors.bg_highlight,
         text = " ",
-        -- color = nil,
-        -- color_nr = nil, -- cterm
         highlight = "CursorColumn",
-        hide_if_all_visible = true, -- Hides handle if all lines are visible
+        hide_if_all_visible = true,
     },
-    
     marks = {
-        Cursor = {
-            text = "•",
-            priority = 0,
-            gui=nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "Normal",
-        },
-        Search = {
-            text = { "-", "=" },
-            color = colors.orange,
-            priority = 1,
-            gui=nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "Search",
-        },
-        Error = {
-            text = { "-", "=" },
-            priority = 2,
-            gui=nil,
-            color = colors.error,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextError",
-        },
-        Warn = {
-            text = { "-", "=" },
-            priority = 3,
-            gui=nil,
-            color = colors.warning,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextWarn",
-        },
-        Info = {
-            text = { "-", "=" },
-            priority = 4,
-            gui=nil,
-            -- cterm=nil,
-            color = colors.info,
-            -- color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextInfo",
-        },
-        Hint = {
-            text = { "-", "=" },
-            priority = 5,
-            gui=nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            color = colors.hint,
-            highlight = "DiagnosticVirtualTextHint",
-        },
-        Misc = {
-            text = { "-", "=" },
-            priority = 6,
-            gui=nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            color = colors.purple,
-            highlight = "Normal",
-        },
-        GitAdd = {
-            text = "┆",
-            priority = 7,
-            gui=nil,
-            -- color = nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "GitSignsAdd",
-        },
-        GitChange = {
-            text = "┆",
-            priority = 7,
-            gui=nil,
-            -- color = nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "GitSignsChange",
-        },
-        GitDelete = {
-            text = "▁",
-            priority = 7,
-            gui=nil,
-            -- color = nil,
-            -- cterm=nil,
-            -- color_nr = nil, -- cterm
-            highlight = "GitSignsDelete",
-        },
+        Cursor = { text = "•", priority = 0, gui=nil, highlight = "Normal", },
+        Search = { text = { "-", "=" }, color = colors.orange, priority = 1, gui=nil, highlight = "Search", },
+        Error = { text = { "-", "=" }, priority = 2, gui=nil, color = colors.error, highlight = "DiagnosticVirtualTextError", },
+        Warn = { text = { "-", "=" }, priority = 3, gui=nil, color = colors.warning, highlight = "DiagnosticVirtualTextWarn", },
+        Info = { text = { "-", "=" }, priority = 4, gui=nil, color = colors.info, highlight = "DiagnosticVirtualTextInfo", },
+        Hint = { text = { "-", "=" }, priority = 5, gui=nil, color = colors.hint, highlight = "DiagnosticVirtualTextHint", },
+        Misc = { text = { "-", "=" }, priority = 6, gui=nil, color = colors.purple, highlight = "Normal", },
+        GitAdd = { text = "┆", priority = 7, gui=nil, highlight = "GitSignsAdd", },
+        GitChange = { text = "┆", priority = 7, gui=nil, highlight = "GitSignsChange", },
+        GitDelete = { text = "▁", priority = 7, gui=nil, highlight = "GitSignsDelete", },
     },
     excluded_buftypes = {"terminal", "telescope", "nofile"},
     excluded_filetypes = {"prompt", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},
-    -- excluded_filetypes = {"prompt", "noice", "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float"},
-
     autocmd = {
-        render = {
-            "BufWinEnter",
-            "TabEnter",
-            "TermEnter",
-            "WinEnter",
-            "CmdwinLeave",
-            "TextChanged",
-            "VimResized",
-            "WinScrolled",
-        },
-        clear = {
-            "BufWinLeave",
-            "TabLeave",
-            "TermLeave",
-            "WinLeave",
-        },
+        render = { "BufWinEnter", "TabEnter", "TermEnter", "WinEnter", "CmdwinLeave", "TextChanged", "VimResized", "WinScrolled", },
+        clear = { "BufWinLeave", "TabLeave", "TermLeave", "WinLeave", },
     },
     handlers = {
         cursor = true,
         diagnostic = true,
-        gitsigns = true, -- Requires gitsigns
+        gitsigns = true,
         handle = true,
-        search = false, -- Requires hlslens
-        ale = false, -- Requires ALE
+        search = false,
+        ale = false,
     },
 })
-
--- require("scrollbar.handlers").register("my_marks", function(bufnr)
---     return {
---         { line = 0 },
---         { line = 1, text = "x", type = "Warn" },
---         { line = 2, type = "Error" }
---     }
--- end)

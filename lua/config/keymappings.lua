@@ -3,51 +3,51 @@ local silent = { silent = true }
 
 table.unpack = table.unpack or unpack -- 5.1 compatibility
 
--- Better window movement
+-- better window movement
 keymap("n", "<C-h>", "<C-w>h", silent)
 keymap("n", "<C-j>", "<C-w>j", silent)
 keymap("n", "<C-k>", "<C-w>k", silent)
 keymap("n", "<C-l>", "<C-w>l", silent)
 
--- H to move to the first non-blank character of the line
+-- h to move to the first non-blank character of the line
 keymap("n", "H", "^", silent)
 
--- Move selected line / block of text in visual mode
+-- move selected line / block of text in visual mode
 keymap("x", "K", ":move '<-2<CR>gv-gv", silent)
 keymap("x", "J", ":move '>+1<CR>gv-gv", silent)
 
--- Keep visual mode indenting
+-- keep visual mode indenting
 keymap("v", "<", "<gv", silent)
 keymap("v", ">", ">gv", silent)
 
--- Case change in visual mode
+-- case change in visual mode
 keymap("v", "`", "u", silent)
 keymap("v", "<A-`>", "U", silent)
 
--- Save file by CTRL-S
+-- save file by ctrl-s
 keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
--- Telescope
+-- telescope
 keymap("n", "<C-p>", "<CMD>lua require('plugins.telescope').project_files()<CR>")
 keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')()<CR>")
 
--- Remove highlights
+-- remove highlights
 keymap("n", "<CR>", ":noh<CR><CR>", silent)
 
--- Find word/file across project
+-- find word/file across project
 keymap("n", "<Leader>pf",
   "<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
 keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
--- Buffers
+-- buffers
 keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", silent)
 keymap("n", "gn", ":bn<CR>", silent)
 keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", silent)
 keymap("n", "gp", ":bp<CR>", silent)
 keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
 
--- Move between barbar buffers
+-- move between barbar buffers
 keymap("n", "<Space>1", ":BufferLineGoToBuffer 1<CR>", silent)
 keymap("n", "<Space>2", ":BufferLineGoToBuffer 2<CR>", silent)
 keymap("n", "<Space>3", ":BufferLineGoToBuffer 3<CR>", silent)
@@ -67,45 +67,45 @@ keymap("n", "<A-7>", ":BufferLineGoToBuffer 7<CR>", silent)
 keymap("n", "<A-8>", ":BufferLineGoToBuffer 8<CR>", silent)
 keymap("n", "<A-9>", ":BufferLineGoToBuffer 9<CR>", silent)
 
--- Don't yank on delete char
+-- don't yank on delete char
 keymap("n", "x", '"_x', silent)
 keymap("n", "X", '"_X', silent)
 keymap("v", "x", '"_x', silent)
 keymap("v", "X", '"_X', silent)
 
--- Don't yank on visual paste
+-- don't yank on visual paste
 keymap("v", "p", '"_dP', silent)
 
--- Avoid issues because of remapping <c-a> and <c-x> below
+-- avoid issues because of remapping <c-a> and <c-x> below
 vim.cmd([[
   nnoremap <Plug>SpeedDatingFallbackUp <c-a>
   nnoremap <Plug>SpeedDatingFallbackDown <c-x>
 ]])
 
--- Quickfix
+-- quickfix
 keymap("n", "<Space>,", ":cp<CR>", silent)
 keymap("n", "<Space>.", ":cn<CR>", silent)
 
--- Toggle quicklist
+-- toggle quicklist
 keymap("n", "<leader>q", "<cmd>lua require('utils').toggle_quicklist()<CR>", silent)
 
--- Manually invoke speeddating in case switch.vim didn't work
+-- manually invoke speeddating in case switch.vim didn't work
 keymap("n", "<C-a>", ":if !switch#Switch() <bar> call speeddating#increment(v:count1) <bar> endif<CR>", silent)
 keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 1}) <bar> call speeddating#increment(-v:count1) <bar> endif<CR>",
   silent)
 
--- Open links under cursor in browser with gx
+-- open links under cursor in browser with gx
 if vim.fn.has('macunix') == 1 then
   keymap("n", "gx", "<cmd>silent execute '!open ' . shellescape('<cWORD>')<CR>", silent)
 else
   keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape('<cWORD>')<CR>", silent)
 end
 
--- Refactor with spectre
+-- refactor with spectre
 keymap("n", "<Leader>pr", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", silent)
 keymap("v", "<Leader>pr", "<cmd>lua require('spectre').open_visual()<CR>")
 
--- LSP
+-- lsp
 -- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent) -- Replaced with Glance plugin
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent) -- Replaced with Glance plugin
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
@@ -130,6 +130,7 @@ keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'single', max_w
 keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
 keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'single', max_width = 100 }})<CR>", silent)
 keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'single', max_width = 100 }})<CR>", silent)
+
 keymap("n", "K", function()
 	local winid = require("ufo").peekFoldedLinesUnderCursor()
 	if not winid then
@@ -137,6 +138,6 @@ keymap("n", "K", function()
 	end
 end)
 
--- Comment Box
+-- comment box
 keymap("n", "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", silent)
 keymap("v", "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", silent)

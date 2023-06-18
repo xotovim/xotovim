@@ -1,29 +1,17 @@
--- require("copilot").setup({
---   suggestion = { enabled = false },
---   panel = { enabled = false },
--- })
-
 require("copilot").setup({
-  -- suggestion = { enabled = false },
-  -- panel = { enabled = false },
-	
 	panel = {
 		enabled = true,
 		auto_refresh = true,
-		layout = {
-			position = "bottom", 
-			ratio = 0.4
-		},
+		layout = { position = "bottom",  ratio = 0.4 },
 	},
 	suggestion = {
 		enabled = true,
 		auto_trigger = true,
 		debounce = 75,
-	
 	},
 	filetypes = {
-		javascript = true, 
-			typescript = true, 
+		javascript = true,  
+		typescript = true,  
 		yaml = false,
 		markdown = false,
 		help = false,

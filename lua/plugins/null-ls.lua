@@ -1,17 +1,13 @@
 require("mason-null-ls").setup({
-  ensure_installed = {
-    -- Opt to list sources here, when available in mason.
-  },
+  ensure_installed = {},
   automatic_installation = true,
-  automatic_setup = true, -- Recommended, but optional
+  automatic_setup = true, 
   handlers = {},
 })
 
 require("null-ls").setup({
   sources = {
-    require("null-ls").builtins.diagnostics.codespell.with({
-      filetypes = { "markdown", "text" },
-    }),
+    require("null-ls").builtins.diagnostics.codespell.with({ filetypes = { "markdown", "text" }, }),
     require("typescript.extensions.null-ls.code-actions"),
   },
 })

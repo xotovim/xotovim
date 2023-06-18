@@ -1,70 +1,112 @@
-
-local present, xotonight = pcall(require, "xotonight")
-if not present then
-  return
-end
-
--- change this to colors
+local xotovimPrimary = "#242738";
+local xotovimPrimaryLight = "#34384f"; 
+local xotovimSecondary = "#e8ab5a";
+local present, tokyonight = pcall(require, "tokyonight")
 local colors = require("config.colors")
+if not present then return end
+local c = require("tokyonight.colors").setup()
 
--- local util = require("xotonight.util")
--- local theme = require("xotonight.theme")
-
--- util.load(theme.setup())
-
-xotonight.setup({
+tokyonight.setup({
   style = "night",
-  transparent = true, --- Enable this to disable setting the background color
-  terminal_colors = true, --- Configure the colors used when opening a `:terminal` in Neovim
-
-  styles = {
-    --- Style to be applied to different syntax groups
-    --- Value is any valid attr-list value `:help attr-list`
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-    --- Background styles. Can be "dark", "transparent" or "normal"
-    sidebars = "dark", --- style for sidebars, see below
-    floats = "transparent", --- style for floating windows
-  },
-  use_background = auto, --- can be light/dark/auto. When auto, background will be set to vim.o.background
-  sidebars = { "qf", "vista_kind", "terminal", "spectre_panel", "NeogitStatus", "help" }, --- set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-  day_brightness = 0.3, --- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-  hide_inactive_statusline = false, --- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-  dim_inactive = true, --- dims inactive windows
-  lualine_bold = false, --- When `true`, section headers in the lualine theme will be bold
-
-  --- You can override specific color groups to use other groups or a hex color
-  --- function will be called with a ColorScheme table
-    on_colors = function(xotoGroupColor)
-      -- xotoGroupColor.hint = xotoGroupColor.orange
-      --- xotoGroupColor.error = "#ff0000"
-      xotoGroupColor.border = "#34384f"
-    end,
-  
-    --- You can override specific highlights to use other groups or a hex color
-    --- fucntion will be called with a Highlights and ColorScheme table
-    --- on_highlights = function(highlights, colors) end,
-    on_highlights = function(hl, colors)
-      local prompt = "#FFA630"
-      local text = "#488dff"
-      local none = "NONE"
-  
-      hl.IndentBlanklineContextChar = { fg = colors.dark5}
-      hl.TSConstructor = {fg = colors.blue1}
-      hl.TSTagDelimiter = {fg = colors.dark5}
-  
-      hl.TelescopeTitle = { fg = prompt, }
-      hl.TelescopeNormal = { bg = none, fg = none, }
-      hl.TelescopeBorder = { bg = none, fg = text }
-      hl.TelescopeMatching = { fg = prompt }
-      hl.MsgArea = { fg = colors.fg_dark }
-    end,
+  transparent = false,   
+  terminal_colors = true,
+  styles = { comments = "NONE", keywords = "italic", functions = "NONE", variables = "NONE", sidebars = "dark",  floats = "dark",            },
+  sidebars = { "qf", "help" },     
+  day_brightness = 0.3,            
+  hide_inactive_statusline = false,
+  dim_inactive = false,            
+  lualine_bold = false,            
+  on_colors = function(colors) colors.border = "#1A1B26" end,
+  on_highlights = function(hl, _color)
+    local prompt = "#FFA630"
+    local text = "#488dff"
+    local none = "NONE"
+    hl.TelescopeTitle = { fg = prompt, }
+    hl.TelescopeNormal = { bg = none, fg = none, }
+    hl.TelescopeBorder = { bg = none, fg = text, }
+    hl.TelescopeMatching = { fg = prompt, }
+    hl.MsgArea = { fg = c.fg_dark, }
+  end,
 })
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ setup colorscheme                                        │
--- ╰──────────────────────────────────────────────────────────╯
+vim.cmd("colorscheme " .. xotovim.colorscheme)
 
--- 
+-- if nightly
+-- if vim.fn.has("nvim-0.8") then
+  
+  -- xotovim global colors
+  vim.api.nvim_set_hl(0, 'xotovimPrimary', { fg = xotovimPrimary });
+  vim.api.nvim_set_hl(0, 'xotovimPrimaryLight', { fg = xotovimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'xotovimSecondary', { fg = xotovimSecondary });
+  vim.api.nvim_set_hl(0, 'CursorLine', { bg = xotovimPrimary });
+
+  vim.api.nvim_set_hl(0, 'xotovimPrimaryBold', { bold = false, fg = xotovimPrimary });
+  vim.api.nvim_set_hl(0, 'xotovimSecondaryBold', { bold = false, fg = xotovimSecondary });
+
+  vim.api.nvim_set_hl(0, 'SmoothCursor', { bg = "None", bold = false, fg = xotovimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'xotovimHeader', { bold = false, fg = xotovimPrimaryLight });
+  vim.api.nvim_set_hl(0, 'xotovimHeaderInfo', { bold = false, fg = xotovimSecondary });
+  vim.api.nvim_set_hl(0, 'xotovimFooter', { bold = false, fg = xotovimSecondary });
+
+  -- xotonight colorscheme override
+  -- if xotovim.colorscheme == 'xotonight' then
+
+    -- lines
+    vim.api.nvim_set_hl(0, 'CursorLineNR', { link = 'xotovimSecondary' })
+    vim.api.nvim_set_hl(0, 'LineNr', { link = 'Comment' })
+
+    -- floats/windows
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = "None", fg = "None" });
+    vim.api.nvim_set_hl(0, 'RegistersWindow', { bg = "None", fg = "None" });
+    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = "None", fg = xotovimPrimaryLight });
+    vim.api.nvim_set_hl(0, 'NotifyBackground', { bg = xotovimPrimaryLight, fg = "None" });
+    vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = "None", fg = xotovimPrimary });
+    vim.api.nvim_set_hl(0, 'BufferTabpageFill', { fg = "None" });
+    vim.api.nvim_set_hl(0, 'VertSplit', { bg = "None", fg = xotovimPrimary });
+    vim.api.nvim_set_hl(0, 'BqfPreviewBorder', { link = 'FloatBorder' })
+
+    -- telescope
+    vim.api.nvim_set_hl(0, 'TelescopeTitle', { link = 'xotovimSecondary' });
+    vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg =  "None" , fg = "None" });
+    vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = "None", fg = xotovimPrimaryLight });
+    vim.api.nvim_set_hl(0, 'TelescopeSelection', { bg = xotovimPrimary, fg = "None" });
+    vim.api.nvim_set_hl(0, 'TelescopeMatching', { link = 'xotovimSecondary' });
+
+    -- autopilot
+    vim.api.nvim_set_hl(0, 'CopilotSuggestion', { bg = "None", fg = colors.dark3 });
+
+    -- misc
+    vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { link = 'Comment' });
+    vim.api.nvim_set_hl(0, 'StatusLine', { bg = "None" });
+    vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = "None" });
+    vim.api.nvim_set_hl(0, 'rainbowcol1', { fg = colors.blue, ctermfg = 9 });
+    vim.api.nvim_set_hl(0, 'Boolean', { fg = "#F7768E" });
+    vim.api.nvim_set_hl(0, 'BufferOffset', { link = 'xotovimSecondary' });
+
+    -- -- completion menu colors
+    -- local highlights = {
+    --   CmpItemAbbr = { fg = colors.dark3, bg = "NONE" },
+    --   CmpItemKindClass = { fg = colors.orange },
+    --   CmpItemKindConstructor = { fg = colors.purple },
+    --   CmpItemKindFolder = { fg = colors.blue2 },
+    --   CmpItemKindFunction = { fg = colors.blue },
+    --   CmpItemKindInterface = { fg = colors.teal, bg = "NONE" },
+    --   CmpItemKindKeyword = { fg = colors.magneta2 },
+    --   CmpItemKindMethod = { fg = colors.red },
+    --   CmpItemKindReference = { fg = colors.red1 },
+    --   CmpItemKindSnippet = { fg = colors.dark3 },
+    --   CmpItemKindVariable = { fg = colors.cyan, bg = "NONE" },
+    --   CmpItemKindText = { fg = "LightGrey" },
+    --   CmpItemMenu = { fg = "#C586C0", bg = "NONE" },
+    --   CmpItemAbbrMatch = { fg = "#569CD6", bg = "NONE" },
+    --   CmpItemAbbrMatchFuzzy = { fg = "#569CD6", bg = "NONE" },
+    -- }
+
+    vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = colors.blue0, bg = xotovimPrimaryLight })
+
+    -- for group, hl in pairs(highlights) do
+    --   vim.api.nvim_set_hl(0, group, hl)
+    -- end
+
+-- vim.api.nvim_set_hl(0, "EcovimPrim
+-- end

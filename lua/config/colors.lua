@@ -30,11 +30,7 @@ local colors = {
   red = "#f7768e",
   red1 = "#db4b4b",
   git = { change = "#6183bb", add = "#449dab", delete = "#914c54" },
-  gitSigns = {
-    add = "#266d6a",
-    change = "#536c9e",
-    delete = "#b2555b",
-  },
+  gitSigns = { add = "#266d6a", change = "#536c9e", delete = "#b2555b", },
 }
 
 return colors

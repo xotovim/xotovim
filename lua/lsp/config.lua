@@ -1,7 +1,6 @@
--- Diagnostic config
 
 local codes = {
-  -- Lua
+  
   no_matching_function = {message = " Can't find a matching function", "redundant-parameter", "ovl_no_viable_function_in_call", },
   empty_block = {message = " That shouldn't be empty here", "empty-block", },
   missing_symbol = {message = " Here should be a symbol", "miss-symbol", },
@@ -21,46 +20,26 @@ local codes = {
 
 vim.diagnostic.config({
   float = {
-    source = "if_many",  -- Or "if_many" or false
-    -- source = false,
+    source = "if_many",  
     format = function(diagnostic)
       local code = diagnostic.user_data.lsp.code
-
-      if not diagnostic.source or not code then
-        return string.format('%s', diagnostic.message)
-      end
-
+      if not diagnostic.source or not code then return string.format('%s', diagnostic.message) end
       if diagnostic.source == 'eslint' then
-        for _, table in pairs(codes) do
-          if vim.tbl_contains(table, code) then
-            return string.format('%s [%s]', table.icon .. diagnostic.message, code)
-          end
-        end
-
+        for _, table in pairs(codes) do if vim.tbl_contains(table, code) then return string.format('%s [%s]', table.icon .. diagnostic.message, code) end end
         return string.format('%s [%s]', diagnostic.message, code)
       end
-
-      for _, table in pairs(codes) do
-        if vim.tbl_contains(table, code) then
-          return table.message
-        end
-      end
-
+      for _, table in pairs(codes) do if vim.tbl_contains(table, code) then return table.message end end
       return string.format('%s [%s]', diagnostic.message, diagnostic.source)
     end
   },
+  
   severity_sort = true,
   signs = true,
   underline = false,
   update_in_insert = true,
-  virtual_text = true, -- {prefix = xotovim.icons.caretRight},
-  virtual_lines = false -- {prefix = xotovim.icons.caretRight},
-  -- virtual_text = {
-  --   prefix = xotovim.icons.circle,
-  -- }
+  virtual_text = true, 
+  virtual_lines = false 
 })
-
--- UI
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 

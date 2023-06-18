@@ -38,7 +38,7 @@ Copy it into your terminal:
 bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/nvim.sh)
 
 # install xotovim
-bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/xotovim.sh)
+git clone git@github.com:xotovim/xotovim.git ~/.config/nvim
 ```
 
 After install configuration:

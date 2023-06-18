@@ -105,29 +105,13 @@ vim.opt.shortmess:append('c');
 -- vim.cmd('autocmd InsertEnter * highlight Cursorline cterm=underline gui=underline')
 -- vim.cmd('autocmd InsertLeave * highlight Cursorline cterm=NONE gui=NONE')
 
-vim.api.nvim_create_autocmd("BufEnter", { 
-  callback = function() 
-    vim.opt.formatoptions = vim.opt.formatoptions - { "c","r","o" } 
-  end, 
-})
-
-vim.api.nvim_create_autocmd("ExitPre", { 
-  callback = function() 
-    vim.opt.guicursor = "a:ver90"
-  end, 
-})
-
+vim.api.nvim_create_autocmd("BufEnter", {  callback = function()  vim.opt.formatoptions = vim.opt.formatoptions - { "c","r","o" }  end,  })
+vim.api.nvim_create_autocmd("ExitPre", {  callback = function()  vim.opt.guicursor = "a:ver90" end,  })
 vim.opt.fillchars:append('stl: ');
 vim.opt.fillchars:append('eob: ');
 vim.opt.fillchars:append('fold: ');
 vim.opt.fillchars:append('foldopen: ');
 vim.opt.fillchars:append('foldsep: ');
 vim.opt.fillchars:append('foldclose:');
-
-for k, v in pairs(options) do
-  vim.opt[k] = v
-end
-
-for k, v in pairs(globals) do
-  vim.g[k] = v
-end
+for k, v in pairs(options) do vim.opt[k] = v end
+for k, v in pairs(globals) do vim.g[k] = v end

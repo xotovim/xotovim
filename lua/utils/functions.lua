@@ -1,11 +1,8 @@
 local utils = require('utils')
 
 local async_present, async = pcall(require, "plenary.async")
-if not async_present then
-  return
-end
+if not async_present then return end
 
--- Exported functions
 local M = {}
 
 M.first_xotovim_run = function()
@@ -24,9 +21,7 @@ end
 M.first_xotovim_run()
 
 local present, win = pcall(require, "lspconfig.ui.windows")
-if not present then
-  return
-end
+if not present then return end
 
 local _default_opts = win.default_opts
 win.default_opts = function(options)
