@@ -37,9 +37,10 @@ M.handle_job_data = function(data)
   return data
 end
 
-M.log = function(message, title) require('notify')(message, "info", { title = title or "Info" }) end
-M.warnlog = function(message, title) require('notify')(message, "warn", { title = title or "Warning" }) end
-M.errorlog = function(message, title) require('notify')(message, "error", { title = title or "Error" }) end
+-- M.log = function(message, title) require('notify')(message, "info", { title = title or "Info" }) end
+-- M.warnlog = function(message, title) require('notify')(message, "warn", { title = title or "Warning" }) end
+-- M.errorlog = function(message, title) require('notify')(message, "error", { title = title or "Error" }) end
+
 
 M.jobstart = function(cmd, on_finish)
   local has_error = false
@@ -56,7 +57,7 @@ M.jobstart = function(cmd, on_finish)
       has_error = true
       local error_message = ""
       for _, line in ipairs(data) do error_message = error_message .. line end
-      M.log("Error during running a job: " .. error_message)
+      -- M.log("Error during running a job: " .. error_message)
     elseif event == "exit" then if not has_error then on_finish(lines) end end
   end
 

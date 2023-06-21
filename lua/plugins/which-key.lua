@@ -12,7 +12,7 @@ wk.setup {
   key_labels = {},
   icons = { breadcrumb = "»",  separator = "➜",  group = "+",  },
   window = { border = xotovim.ui.float.border or "single",  position = "bottom",  margin = { 0, 0, 0, 0 },  padding = { 1, 1, 1, 1 },  },
-  layout = { height = { min = 4, max = 25 },  width = { min = 20, max = 50 },  spacing = 4,  align = "left",  },
+  layout = { height = { min = 4, max = 10 },  width = { min = 20, max = 50 },  spacing = 4,  align = "left",  },
   ignore_missing = false, 
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, 
   show_help = true, 
@@ -49,15 +49,16 @@ local normal_mode_mappings = {
   ['v'] = { '<C-W>v', 'split right' },
   ['V'] = { '<C-W>s', 'split below' },
   ['q'] = { 'quicklist' },
+  
   -- ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
-  ['r'] = { '<cmd>Ranger<CR>', 'ranger' },
+  -- ['r'] = { '<cmd>Ranger<CR>', 'ranger' },
   ["x"] = { "<cmd>q!<CR>", "quit" },
   ["T"] = { '<cmd>ToggleTerm<CR>', 'terminal' },
   ["t"] = { '<cmd>vert sbnext<cr>', 'split right' },
   ["b"] = { '<cmd>bel sbnext<cr>', 'split right' },
   [";"] = {
     name = "xotovim",
-    ["/"] = { '<cmd>Alpha<CR>', 'dashboard' },
+    -- ["/"] = { '<cmd>Alpha<CR>', 'dashboard' },
     m = { '<cmd>e $MYVIMRC<CR>', 'main config' },
   },
   w = {
@@ -107,7 +108,7 @@ local normal_mode_mappings = {
     c = { "<cmd>lua require'dap'.continue()<cr>", "continue" },
     C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "run to cursor" },
     d = { "<cmd>lua require'dap'.disconnect()<cr>", "disconnect" },
-    g = { "<cmd>lua require'dap'.session()<cr>", "get session" },
+    -- g = { "<cmd>lua require'dap'.session()<cr>", "get session" },
     i = { "<cmd>lua require'dap'.step_into()<cr>", "step into" },
     o = { "<cmd>lua require'dap'.step_over()<cr>", "step over" },
     u = { "<cmd>lua require'dap'.step_out()<cr>", "step out" },
@@ -164,7 +165,7 @@ local normal_mode_mappings = {
     w = { 'word' },
     l = { "<cmd>lua require'telescope'.extensions.repo.cached_list{file_ignore_patterns={'/%.cache/', '/%.cargo/', '/%.local/', '/%timeshift/', '/usr/', '/srv/', '/%.oh%-my%-zsh', '/Library/', '/%.cocoapods/'}}<CR>", 'list' },
     r = { 'refactor' },
-    s = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
+    -- s = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
     t = { "<cmd>TodoTrouble<CR>", 'todo' },
   },
   f = {
@@ -179,14 +180,14 @@ local normal_mode_mappings = {
     t = { '<cmd>Telescope live_grep<cr>', 'text' },
     k = { '<cmd>Telescope keymaps<cr>', 'keymaps' },
   },
-  ["s"] = {
-    name = "session",
-    c = { '<cmd>SessionManager load_session<CR>', 'choose session' },
-    r = { '<cmd>SessionManager delete_session<CR>', 'remove session' },
-    d = { '<cmd>SessionManager load_current_dir_session<CR>', 'current dir session' },
-    l = { '<cmd>SessionManager load_last_session<CR>', 'last session' },
-    s = { '<cmd>SessionManager save_current_session<CR>', 'save session' },
-  },
+  -- ["s"] = {
+  --   name = "session",
+  --   c = { '<cmd>SessionManager load_session<CR>', 'choose session' },
+  --   r = { '<cmd>SessionManager delete_session<CR>', 'remove session' },
+  --   d = { '<cmd>SessionManager load_current_dir_session<CR>', 'current dir session' },
+  --   l = { '<cmd>SessionManager load_last_session<CR>', 'last session' },
+  --   s = { '<cmd>SessionManager save_current_session<CR>', 'save session' },
+  -- },
 }
 local visual_mode_mappings = {
   ["s"] = { "<cmd>'<,'>sort<CR>", 'sort' },

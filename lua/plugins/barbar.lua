@@ -15,7 +15,7 @@ require("barbar").setup({
 			changed = { enabled = false, icon = "~" },
 			deleted = { enabled = false, icon = "-" },
 		},
-		separator = { left = "▎", right = "" },
+		separator = { left = "", right = "" },
 		modified = { button = "●" },
 		pinned = { button = "車", filename = true, separator = { right = "" } },
 		alternate = { filetype = { enabled = false } },

@@ -55,7 +55,8 @@ end
 
 vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
   callback = function()
-    local winbar_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir", "Outline", "spectre_panel", "TelescopePrompt", "neotest-summary", "toggleterm", }
+    local winbar_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "lir", "Outline", "spectre_panel", "TelescopePrompt", "neotest-summary", "toggleterm", }
+    -- local winbar_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir", "Outline", "spectre_panel", "TelescopePrompt", "neotest-summary", "toggleterm", }
 
     if vim.api.nvim_win_get_config(0).relative ~= "" then return end
 

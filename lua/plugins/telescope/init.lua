@@ -5,7 +5,7 @@ local icons = xotovim.icons
 
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('repo')
-require('telescope').load_extension('projects')
+-- require('telescope').load_extension('projects')
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("package_info")
@@ -25,13 +25,13 @@ require('telescope').setup {
     vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
     layout_config = { horizontal = { preview_cutoff = 120 }, prompt_position = "top", },
     file_sorter = require('telescope.sorters').get_fzy_sorter,
-    prompt_prefix = '   ',
+    prompt_prefix = ' +  ',
     color_devicons = true,
     selection_strategy = "reset",
     layout_strategy = "horizontal",
     use_less = true,
     border = {},
-    selection_caret =  " ▷  ",
+    selectionet =  "  ",
     entry_prefix = "  ",
     initial_mode = "normal",
     borderchars = { '─', '│', '─', '│', '┌', '┐', "┘", "└"},
@@ -43,8 +43,15 @@ require('telescope').setup {
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
     mappings = { 
-      i = { ["<C-x>"] = false, ["<C-j>"] = actions.move_selection_next, ["<C-k>"] = actions.move_selection_previous, ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist, ["<C-s>"] = actions.cycle_previewers_next, ["<C-a>"] = actions.cycle_previewers_prev, ["<C-h>"] = "which_key", }, -- ["<ESC>"] = actions.close, 
-      n = { ["<C-s>"] = actions.cycle_previewers_next, ["<C-a>"] = actions.cycle_previewers_prev, }
+      i = { ["<C-x>"] = false, 
+      ["<C-j>"] = actions.move_selection_next, 
+      ["<C-k>"] = actions.move_selection_previous, 
+      ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist, 
+      ["<C-s>"] = actions.cycle_previewers_next, 
+      ["<C-a>"] = actions.cycle_previewers_prev, 
+      ["<C-h>"] = "which_key", }, -- ["<ESC>"] = actions.close, 
+      n = { ["<C-s>"] = actions.cycle_previewers_next, 
+      ["<C-a>"] = actions.cycle_previewers_prev, }
     }
   },
   extensions = {

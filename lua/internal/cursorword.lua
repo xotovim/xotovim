@@ -3,13 +3,15 @@
 -- end
 
 local function disable_cursorword()
-  local disable_ft = { ['alpha'] = true, ['lspsagafinder'] = true, ['NeogitStatus'] = true, ['text'] = true, }
+  local disable_ft = { ['lspsagafinder'] = true, ['NeogitStatus'] = true, ['text'] = true, }
+  -- local disable_ft = { ['alpha'] = true, ['lspsagafinder'] = true, ['NeogitStatus'] = true, ['text'] = true, }
   if not disable_ft[vim.bo.ft] then return end
   if vim.w.cursorword_id ~= 0 and vim.w.cursorword_id ~= nil and vim.w.cursorword_match ~= 0 then vim.fn.matchdelete(vim.w.cursorword_id) vim.w.cursorword_id = nil vim.w.cursorword_match = nil vim.w.cursorword = nil end
 end
 
 local function matchadd()
-  local disable_ft = { ['alpha'] = true, ['NvimTree'] = true, ['lspsagafinder'] = true, ['dashboard'] = true, }
+  local disable_ft = { ['NvimTree'] = true, ['lspsagafinder'] = true, ['dashboard'] = true, }
+  -- local disable_ft = { ['alpha'] = true, ['NvimTree'] = true, ['lspsagafinder'] = true, ['dashboard'] = true, }
   if disable_ft[vim.bo.ft] then return end
   if vim.api.nvim_get_mode().mode == 'i' then return end
   local column = vim.api.nvim_win_get_cursor(0)[2]

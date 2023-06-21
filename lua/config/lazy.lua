@@ -9,7 +9,8 @@ require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
   install = { colorscheme = { xotovim.colorscheme } },
   checker = { enabled = true },
-  performance = { rtp = { disabled_plugins = { "gzip", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
+  performance = { rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
+  -- performance = { rtp = { disabled_plugins = { "gzip", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
   debug = false,
   ui = { border = xotovim.ui.float.border, }
 })
