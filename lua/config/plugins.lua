@@ -1,5 +1,7 @@
 return {
 	-- { "folke/tokyonight.nvim", lazy = false, priority = 1000, config = function() vim.cmd([[colorscheme tokyonight]]) require("plugins.xotonight") end },
+	-- {"nvim-telescope/telescope-file-browser.nvim",dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },},
+	
 	{ "projekt0n/github-nvim-theme", lazy = false, priority = 1000, config = function() vim.cmd([[colorscheme github_light]]) require("plugins.xotonight") end },
 	{ "nvim-lualine/lualine.nvim", lazy = false, priority = 1000, config = function() require("plugins.lualine") end },
 -- 	{ 
@@ -36,8 +38,8 @@ return {
 	{ "nvim-pack/nvim-spectre" },
 	{ "nvim-telescope/telescope.nvim", lazy = false, config = function() require("plugins.telescope") end, dependencies = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope-ui-select.nvim" }, { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, { "cljoly/telescope-repo.nvim" } } },
 	-- { "nvim-tree/nvim-tree.lua", config = function() require("plugins.tree") end },
-	-- { "nvim-tree/nvim-tree.lua", config = function() require("plugins.tree") end },
-	-- { "nvim-tree/nvim-tree.lua", cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeFindFileToggle" }, keys = { { "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" } }, config = function() require("plugins.tree") end },
+	-- { "nvim-tree/nvim-tree.lua", lazy = false, config = function() require("plugins.tree") end },
+	{ "nvim-tree/nvim-tree.lua", cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeFindFileToggle" },  config = function() require("plugins.tree") end },
 	{ "gbprod/stay-in-place.nvim", lazy = false, config = true,  },
 	{ "neovim/nvim-lspconfig", event = "BufReadPre", dependencies = { "mason.nvim", "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" }, servers = nil },
 	{ "williamboman/mason.nvim", cmd = "Mason", keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } } },
@@ -58,7 +60,7 @@ return {
 	{ "Wansmer/treesj", lazy = true, cmd = { "TSJToggle", "TSJSplit", "TSJJoin" }, keys = { { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" } }, config = function() require("treesj").setup({ use_default_keymaps = false }) end },
 	{ "numToStr/Comment.nvim", lazy = false, branch = "jsx", config = function() require("plugins.comment") end },
 	-- { "LudoPinelli/comment-box.nvim" },
-	{ "akinsho/nvim-toggleterm.lua", lazy = false, branch = "main", config = function() require("plugins.toggleterm") end },
+	-- { "akinsho/nvim-toggleterm.lua", lazy = false, branch = "main", config = function() require("plugins.toggleterm") end },
 	{ "tpope/vim-repeat", lazy = false },
 	{ "tpope/vim-speeddating", lazy = false },
 	{ "dhruvasagar/vim-table-mode", ft = { "markdown" } },
@@ -93,9 +95,7 @@ return {
 	{ "sindrets/diffview.nvim", lazy = true, enabled = false, event = "BufRead", config = function() require("plugins.git.diffview") end },
 	{ "akinsho/git-conflict.nvim", lazy = false, config = function() require("plugins.git.conflict") end },
 	{ "ThePrimeagen/git-worktree.nvim", keys = { "<Leader>gwc", "<Leader>gww" }, config = function() require("plugins.git.worktree") end },
-	{ "kdheepak/lazygit.nvim", cmd = { "LazyGit", "LazyGitCurrentFile", "LazyGitFilterCurrentFile", "LazyGitFilter" },  requires = {
-		"nvim-lua/plenary.nvim",
-}, config = function() vim.g.lazygit_floating_window_scaling_factor = 1 end },
+	{ "kdheepak/lazygit.nvim", cmd = { "LazyGit", "LazyGitCurrentFile", "LazyGitFilterCurrentFile", "LazyGitFilter" },  dependencies = { "nvim-lua/plenary.nvim"}, config = function() vim.g.lazygit_floating_window_scaling_factor = 1 end },
 	{ "rcarriga/neotest", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter", "antoinemadec/FixCursorHold.nvim", "haydenmeade/neotest-jest" }, config = function() require("plugins.neotest") end },
 	{ "andythigpen/nvim-coverage", dependencies = "nvim-lua/plenary.nvim", cmd = { "Coverage", "CoverageSummary", "CoverageLoad", "CoverageShow", "CoverageHide", "CoverageToggle", "CoverageClear" }, config = function() require("coverage").setup() end },
 	{ "mfussenegger/nvim-dap", config = function() require("plugins.dap") end, keys = { "<Leader>da", "<Leader>db", "<Leader>dc", "<Leader>dd", "<Leader>dh", "<Leader>di", "<Leader>do", "<Leader>dO", "<Leader>dt" }, dependencies = { "theHamsta/nvim-dap-virtual-text", "rcarriga/nvim-dap-ui", "mxsdev/nvim-dap-vscode-js" } },

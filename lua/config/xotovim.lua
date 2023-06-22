@@ -4,12 +4,12 @@ local icons = require("utils.icons")
 xotovim = {
 	colorscheme = "github_light",
 	ui = {
-		float = { border = "single", },
+		float = { border = "single"},
 	},
 	plugins = {
-		ai = { chatgpt = { enabled = true, }, codeium = { enabled = true, }, copilot = { enabled = true, }, tabnine = { enabled = true, }, },
-		completion = { select_first_on_enter = true, },
-		jump_by_subwords = { enabled = false, },
+		ai = { chatgpt = { enabled = true}, codeium = { enabled = true}, copilot = { enabled = true}, tabnine = { enabled = true}, },
+		completion = { select_first_on_enter = true},
+		jump_by_subwords = { enabled = false},
 		rooter = { patterns = { ".git", "_darcs", ".bzr", ".svn", "Makefile" },  },
 		zen = { kitty_enabled = true, enabled = true,  },
 	},

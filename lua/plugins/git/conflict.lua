@@ -5,7 +5,7 @@ conflict.setup({
 	default_mappings = true, 
 	default_commands = true, 
 	disable_diagnostics = true, 
-	highlights = {  incoming = "DiffText", current = "DiffAdd", },
+	highlights = {  incoming = "DiffText", current = "DiffAdd"},
 })
 
 vim.api.nvim_create_autocmd("User", {

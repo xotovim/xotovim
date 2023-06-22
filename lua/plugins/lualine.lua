@@ -1,5 +1,6 @@
 local lualine = require("lualine")
 local lualine_require = require("lualine_require")
+
 function loadcolors()
 	local modules = lualine_require.lazy_require { utils_notices = "lualine.utils.notices" }
 	local sep = package.config:sub(1, 1)
@@ -24,6 +25,7 @@ function loadcolors()
 			wal[key] = value
 		end
 	end
+
 	colors = {
 		bg = wal.background,
 		fg = wal.foreground,
@@ -40,6 +42,7 @@ function loadcolors()
 end
 
 local colors = loadcolors()
+
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -53,6 +56,7 @@ local conditions = {
 		return gitdir and #gitdir > 0 and #gitdir < #filepath
 	end
 }
+
 local config = {
 	options = {
 		component_separators = "",
@@ -63,12 +67,15 @@ local config = {
 	sections = { lualine_a = {}, lualine_b = {}, lualine_y = {}, lualine_z = {}, lualine_c = {}, lualine_x = {} },
 	inactive_sections = { lualine_a = {}, lualine_b = {}, lualine_y = {}, lualine_z = {}, lualine_c = {}, lualine_x = {} }
 }
+
 local function ins_left(component)
 	table.insert(config.sections.lualine_c, component)
 end
+
 local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
+
 ins_left {
 	function()
 		return ""
@@ -78,16 +85,19 @@ ins_left {
 		return { fg = mode_color[vim.fn.mode()] }
 	end
 }
+
 ins_left {
 	"",
 	cond = conditions.buffer_not_empty,
 	color = { gui = "bold" }
 }
+
 ins_left {
 	"branch",
 	icon = "",
 	color = { gui = "bold" }
 }
+
 ins_left {
 	"diff",
 	symbols = {
@@ -102,9 +112,11 @@ ins_left {
 	},
 	cond = conditions.hide_in_width
 }
+
 ins_left { function()
 	return "%="
 end }
+
 ins_right {
 	function()
 		local msg = "null"
@@ -122,6 +134,7 @@ ins_right {
 	icon = " LSP:",
 	color = { gui = "bold" }
 }
+
 ins_right {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
@@ -138,6 +151,7 @@ ins_right {
 	},
 	always_visible = true
 }
+
 ins_right { "o:encoding", fmt = string.upper, cond = conditions.hide_in_width, color = { gui = "bold" } }
 ins_right { "fileformat", fmt = string.upper, icons_enabled = false, color = { gui = "bold" } }
 ins_right { "location", color = { gui = "bold" } }

@@ -2,7 +2,7 @@ local present, neotest = pcall(require, "neotest")
 if not present then return end
 
 neotest.setup({
-  adapters = { require("neotest-jest")({ jestCommand = "npm test --", env = { CI = true }, cwd = function(path) return vim.fn.getcwd() end, }), },
+  adapters = { require("neotest-jest")({ jestCommand = "npm test --", env = { CI = true }, cwd = function(path) return vim.fn.getcwd() end, })},
   diagnostic = { enabled = true },
   floating = { border = xotovim.ui.float.border or "single", max_height = 0.6, max_width = 0.6 },
   highlights = { adapter_name = "NeotestAdapterName", border = "NeotestBorder", dir = "NeotestDir", expand_marker = "NeotestExpandMarker", failed = "NeotestFailed", file = "NeotestFile", focused = "NeotestFocused", indent = "NeotestIndent", namespace = "NeotestNamespace", passed = "NeotestPassed", running = "NeotestRunning", skipped = "NeotestSkipped", test = "NeotestTest" },
@@ -21,7 +21,7 @@ neotest.setup({
     unknown = "?"
   },
   
-  output = { enabled = true, open_on_run = true, },
+  output = { enabled = true, open_on_run = true },
   run = { enabled = true },
   status = { enabled = true },
   strategies = { integrated = { height = 40, width = 120 } },

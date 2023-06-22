@@ -25,10 +25,10 @@ dap_vt.setup({
 
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸" },
-  mappings = { expand = { "<CR>", "<2-LeftMouse>" }, open = "o", remove = "d", edit = "e", repl = "r", toggle = "t", },
+  mappings = { expand = { "<CR>", "<2-LeftMouse>" }, open = "o", remove = "d", edit = "e", repl = "r", toggle = "t"},
   expand_lines = vim.fn.has("nvim-0.7"),
-  layouts = {{ elements = {{ id = "scopes", size = 0.25 }, "breakpoints", "stacks", "watches", }, size = 40,  position = "left", }, { elements = { "repl", "console", }, size = 0.25,  position = "bottom", }, },
-  floating = { max_height = nil, max_width = nil, border = xotovim.ui.float.border or "single", mappings = { close = { "q", "<Esc>" }, }, },
+  layouts = {{ elements = {{ id = "scopes", size = 0.25 }, "breakpoints", "stacks", "watches"}, size = 40,  position = "left"}, { elements = { "repl", "console"}, size = 0.25,  position = "bottom"}, },
+  floating = { max_height = nil, max_width = nil, border = xotovim.ui.float.border or "single", mappings = { close = { "q", "<Esc>" }}, },
   windows = { indent = 1 },
   render = { max_type_length = nil,  },
 })
@@ -77,19 +77,19 @@ require("dap-vscode-js").setup({
 })
 
 dap.configurations.javascript = {
-  { name = "Node.js", type = "node2", request = "launch", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", console = "integratedTerminal", }, 
+  { name = "Node.js", type = "node2", request = "launch", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", console = "integratedTerminal"}, 
 }
 
 dap.configurations.javascript = {
-  { name = "Chrome (9222)", type = "chrome", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", port = 9222, webRoot = "${workspaceFolder}", },
+  { name = "Chrome (9222)", type = "chrome", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", port = 9222, webRoot = "${workspaceFolder}"},
 }
 
 dap.configurations.javascriptreact = {
-  { name = "Chrome (9222)", type = "chrome", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", port = 9222, webRoot = "${workspaceFolder}", },
+  { name = "Chrome (9222)", type = "chrome", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", port = 9222, webRoot = "${workspaceFolder}"},
 }
 
 dap.configurations.typescriptreact = {
-  { name = "Chrome (9222)", type = "chrome", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", port = 9222, webRoot = "${workspaceFolder}", },
-  { name = "React Native (8081) (Node2)", type = "node2", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", console = "integratedTerminal", port = 8081, },
-  { name = "Attach React Native (8081)", type = "pwa-node", request = "attach", processId = require('dap.utils').pick_process, cwd = vim.fn.getcwd(), rootPath = '${workspaceFolder}', skipFiles = { "<node_internals>/**", "node_modules/**" }, sourceMaps = true, protocol = "inspector", console = "integratedTerminal", },
+  { name = "Chrome (9222)", type = "chrome", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", port = 9222, webRoot = "${workspaceFolder}"},
+  { name = "React Native (8081) (Node2)", type = "node2", request = "attach", program = "${file}", cwd = vim.fn.getcwd(), sourceMaps = true, protocol = "inspector", console = "integratedTerminal", port = 8081},
+  { name = "Attach React Native (8081)", type = "pwa-node", request = "attach", processId = require('dap.utils').pick_process, cwd = vim.fn.getcwd(), rootPath = '${workspaceFolder}', skipFiles = { "<node_internals>/**", "node_modules/**" }, sourceMaps = true, protocol = "inspector", console = "integratedTerminal"},
 }

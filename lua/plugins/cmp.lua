@@ -119,7 +119,7 @@ local buffer_option = {
 }
 
 cmp.setup({
-  snippet = { expand = function(args) luasnip.lsp_expand(args.body) end, },
+  snippet = { expand = function(args) luasnip.lsp_expand(args.body) end},
   
   
   mapping = cmp.mapping.preset.insert({
@@ -139,7 +139,7 @@ cmp.setup({
     --     copilot.accept()
     --   end
     -- end, { "i", "s" }),
-    ['<Esc>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
+    ['<Esc>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close()},
     ["<CR>"] = cmp.mapping.confirm({
 			-- this is the important line for Copilot
 			behavior = cmp.ConfirmBehavior.Replace,

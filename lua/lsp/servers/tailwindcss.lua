@@ -15,7 +15,7 @@ end
 local filetypes = { "html", "mdx", "javascript", "javascriptreact", "typescriptreact", "vue", "svelte" }
 
 local init_options = {
-	userLanguages = { eelixir = "html-eex", eruby = "erb", },
+	userLanguages = { eelixir = "html-eex", eruby = "erb"},
 }
 
 local settings = {
@@ -30,7 +30,7 @@ local settings = {
 			recommendedVariantOrder = "warning",
 		},
 		experimental = {
-			classRegex = { "tw`([^`]*)", 'tw="([^"]*)', 'tw={"([^"}]*)', "tw\\.\\w+`([^`]*)", "tw\\(.*?\\)`([^`]*)", { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, { "classnames\\(([^)]*)\\)", "'([^']*)'" }, { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" }, },
+			classRegex = { "tw`([^`]*)", 'tw="([^"]*)', 'tw={"([^"}]*)', "tw\\.\\w+`([^`]*)", "tw\\(.*?\\)`([^`]*)", { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, { "classnames\\(([^)]*)\\)", "'([^']*)'" }, { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" }},
 		},
 		validate = true,
 	},

@@ -11,7 +11,7 @@
 --   autoload_mode = require('session_manager.config').AutoloadMode.Disabled, 
 --   autosave_last_session = true, 
 --   autosave_ignore_not_normal = true, 
---   autosave_ignore_filetypes = { 'gitcommit', },
+--   autosave_ignore_filetypes = { 'gitcommit'},
 --   autosave_only_in_session = true, 
 --   max_path_length = 80, 
 -- })

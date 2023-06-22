@@ -6,10 +6,10 @@ local ufo_config_handler = require("plugins.nvim-ufo").handler
 
 if not mason_ok or not mason_lsp_ok then return end
 
-mason.setup({ ui = { border = xotovim.ui.float.border or "single", }, })
+mason.setup({ ui = { border = xotovim.ui.float.border or "single"}, })
 
 mason_lsp.setup({
-  ensure_installed = { "bashls", "cssls", "eslint", "graphql", "html", "jsonls", "lua_ls", "prismals", "tailwindcss", "tsserver", },
+  ensure_installed = { "bashls", "cssls", "eslint", "graphql", "html", "jsonls", "lua_ls", "prismals", "tailwindcss", "tsserver"},
   automatic_installation = true,
 })
 

@@ -1,6 +1,4 @@
--- local function highlight_cursorword()
---   if vim.g.cursorword_highlight ~= false then --     vim.cmd('highlight CursorWord term=underline cterm=underline gui=underline') --   end
--- end
+
 
 local function disable_cursorword()
   local disable_ft = { ['lspsagafinder'] = true, ['NeogitStatus'] = true, ['text'] = true, }
@@ -8,6 +6,12 @@ local function disable_cursorword()
   if not disable_ft[vim.bo.ft] then return end
   if vim.w.cursorword_id ~= 0 and vim.w.cursorword_id ~= nil and vim.w.cursorword_match ~= 0 then vim.fn.matchdelete(vim.w.cursorword_id) vim.w.cursorword_id = nil vim.w.cursorword_match = nil vim.w.cursorword = nil end
 end
+
+-- local function highlight_cursorword()
+--   if vim.g.cursorword_highlight ~= false then --     vim.cmd('highlight CursorWord term=underline cterm=underline gui=underline') --   end
+-- end
+
+-- highlight_cursorword()
 
 local function matchadd()
   local disable_ft = { ['NvimTree'] = true, ['lspsagafinder'] = true, ['dashboard'] = true, }
@@ -34,7 +38,7 @@ local function cursor_moved()
   if vim.api.nvim_get_mode().mode == 'n' then matchadd() end
 end
 
--- highlight_cursorword()
+
 
 vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, { pattern = '*', callback = cursor_moved, })
 vim.api.nvim_create_autocmd({ 'InsertEnter', 'BufWinEnter' }, { pattern = '*', callback = disable_cursorword, })

@@ -17,7 +17,7 @@ wk.setup {
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, 
   show_help = true, 
   triggers = {"<leader>"}, 
-  triggers_blacklist = { i = { "j", "k" }, v = { "j", "k" }, },
+  triggers_blacklist = { i = { "j", "k" }, v = { "j", "k" }},
 }
 local opts = {
   mode = "n", 
@@ -51,9 +51,10 @@ local normal_mode_mappings = {
   ['q'] = { 'quicklist' },
   
   -- ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
+  ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
   -- ['r'] = { '<cmd>Ranger<CR>', 'ranger' },
   ["x"] = { "<cmd>q!<CR>", "quit" },
-  ["T"] = { '<cmd>ToggleTerm<CR>', 'terminal' },
+  -- ["T"] = { '<cmd>ToggleTerm<CR>', 'terminal' },
   ["t"] = { '<cmd>vert sbnext<cr>', 'split right' },
   ["b"] = { '<cmd>bel sbnext<cr>', 'split right' },
   [";"] = {
@@ -93,8 +94,8 @@ local normal_mode_mappings = {
     f = { vim.lsp.buf.format, "format" },
     i = { "<cmd>LspInfo<cr>", "info" },
     m = { "<cmd>Mason<cr>", "mason info" },
-    n = { vim.diagnostic.goto_next, "next diagnostic", },
-    p = { vim.diagnostic.goto_prev, "prev diagnostic", },
+    n = { vim.diagnostic.goto_next, "next diagnostic"},
+    p = { vim.diagnostic.goto_prev, "prev diagnostic"},
     l = { vim.lsp.codelens.run, "codelens action" },
     q = { vim.diagnostic.setloclist, "quickfix" },
     t = { "<cmd>Telescope quickfix<cr>", "telescope quickfix" },
@@ -192,9 +193,9 @@ local normal_mode_mappings = {
 local visual_mode_mappings = {
   ["s"] = { "<cmd>'<,'>sort<CR>", 'sort' },
   ["/"] = { "<Plug>(comment_toggle_linewise_current)", "comment" },
-  l = { name = "lsp", a = { 'range code action' }, f = { 'range format' }, },
-  g = { name = "git", h = { name = "hunk", r = "reset hunk", s = "stage hunk", }, },
-  p = { name = "project", r = { 'refactor' }, },
+  l = { name = "lsp", a = { 'range code action' }, f = { 'range format' }},
+  g = { name = "git", h = { name = "hunk", r = "reset hunk", s = "stage hunk"}, },
+  p = { name = "project", r = { 'refactor' }},
 --[[   t = {
     name = "table mode",
     t = { 'tableize' },

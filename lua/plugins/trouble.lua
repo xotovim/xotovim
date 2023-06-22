@@ -17,6 +17,6 @@ require("trouble").setup {
   auto_preview = true, 
   auto_fold = true, 
   auto_jump = {"lsp_definitions"}, 
-  signs = {  error = icons.errorOutline, warning = icons.warningTriangleNoBg, hint = icons.lightbulbOutline, information = icons.infoOutline, },
+  signs = {  error = icons.errorOutline, warning = icons.warningTriangleNoBg, hint = icons.lightbulbOutline, information = icons.infoOutline},
   use_diagnostic_signs = true 
 };

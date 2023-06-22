@@ -9,6 +9,7 @@ require('telescope').load_extension('repo')
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("package_info")
+-- require("telescope").load_extension "file_browser"
 
 local git_icons = {
   added = icons.gitAdd,
@@ -23,7 +24,7 @@ local git_icons = {
 require('telescope').setup {
   defaults = {
     vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
-    layout_config = { horizontal = { preview_cutoff = 120 }, prompt_position = "top", },
+    layout_config = { horizontal = { preview_cutoff = 120 }, prompt_position = "top"},
     file_sorter = require('telescope.sorters').get_fzy_sorter,
     prompt_prefix = ' +  ',
     color_devicons = true,
@@ -49,15 +50,33 @@ require('telescope').setup {
       ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist, 
       ["<C-s>"] = actions.cycle_previewers_next, 
       ["<C-a>"] = actions.cycle_previewers_prev, 
-      ["<C-h>"] = "which_key", }, -- ["<ESC>"] = actions.close, 
+      ["<C-h>"] = "which_key"}, 
+      -- ["<ESC>"] = actions.close, 
       n = { ["<C-s>"] = actions.cycle_previewers_next, 
       ["<C-a>"] = actions.cycle_previewers_prev, }
     }
   },
   extensions = {
-    fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case", },
-    ["ui-select"] = { require("telescope.themes").get_cursor { color_devicons = true, }, require("telescope.themes").get_dropdown { }, codeactions = true, }, package_info = { theme = "ivy", }, 
-  }
+    fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case"},
+    ["ui-select"] = { require("telescope.themes").get_cursor { color_devicons = true}, require("telescope.themes").get_dropdown { }, codeactions = true}, package_info = { theme = "ivy"}, 
+    -- file_browser = {
+    --   theme = "ivy",
+    --   -- disables netrw and use telescope-file-browser in its place
+    --   hijack_netrw = true,
+    --   -- mappings = {
+    --   --   ["i"] = {
+    --   --     -- your custom insert mode mappings
+    --   --   },
+    --   --   ["n"] = {
+    --   --     -- your custom normal mode mappings
+    --   --   },
+    --   -- },
+    -- },
+    
+  },
+  --   extensions = {
+
+  -- },
 }
 
 local M = {}
@@ -101,7 +120,7 @@ M.edit_neovim = function()
       prompt_title = "xotovim dotfiles",
       sorting_strategy = "ascending",
       winblend = 0,
-      layout_config = { horizontal = { mirror = false, }, vertical = { mirror = false, }, prompt_position = "top", },
+      layout_config = { horizontal = { mirror = false}, vertical = { mirror = false}, prompt_position = "top"},
     }))
 end
 
