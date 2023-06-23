@@ -17,7 +17,7 @@ nvim_tree.setup({
 		git_clean = false,
 		no_buffer = false,
 		custom = { 'node_modules' },
-},
+    },
     disable_netrw = true,
     hijack_netrw = true,
     --open_on_setup = false,
@@ -28,7 +28,6 @@ nvim_tree.setup({
         enable = true,
         auto_open = true,
     },
-    
     diagnostics = {
         enable = false,
         icons = {

@@ -1,10 +1,11 @@
 return {
 	-- { "folke/tokyonight.nvim", lazy = false, priority = 1000, config = function() vim.cmd([[colorscheme tokyonight]]) require("plugins.xotonight") end },
 	-- {"nvim-telescope/telescope-file-browser.nvim",dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },},
-	
-	{ "projekt0n/github-nvim-theme", lazy = false, priority = 1000, config = function() vim.cmd([[colorscheme github_light]]) require("plugins.xotonight") end },
+
+	{ "projekt0n/github-nvim-theme", lazy = false, priority = 1000, config = function() require("plugins.xotonight") vim.cmd('colorscheme github_light') end },
 	{ "nvim-lualine/lualine.nvim", lazy = false, priority = 1000, config = function() require("plugins.lualine") end },
--- 	{ 
+
+-- { 
 --   'dinhhuy258/sfm.nvim',
 --   config = function()
 --     require("sfm").setup()
@@ -38,7 +39,8 @@ return {
 	{ "nvim-pack/nvim-spectre" },
 	{ "nvim-telescope/telescope.nvim", lazy = false, config = function() require("plugins.telescope") end, dependencies = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope-ui-select.nvim" }, { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, { "cljoly/telescope-repo.nvim" } } },
 	-- { "nvim-tree/nvim-tree.lua", lazy = false, config = function() require("plugins.tree") end },
-	{ "nvim-tree/nvim-tree.lua", lazy = false, cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeFindFileToggle" },  config = function() require("plugins.tree") end },
+	{ "nvim-tree/nvim-tree.lua", lazy = false, priority = 1000, cmd = { "NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeFindFileToggle" },  config = function() require("plugins.tree") end },
+	
 	{ "gbprod/stay-in-place.nvim", lazy = false, config = true,  },
 	{ "neovim/nvim-lspconfig", event = "BufReadPre", dependencies = { "mason.nvim", "williamboman/mason-lspconfig.nvim", "hrsh7th/cmp-nvim-lsp" }, servers = nil },
 	{ "williamboman/mason.nvim", cmd = "Mason", keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } } },
