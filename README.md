@@ -1,6 +1,5 @@
 # xotovim : Neovim Config
 
-[![Last commit](https://img.shields.io/github/last-commit/xotovim/xotovim?style=for-the-badge)](https://github.com/xotovim/xotovim/commits/development)
 ![Stars](https://img.shields.io/github/stars/xotovim/xotovim?style=for-the-badge)
 ![License](https://img.shields.io/github/license/xotovim/xotovim?style=for-the-badge)
 ![Neovim Version](https://img.shields.io/badge/For%20Neovim-0.9+-yellowgreen?style=for-the-badge&logo=neovim&logoColor=d8abbb&color=d8abbb)
@@ -21,7 +20,7 @@
 - Treesitter-based folding
 - Git management with [Lazygit](https://github.com/jesseduffield/lazygit), custom telescope commits view with [git-delta](https://github.com/dandavison/delta), [gitsigns](https://github.com/lewis6991/gitsigns.nvim) & [diffview](https://github.com/sindrets/diffview.nvim), custom git blame
 
-And of course usage of [telescope](https://github.com/nvim-telescope/telescope.nvim), [nvim-tree](https://github.com/kyazdani42/nvim-tree.lua), [barbar](https://github.com/romgrk/barbar.nvim), [cmp](https://github.com/hrsh7th/nvim-cmp), [treesitter](https://github.com/nvim-treesitter/nvim-treesitter), [blankline](https://github.com/lukas-reineke/indent-blankline.nvim) & more!
+And of course usage of [telescope](https://github.com/nvim-telescope/telescope.nvim), [nvim-tree](https://github.com/kyazdani42/nvim-tree.lua), [barbar](https://github.com/romgrk/barbar.nvim), [cmp](https://github.com/hrsh7th/nvim-cmp), [treesitter](https://github.com/nvim-treesitter/nvim-treesitter) & more!
 
 ## Screenshots 📸
 
@@ -29,7 +28,7 @@ Dashboard
 
 ![Dashboard](./.screenshots/1-alpha.png)
 
-## Installation ⚡️
+## Requirements ⚡️
 
 Copy it into your terminal:
 
@@ -38,6 +37,16 @@ Copy it into your terminal:
 bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/nvim.sh)
 ```
 
+
+## Installation ⚡️
+
+Copy it into your terminal:
+
+```bash
+# install nvim 8
+git clone https://github.com/xotovim/xotovim.git ~/.config/nvim
+```
+ 
 ## Configuration 💻
 
 To change xotovim related config use the `config.lua` file.\

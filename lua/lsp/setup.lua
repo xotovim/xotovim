@@ -86,7 +86,6 @@ lspconfig.vuels.setup({
 for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html", "prismals" })
  do
   lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities, handlers = handlers, })
-  
 end
 
 require("ufo").setup({
