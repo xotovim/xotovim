@@ -9,7 +9,7 @@
 
 ## Features 💠
 
-- Recommended default theme: [XotoNight](https://github.com/xotovim/xotonight)
+- Recommended default theme: github-light
 - Highly performant even with a lot of plugins
 - Lazy loaded
 - Extendable LSP configuration
@@ -37,13 +37,6 @@ Copy it into your terminal:
 # install nvim 8
 bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/nvim.sh)
 ```
-
-After install configuration:
-
-1. Treesitter Languages are <ins>installed</ins> by default.\
-   If you wish to add more of them make sure to run `:TSInstall <lang>` for specific language you want to install and configure them in the lsp folder. 
-   
-2. LSP servers are enabled by default. You can check installed LSP servers by :Mason command.
 
 ## Configuration 💻
 
