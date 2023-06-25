@@ -1,7 +1,9 @@
 return {
 	{ "projekt0n/github-nvim-theme",  lazy = false,  priority = 1000,  config = function() require('plugins.xotonight') end },
+	{ 'nvim-telescope/telescope-file-browser.nvim', config = function() require("plugins.filebrowser") end }, 
 	{ "nvim-lualine/lualine.nvim", lazy = false, priority = 1000, config = function() require("plugins.lualine") end },
 	{ "kylechui/nvim-surround", lazy = false, config = function() require("plugins.surround") end }, 
+	{ 'gelguy/wilder.nvim', config = function() require("plugins.wilder")  end, build = ":UpdateRemotePlugins", event = "CmdlineEnter", dependencies = { { "romgrk/fzy-lua-native", build = "make", }, }, },
 	{ 'karb94/neoscroll.nvim', lazy = true, event = "VeryLazy", config = function() require('plugins.smoothscroll') end }, 
 	{ 'petertriho/nvim-scrollbar', lazy = false,  config = function() require('plugins.scrollbar') end },
 	{ 'abecodes/tabout.nvim', lazy = false, wants = {'nvim-treesitter'},  after = {'nvim-cmp'},  config = function() require('plugins.tabula') end }, 

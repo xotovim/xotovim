@@ -7,7 +7,7 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('repo')
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("package_info")
--- require("telescope").load_extension("file_browser")
+require("telescope").load_extension("file_browser")
 require("telescope").load_extension("ui-select")
 
 local git_icons = {
@@ -43,20 +43,54 @@ require('telescope').setup {
     qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
     mappings = { 
-      i = { ["<C-x>"] = false, 
-      ["<C-j>"] = actions.move_selection_next, 
-      ["<C-k>"] = actions.move_selection_previous, 
-      ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist, 
-      ["<C-s>"] = actions.cycle_previewers_next, 
-      ["<C-a>"] = actions.cycle_previewers_prev, 
-      ["<C-h>"] = "which_key"}, 
-      ["<ESC>"] = actions.close, 
-      n = { ["<C-s>"] = actions.cycle_previewers_next, 
-      ["<C-a>"] = actions.cycle_previewers_prev, }
+      i = { 
+        ["<C-x>"] = false, 
+        ["<C-j>"] = actions.move_selection_next, 
+        ["<C-k>"] = actions.move_selection_previous, 
+        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist, 
+        ["<C-s>"] = actions.cycle_previewers_next, 
+        ["<C-a>"] = actions.cycle_previewers_prev, 
+        ["<C-h>"] = "which_key"
+      }, 
+        
+      -- ["<ESC>"] = actions.close, 
+      
+      n = { 
+        ["<C-s>"] = actions.cycle_previewers_next, 
+        ["<C-a>"] = actions.cycle_previewers_prev, 
+    }
     }
   },
   extensions = {
     fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case"},
+    -- file_browser = {
+    --   hijack_netrw = true,
+    --   theme = "ivy",
+    --   -- -- path
+    --   -- -- cwd
+    --   -- cwd_to_path = true,
+    --   -- grouped = false,
+    --   -- files = true,
+    --   -- add_dirs = true,
+    --   -- depth = 1,
+    --   -- auto_depth = false,
+    --   -- select_buffer = false,
+    --   -- hidden = { file_browser = true, folder_browser = true },
+    --   -- -- respect_gitignore
+    --   -- -- browse_files
+    --   -- -- browse_folders
+    --   -- hide_parent_dir = false,
+    --   -- collapse_dirs = false,
+    --   -- prompt_path = false,
+    --   -- quiet = false,
+    --   -- dir_icon = "",
+    --   -- dir_icon_hl = "Default",
+    --   -- display_stat = { date = true, size = true, mode = true },
+    --   -- use_fd = true,
+    --   -- git_status = true,
+      
+    -- },
+    
     -- file_browser = {
     --   theme = "ivy",
     --   hijack_netrw = true,
@@ -70,6 +104,9 @@ require('telescope').setup {
     }
   },
 }
+
+-- require("telescope").load_extension("file_browser")
+
 
 local M = {}
 

@@ -1,4 +1,5 @@
 local present, wk = pcall(require, "which-key")
+
 if not present then return end
 wk.setup {
   plugins = {
@@ -48,7 +49,7 @@ local normal_mode_mappings = {
   ['v'] = { '<C-W>v', 'split right' },
   ['V'] = { '<C-W>s', 'split below' },
   ['q'] = { 'quicklist' },
-  -- ['e']  = { "<cmd>Telescope file_browser<cr>", "explorer" },
+  ['e']  = { "<cmd>Telescope file_browser<cr>", "explorer" },
   ["x"] = { "<cmd>q!<CR>", "quit" },
   ["t"] = { '<cmd>vert sbnext<cr>', 'split right' },
   ["b"] = { '<cmd>bel sbnext<cr>', 'split right' },

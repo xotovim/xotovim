@@ -360,7 +360,7 @@ if xotovim.plugins.ai.tabnine.enabled then
     sort = true,
     show_prediction_strength = true,
     run_on_every_keystroke = true,
-    snipper_placeholder = ":",
+    snipper_placeholder = "..",
     ignored_file_types = {},
   })
 end
