@@ -1,6 +1,5 @@
 local present, wk = pcall(require, "which-key")
 if not present then return end
-
 wk.setup {
   plugins = {
     marks = true, 
@@ -49,17 +48,12 @@ local normal_mode_mappings = {
   ['v'] = { '<C-W>v', 'split right' },
   ['V'] = { '<C-W>s', 'split below' },
   ['q'] = { 'quicklist' },
-  
-  -- ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
-  ['e'] = { '<cmd>NvimTreeToggle<CR>', 'explorer' },
-  -- ['r'] = { '<cmd>Ranger<CR>', 'ranger' },
+  ['e']  = { "<cmd>Telescope file_browser<cr>", "explorer" },
   ["x"] = { "<cmd>q!<CR>", "quit" },
-  -- ["T"] = { '<cmd>ToggleTerm<CR>', 'terminal' },
   ["t"] = { '<cmd>vert sbnext<cr>', 'split right' },
   ["b"] = { '<cmd>bel sbnext<cr>', 'split right' },
   [";"] = {
     name = "xotovim",
-    -- ["/"] = { '<cmd>Alpha<CR>', 'dashboard' },
     m = { '<cmd>e $MYVIMRC<CR>', 'main config' },
   },
   w = {
@@ -103,21 +97,22 @@ local normal_mode_mappings = {
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "document symbols" },
   },
   d = {
-    name = "dab debug",
-    t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "toggle breakpoint" },
-    b = { "<cmd>lua require'dap'.step_back()<cr>", "step back" },
-    c = { "<cmd>lua require'dap'.continue()<cr>", "continue" },
-    C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "run to cursor" },
-    d = { "<cmd>lua require'dap'.disconnect()<cr>", "disconnect" },
-    -- g = { "<cmd>lua require'dap'.session()<cr>", "get session" },
-    i = { "<cmd>lua require'dap'.step_into()<cr>", "step into" },
-    o = { "<cmd>lua require'dap'.step_over()<cr>", "step over" },
-    u = { "<cmd>lua require'dap'.step_out()<cr>", "step out" },
-    p = { "<cmd>lua require'dap'.pause()<cr>", "pause" },
-    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "toggle repl" },
-    s = { "<cmd>lua require'dap'.continue()<cr>", "start" },
-    q = { "<cmd>lua require'dap'.close()<cr>", "quit" },
-    U = { "<cmd>lua require'dapui'.toggle()<cr>", "toggle ui" },
+    name = 'debug',
+    a = { 'attach' },
+    b = { 'breakpoint' },
+    c = { 'continue' },
+    C = { 'close UI' },
+    d = { 'continue' },
+    h = { 'visual hover' },
+    i = { 'step into' },
+    o = { 'step over' },
+    O = { 'step out' },
+    r = { 'repl' },
+    s = { 'scopes' },
+    t = { 'terminate' },
+    v = { 'log variable' },
+    V = { 'log variable above' },
+    w = { 'watches' },
   },
   g = {
     name = "git",
@@ -166,7 +161,6 @@ local normal_mode_mappings = {
     w = { 'word' },
     l = { "<cmd>lua require'telescope'.extensions.repo.cached_list{file_ignore_patterns={'/%.cache/', '/%.cargo/', '/%.local/', '/%timeshift/', '/usr/', '/srv/', '/%.oh%-my%-zsh', '/Library/', '/%.cocoapods/'}}<CR>", 'list' },
     r = { 'refactor' },
-    -- s = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
     t = { "<cmd>TodoTrouble<CR>", 'todo' },
   },
   f = {
@@ -196,10 +190,6 @@ local visual_mode_mappings = {
   l = { name = "lsp", a = { 'range code action' }, f = { 'range format' }},
   g = { name = "git", h = { name = "hunk", r = "reset hunk", s = "stage hunk"}, },
   p = { name = "project", r = { 'refactor' }},
---[[   t = {
-    name = "table mode",
-    t = { 'tableize' },
-  }, ]]
 }
 wk.register(normal_mode_mappings, opts)
 wk.register(visual_mode_mappings, visual_opts)

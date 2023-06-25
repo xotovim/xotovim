@@ -9,11 +9,11 @@ capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
 capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits"}, }
+capabilities.textDocument.completion.completionItem.resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits", }, }
 
 capabilities.textDocument.codeAction = {
 	dynamicRegistration = false,
-	codeActionLiteralSupport = { codeActionKind = { valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports"}, }},
+	codeActionLiteralSupport = { codeActionKind = { valueSet = { "", "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports", }, }, },
 }
 
 capabilities.textDocument.foldingRange = {
@@ -22,15 +22,14 @@ capabilities.textDocument.foldingRange = {
 }
 
 local on_attach = function(client, bufnr)
-	-- client.server_capabilities.documentFormattingProvider = false
-	-- client.server_capabilities.documentRangeFormattingProvider = false
+	client.server_capabilities.documentFormattingProvider = true
+	client.server_capabilities.documentRangeFormattingProvider = true
 
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
 
 	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
 	require("lsp-inlayhints").on_attach(client, bufnr)
 end
 

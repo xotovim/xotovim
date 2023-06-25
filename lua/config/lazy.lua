@@ -7,7 +7,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { xotovim.colorscheme } },
+  install = { colorscheme = { "github_light" } },
   checker = { enabled = true },
   performance = { rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
   -- performance = { rtp = { disabled_plugins = { "gzip", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
@@ -15,4 +15,3 @@ require("lazy").setup("config.plugins", {
   ui = { border = xotovim.ui.float.border, }
 })
 
-vim.keymap.set("n", "<leader>/l", "<cmd>:Lazy<cr>")

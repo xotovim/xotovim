@@ -1,8 +1,5 @@
-------------------------------------------------
-------------------------------------------------
 local icons = require("utils.icons")
 xotovim = {
-	colorscheme = "github_light",
 	ui = {
 		float = { border = "single"},
 	},

@@ -6,7 +6,6 @@ require'nvim-treesitter.configs'.setup {
   highlight = { enable = true, additional_vim_regex_highlighting = true},
   incremental_selection = {
     enable = false,
-    keymaps = { init_selection = "<leader>gnn", node_incremental = "<leader>gnr", scope_incremental = "<leader>gne", node_decremental = "<leader>gnt"},
   },
   indent = { enable = true },
   rainbow = { enable = true, colors = { "#68a0b0", "#946EaD", "#c7aA6D"}, disable = { "html" }},
@@ -21,6 +20,5 @@ require'nvim-treesitter.configs'.setup {
   },
   textsubjects = {
     enable = true,
-    keymaps = { ['<cr>'] = 'textsubjects-smart',  }
   },
 }

@@ -8,5 +8,3 @@ todo_comments.setup {
   highlight = { before = "",  keyword = "wide",  after = "",  pattern = [[.*<(KEYWORDS)\s*:]],  comments_only = true,  max_line_len = 400,  exclude = {},  },
 }
 
-vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
-vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })

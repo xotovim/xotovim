@@ -1,5 +1,5 @@
 require('printer').setup({
-  keymap = "gp", 
+  keymap = "gp",
   behavior = "insert_below", 
   formatters = {
     lua = function(inside, variable) return string.format('print("%s: " .. %s)', inside, variable) end,
@@ -7,4 +7,3 @@ require('printer').setup({
   },
 })
 
-vim.keymap.set("n", "gP", "<Plug>(printer_print)iw")

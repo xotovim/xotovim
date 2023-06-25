@@ -2,8 +2,6 @@ local present_dapui, dapui = pcall(require, "dapui")
 local present_dap, dap = pcall(require, "dap")
 local present_virtual_text, dap_vt = pcall(require, "nvim-dap-virtual-text")
 local _, shade = pcall(require, "shade")
-local keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 if not present_dapui or not present_dap or not present_virtual_text then return end
 
@@ -29,7 +27,7 @@ dapui.setup({
   expand_lines = vim.fn.has("nvim-0.7"),
   layouts = {{ elements = {{ id = "scopes", size = 0.25 }, "breakpoints", "stacks", "watches"}, size = 40,  position = "left"}, { elements = { "repl", "console"}, size = 0.25,  position = "bottom"}, },
   floating = { max_height = nil, max_width = nil, border = xotovim.ui.float.border or "single", mappings = { close = { "q", "<Esc>" }}, },
-  windows = { indent = 1 },
+  -- windows = { indent = 1 },
   render = { max_type_length = nil,  },
 })
 
@@ -44,19 +42,6 @@ vim.g.dap_virtual_text = true
 vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
 
-keymap("n", "<Leader>db", "<CMD>lua require('dap').toggle_breakpoint()<CR>", opts)
-keymap("n", "<Leader>dc", "<CMD>lua require('dap').continue()<CR>", opts)
-keymap("n", "<Leader>dd", "<CMD>lua require('dap').continue()<CR>", opts)
-keymap("n", "<Leader>dh", "<CMD>lua require('dapui').eval()<CR>", opts)
-keymap("n", "<Leader>di", "<CMD>lua require('dap').step_into()<CR>", opts)
-keymap("n", "<Leader>do", "<CMD>lua require('dap').step_out()<CR>", opts)
-keymap("n", "<Leader>dO", "<CMD>lua require('dap').step_over()<CR>", opts)
-keymap("n", "<Leader>dt", "<CMD>lua require('dap').terminate()<CR>", opts)
-keymap("n", "<Leader>dC", "<CMD>lua require('dapui').close()<CR>", opts)
-
-keymap("n", "<Leader>dw", "<CMD>lua require('dapui').float_element('watches', { enter = true })<CR>", opts)
-keymap("n", "<Leader>ds", "<CMD>lua require('dapui').float_element('scopes', { enter = true })<CR>", opts)
-keymap("n", "<Leader>dr", "<CMD>lua require('dapui').float_element('repl', { enter = true })<CR>", opts)
 
 dap.adapters.node2 = {
   type = "executable",

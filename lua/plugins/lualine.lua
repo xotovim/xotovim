@@ -89,13 +89,13 @@ ins_left {
 ins_left {
 	"",
 	cond = conditions.buffer_not_empty,
-	color = { gui = "bold" }
+	-- color = { gui = "bold" }
 }
 
 ins_left {
 	"branch",
 	icon = "",
-	color = { gui = "bold" }
+	-- color = { gui = "bold" }
 }
 
 ins_left {
@@ -131,8 +131,9 @@ ins_right {
 		end
 		return msg
 	end,
-	icon = " LSP:",
-	color = { gui = "bold" }
+	icon = " ",
+	-- icon = "LSP : ",
+	-- color = { gui = "bold" }
 }
 
 ins_right {
@@ -152,8 +153,12 @@ ins_right {
 	always_visible = true
 }
 
-ins_right { "o:encoding", fmt = string.upper, cond = conditions.hide_in_width, color = { gui = "bold" } }
-ins_right { "fileformat", fmt = string.upper, icons_enabled = false, color = { gui = "bold" } }
-ins_right { "location", color = { gui = "bold" } }
-ins_right { "progress", color = { gui = "bold" } }
+ins_right { "o:encoding", fmt = string.upper, cond = conditions.hide_in_width}
+ins_right { "fileformat", fmt = string.upper, icons_enabled = false}
+ins_right { "location"}
+ins_right { "progress"}
+-- ins_right { "o:encoding", fmt = string.upper, cond = conditions.hide_in_width, color = { gui = "bold" } }
+-- ins_right { "fileformat", fmt = string.upper, icons_enabled = false, color = { gui = "bold" } }
+-- ins_right { "location", color = { gui = "bold" } }
+-- ins_right { "progress", color = { gui = "bold" } }
 lualine.setup(config)

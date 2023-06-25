@@ -35,9 +35,6 @@ local colors = {
   gitSigns = { add = "#266d6a", change = "#536c9e", delete = "#b2555b"},
 }
 
-
-
-
 require("scrollbar").setup({
     show = true,
     show_in_active_only = false,
