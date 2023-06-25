@@ -1,6 +1,4 @@
-
 local codes = {
-  
   no_matching_function = {message = " Can't find a matching function", "redundant-parameter", "ovl_no_viable_function_in_call"},
   empty_block = {message = " That shouldn't be empty here", "empty-block"},
   missing_symbol = {message = " Here should be a symbol", "miss-symbol"},
@@ -32,7 +30,6 @@ vim.diagnostic.config({
       return string.format('%s [%s]', diagnostic.message, diagnostic.source)
     end
   },
-  
   severity_sort = true,
   signs = true,
   underline = false,

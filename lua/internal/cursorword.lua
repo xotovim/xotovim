@@ -1,5 +1,3 @@
-
-
 local function disable_cursorword()
   local disable_ft = { ['lspsagafinder'] = true, ['NeogitStatus'] = true, ['text'] = true, }
   -- local disable_ft = { ['alpha'] = true, ['lspsagafinder'] = true, ['NeogitStatus'] = true, ['text'] = true, }

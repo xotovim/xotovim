@@ -14,6 +14,7 @@ mason_lsp.setup({
 })
 
 local lspconfig = require("lspconfig")
+
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { silent = true, border = xotovim.ui.float.border, }),
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = xotovim.ui.float.border }),
