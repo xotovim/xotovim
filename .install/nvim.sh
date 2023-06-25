@@ -5,12 +5,12 @@
 
 NEOVIM_VERSION="v0.9.0"
 
-################################# CLEANING
+######################################### CLEANING
 
 SYSTEM_MACHINE=''
 SYSTEM_OS="$(uname)"
 
-################################################ CASES
+######################################### CASES
 
 case $SYSTEM_OS in
 'Linux')
@@ -24,7 +24,7 @@ case $SYSTEM_OS in
 *) ;;
 esac
 
-################################################ INSTALL
+######################################### INSTALL
 
 function installNeovim() {
 	echo "🧑🏽‍💻 INSTALLING NEOVIM"
@@ -37,22 +37,21 @@ function installNeovim() {
 	ln -sf ${HOME}/${FILE}/bin/nvim /usr/local/bin/nvim
 }
 
-################################################ REMOVE NVIM
+######################################### REMOVE NVIM
 
 function removeInstalledNvim() {
 	echo "❌ REMOVING NVIM"
 	rm -rf ${HOME}/nvim-macos ${HOME}/nvim.appimage /usr/local/Cellar/nvim /usr/local/bin/nvim ${HOME}/.cache/nvim ${HOME}/.cache/nvim ${HOME}/.local/share/nvim /usr/local/share/lua /usr/local/Cellar/luajit-openresty /usr/local/share/luajit-2.1.0-beta3 /usr/local/lib/lua
-	# bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.sh)
 }
 
-################################################ INSTALL NVIM FOLDER
+######################################### INSTALL NVIM FOLDER
 
 removeInstalledNvim
 installNeovim
 
 echo ""
 
-################################################ END
+######################################### END
 
 echo "########.####.##....##.####..######..##.....##.########.########."
 echo "##........##..###...##..##..##....##.##.....##.##.......##.....##"

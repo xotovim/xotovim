@@ -1,46 +1,24 @@
 local lspkind = require("lspkind")
 local types = require("cmp.types")
-
 local _, tabnine = pcall(require, "cmp_tabnine.config")
-
 local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
-
+if not cmp_status_ok then return end
 local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
-
+if not snip_status_ok then return end
 local copilot_status_ok, copilot_cmp_comparators = pcall(require, "copilot_cmp.comparators")
-
-
 local copilot_suggestion_ok, copilot_suggestion = pcall(require, "copilot.suggestion")
-if not copilot_suggestion_ok then
-  return
-end
-
--- local copilot_status_ok, copilot_cmp_comparators = pcall(require, "copilot_cmp.comparators")
-
+if not copilot_suggestion_ok then return end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ Utils                                                    │
--- ╰──────────────────────────────────────────────────────────╯
 local check_backspace = function()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+  local col = vim.fn.col(".") - 1 
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") 
 end
 
 local function deprioritize_snippet(entry1, entry2)
-  if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
-    return false
-  end
-  if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
-    return true
-  end
+  if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then return false end
+  if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then return true end
 end
 
 local function limit_lsp_types(entry, ctx)
@@ -61,51 +39,28 @@ local function limit_lsp_types(entry, ctx)
       return false
     end
   elseif string.match(line, "^%s+%w+$") then
-    if kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable then
-      return true
-    else
-      return false
-    end
+    if kind == types.lsp.CompletionItemKind.Function or kind == types.lsp.CompletionItemKind.Variable then return true else return false end
   end
 
   return true
 end
 
 local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-    return false
-  end
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
---- Get completion context, i.e., auto-import/target module location.
---- Depending on the LSP this information is stored in different parts of the
---- lsp.CompletionItem payload. The process to find them is very manual: log the payloads
---- And see where useful information is stored.
----@param completion lsp.CompletionItem
----@param source cmp.Source
----@see Astronvim, because i just discovered they're already doing this thing, too
---  https://github.com/AstroNvim/AstroNvim
 local function get_lsp_completion_context(completion, source)
-  local ok, source_name = pcall(function()
-    return source.source.client.config.name
-  end)
-  if not ok then
-    return nil
-  end
+  local ok, source_name = pcall(function() return source.source.client.config.name end)
+  if not ok then return nil end
   if source_name == "tsserver" then
     return completion.detail
   elseif source_name == "pyright" then
-    if completion.labelDetails ~= nil then
-      return completion.labelDetails.description
-    end
+    if completion.labelDetails ~= nil then return completion.labelDetails.description end
   end
 end
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ Setup                                                    │
--- ╰──────────────────────────────────────────────────────────╯
 local source_mapping = {
   npm = xotovim.icons.terminal .. "NPM",
   cmp_tabnine = xotovim.icons.light,
@@ -119,25 +74,52 @@ local source_mapping = {
   path = xotovim.icons.folderOpen2,
   treesitter = xotovim.icons.tree,
   zsh = xotovim.icons.terminal .. "ZSH",
+  Array = " ",
+  Boolean = " ",
+  Class = " ",
+  Color = " ",
+  Constant = " ",
+  Constructor = " ",
+  Enum = " ",
+  EnumMember = " ",
+  Event = " ",
+  Field = " ",
+  File = " ",
+  Folder = " ",
+  Function = " ",
+  Interface = " ",
+  Key = " ",
+  Keyword = " ",
+  Method = " ",
+  Module = " ",
+  Namespace = " ",
+  Null = "ﳠ ",
+  Number = " ",
+  Object = " ",
+  Operator = " ",
+  Package = " ",
+  Property = " ",
+  Reference = " ",
+  Snippet = " ",
+  String = " ",
+  Struct = " ",
+  Text = " ",
+  TypeParameter = " ",
+  Unit = " ",
+  Value = " ",
+  Variable = " ",
 }
 
 local buffer_option = {
-  -- Complete from all visible buffers (splits)
   get_bufnrs = function()
     local bufs = {}
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      bufs[vim.api.nvim_win_get_buf(win)] = true
-    end
+    for _, win in ipairs(vim.api.nvim_list_wins()) do bufs[vim.api.nvim_win_get_buf(win)] = true end
     return vim.tbl_keys(bufs)
   end,
 }
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
+  snippet = { expand = function(args) luasnip.lsp_expand(args.body) end},
   
   
   mapping = cmp.mapping.preset.insert({
@@ -157,7 +139,7 @@ cmp.setup({
     --     copilot.accept()
     --   end
     -- end, { "i", "s" }),
-    ['<Esc>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
+    ['<Esc>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close()},
     ["<CR>"] = cmp.mapping.confirm({
 			-- this is the important line for Copilot
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -371,9 +353,6 @@ cmp.setup({
   },
 })
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ Tabnine Setup                                            │
--- ╰──────────────────────────────────────────────────────────╯
 if xotovim.plugins.ai.tabnine.enabled then
   tabnine:setup({
     max_lines = 1000,

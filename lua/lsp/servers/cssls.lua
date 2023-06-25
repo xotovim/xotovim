@@ -1,16 +1,8 @@
 local M = {}
 
 M.settings = {
-  css = {
-    lint = {
-      unknownAtRules = 'ignore',
-    },
-  },
-  scss = {
-    lint = {
-      unknownAtRules = 'ignore',
-    },
-  },
+  css = { lint = { unknownAtRules = 'ignore'}, },
+  scss = { lint = { unknownAtRules = 'ignore'}, },
 }
 
 M.on_attach = function(client, bufnr)

@@ -4,10 +4,7 @@ vim.api.nvim_set_hl(0, "NavicText", { link = "Comment" })
 vim.api.nvim_set_hl(0, "NavicSeparator", { link = "Comment" })
 
 navic.setup {
-    lsp = {
-        auto_attach = true,
-        preference = nil,
-    },
+    lsp = { auto_attach = true, preference = nil},
     highlight = true,
     separator = " " .. xotovim.icons.caretRight .. " ",
     depth_limit = 0,

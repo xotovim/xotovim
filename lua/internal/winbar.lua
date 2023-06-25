@@ -1,13 +1,9 @@
 local M = {}
 
 local status_navic_ok, navic = pcall(require, "nvim-navic")
-if not status_navic_ok then
-  return
-end
+if not status_navic_ok then return end
 
-local function isempty(s)
-  return s == nil or s == ""
-end
+local function isempty(s) return s == nil or s == "" end
 
 M.filename = function()
   local filename = vim.fn.expand("%:t")
@@ -21,50 +17,33 @@ M.filename = function()
 
   if not isempty(filename) then
     extension = vim.fn.expand("%:e")
-
     local default = false
-
     if isempty(extension) then
       extension = ""
       default = true
     end
 
-    file_icon, file_icon_color =
-        require("nvim-web-devicons").get_icon_color(filename, extension, { default = default })
-
+    file_icon, file_icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = default })
     local hl_group = "FileIconColor" .. extension
-
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
+    
     if file_icon == nil then
       file_icon = default_file_icon
       file_icon_color = default_file_icon_color
     end
 
-    -- Return filename if parent dir doesn't exist
-    if (parent_dir == nil or parent_dir == '') then
-      return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. filename .. "%*"
-    end
-
-    -- Return parent dir
+    if (parent_dir == nil or parent_dir == '') then return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. filename .. "%*" end
     return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. parent_dir .. "%*"
   end
 end
 
 M.gps = function()
   local status_ok, navic_location = pcall(navic.get_location, {})
-  if not status_ok then
-    return
-  end
-
-  if not navic.is_available() then -- Returns boolean value indicating whether a output can be provided
-    return
-  end
-
+  if not status_ok then return end
+  if not navic.is_available() then  return end
   local retval = M.filename()
-
-  if navic_location == "error" then
-    return ""
-  else
+  
+  if navic_location == "error" then return "" else
     if not isempty(navic_location) then
       local hl_group = "LineNr"
       return retval .. " " .. "%#" .. hl_group .. "#" .. xotovim.icons.caretRight .. "%*" .. " " .. navic_location
@@ -76,28 +55,10 @@ end
 
 vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
   callback = function()
-    local winbar_filetype_exclude = {
-      "help",
-      "startify",
-      "dashboard",
-      "packer",
-      "neogitstatus",
-      "NvimTree",
-      "Trouble",
-      "alpha",
-      "lir",
-      "Outline",
-      "spectre_panel",
-      "TelescopePrompt",
-      -- "DressingInput",
-      -- "DressingSelect",
-      "neotest-summary",
-      "toggleterm",
-    }
+    local winbar_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "lir", "Outline", "spectre_panel", "TelescopePrompt", "neotest-summary", "toggleterm", }
+    -- local winbar_filetype_exclude = { "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir", "Outline", "spectre_panel", "TelescopePrompt", "neotest-summary", "toggleterm", }
 
-    if vim.api.nvim_win_get_config(0).relative ~= "" then
-      return
-    end
+    if vim.api.nvim_win_get_config(0).relative ~= "" then return end
 
     if vim.bo.filetype == "dapui_watches" then
       local hl_group = "xotovimSecondary"
@@ -125,13 +86,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
 
     if vim.bo.filetype == "dap-repl" then
       local hl_group = "xotovimSecondary"
-      vim.opt_local.winbar = " "
-          .. "%#"
-          .. hl_group
-          .. "#"
-          .. require("utils.icons").consoleDebug
-          .. "Debug Console"
-          .. "%*"
+      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").consoleDebug .. "Debug Console" .. "%*"
       return
     end
 
@@ -159,11 +114,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
     end
 
     local value = winbar.gps()
-
-    if value == nil then
-      value = winbar.filename()
-    end
-
+    if value == nil then value = winbar.filename() end
     vim.opt_local.winbar = value
   end,
 })

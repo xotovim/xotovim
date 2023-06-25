@@ -1,19 +1,17 @@
 local status_ok, gps = pcall(require, "nvim-gps")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 
 local icons = require "utils.icons"
 local hl_group = "LineNr"
 
 gps.setup({
   icons = {
-    ["class-name"] = "%#CmpItemKindClass#" .. icons.class .. "%*" .. "", -- classes and class-like objects
-    ["hook-name"] = "%#CmpItemKindMethodDefault#" .. icons.hook .. "%*" .. "", -- react hooks
-    ["function-name"] = "%#CmpItemKindFunction#" .. icons.func .. "%*" .. "", -- functions
-    ["method-name"] = "%#CmpItemKindMethod#" .. icons.method .. "%*" .. "", -- methods (functions inside class-like objects)
-    ["container-name"] = "%#CmpItemKindProperty#" .. icons.object .. "%*" .. "", -- containers (example: lua tables)
-    ["tag-name"] = "%#CmpItemKindKeyword#" .. icons.tag .. "%*" .. " ", -- tags (example: html tags)
+    ["class-name"] = "%#CmpItemKindClass#" .. icons.class .. "%*" .. "", 
+    ["hook-name"] = "%#CmpItemKindMethodDefault#" .. icons.hook .. "%*" .. "", 
+    ["function-name"] = "%#CmpItemKindFunction#" .. icons.func .. "%*" .. "", 
+    ["method-name"] = "%#CmpItemKindMethod#" .. icons.method .. "%*" .. "", 
+    ["container-name"] = "%#CmpItemKindProperty#" .. icons.object .. "%*" .. "", 
+    ["tag-name"] = "%#CmpItemKindKeyword#" .. icons.tag .. "%*" .. " ", 
     ["mapping-name"] = "%#CmpItemKindProperty#" .. icons.object .. "%*" .. "",
     ["sequence-name"] = "%CmpItemKindProperty#" .. icons.array .. "%*" .. "",
     ["null-name"] = "%CmpItemKindField#" .. icons.field .. "%*" .. "",
@@ -31,18 +29,14 @@ gps.setup({
     ["time-name"] = "%CmpItemKindValue#" .. icons.watch .. "%*" .. "",
     ["module-name"] = "%CmpItemKindModule#" .. icons.module .. "%*" .. "",
   },
-  -- Disable any languages individually over here
-  -- Icons can be set here too for some specific languages (check in gps source code)
-  -- Any language not disabled here is enabled by default
+  
   languages = {
     ["html"] = false,
-    ["tsx"] = {
-      ["hook-name"] = "%#CmpItemKindMethodDefault#" .. icons.hook .. "%*" .. "", -- react hooks
-    }
+    ["tsx"] = { ["hook-name"] = "%#CmpItemKindMethodDefault#" .. icons.hook .. "%*" .. "",  }
   },
 
   separator = " " .. "%#" .. hl_group .. "#" .. xotovim.icons.caretRight .. "%*",
-  depth = 0, -- limit for amount of context shown -- 0 means no limit -- note: to make use of depth feature properly, make sure your separator isn't something that can appear -- in context names (eg: function names, class names, etc)
-  depth_limit_indicator = "..", -- indicator used when context is hits depth limit
+  depth = 0, 
+  depth_limit_indicator = "..", 
   text_hl = hl_group
 })

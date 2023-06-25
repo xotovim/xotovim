@@ -1,5 +1,4 @@
-# xotovim: Neovim Config
-WIP : branch => feature/xotovim-tokio
+# xotovim : Neovim Config
 
 [![Last commit](https://img.shields.io/github/last-commit/xotovim/xotovim?style=for-the-badge)](https://github.com/xotovim/xotovim/commits/development)
 ![Stars](https://img.shields.io/github/stars/xotovim/xotovim?style=for-the-badge)
@@ -37,15 +36,13 @@ Copy it into your terminal:
 ```bash
 # install nvim 8
 bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/nvim.sh)
-
-# install xotovim
-bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/xotovim.sh)
 ```
 
 After install configuration:
 
 1. Treesitter Languages are <ins>installed</ins> by default.\
    If you wish to add more of them make sure to run `:TSInstall <lang>` for specific language you want to install and configure them in the lsp folder. 
+   
 2. LSP servers are enabled by default. You can check installed LSP servers by :Mason command.
 
 ## Configuration 💻
