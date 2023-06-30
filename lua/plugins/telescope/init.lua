@@ -7,7 +7,7 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('repo')
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("package_info")
-require("telescope").load_extension("file_browser")
+-- require("telescope").load_extension("file_browser")
 require("telescope").load_extension("ui-select")
 
 local git_icons = {
@@ -106,7 +106,6 @@ require('telescope').setup {
 }
 
 -- require("telescope").load_extension("file_browser")
-
 
 local M = {}
 

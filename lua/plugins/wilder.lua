@@ -36,22 +36,28 @@ wilder.set_option('pipeline', {
     })
   )
 })
-wilder.set_option('renderer', wilder.popupmenu_renderer(
-  wilder.popupmenu_border_theme({
-    highlighter = {
-      wilder.pcre2_highlighter(),
-      wilder.lua_fzy_highlighter(),
-    },
-    highlights = {
-      border = 'Normal',
-      accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#EA2143' } }),
-    },
-    border = 'rounded',
-    left = { ' ', wilder.popupmenu_devicons() },
-    right = { ' ', wilder.popupmenu_devicons() },
-    empty_message = wilder.popupmenu_empty_message_with_spinner(),
-    ['/'] = wilder.wildmenu_renderer({
-      highlighter = wilder.lua_fzy_highlighter(),
-    }),
-  })
-))
+wilder.set_option('renderer', wilder.popupmenu_renderer({
+  highlighter = wilder.basic_highlighter(),
+  left = {' ', wilder.popupmenu_devicons()},
+  right = {' ', wilder.popupmenu_scrollbar()},
+}))
+
+-- wilder.set_option('renderer', wilder.popupmenu_renderer(
+--   wilder.popupmenu_border_theme({
+--     highlighter = {
+--       wilder.pcre2_highlighter(),
+--       wilder.lua_fzy_highlighter(),
+--     },
+--     highlights = {
+--       -- border = 'Normal',
+--       accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#EA2143' } }),
+--     },
+--     -- border = 'rounded',
+--     left = { ' ', wilder.popupmenu_devicons() },
+--     right = { ' ', wilder.popupmenu_devicons() },
+--     empty_message = wilder.popupmenu_empty_message_with_spinner(),
+--     ['/'] = wilder.wildmenu_renderer({
+--       highlighter = wilder.lua_fzy_highlighter(),
+--     }),
+--   })
+-- ))

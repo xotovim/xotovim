@@ -1,4 +1,5 @@
 return {
+	{ "xiyaowong/transparent.nvim",  lazy = false,  priority = 1000,  config = function() require('plugins.transparent') end },
 	{ "projekt0n/github-nvim-theme",  lazy = false,  priority = 1000,  config = function() require('plugins.xotonight') end },
 	{ 'nvim-telescope/telescope-file-browser.nvim', config = function() require("plugins.filebrowser") end }, 
 	{ "nvim-lualine/lualine.nvim", lazy = false, priority = 1000, config = function() require("plugins.lualine") end },
