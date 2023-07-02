@@ -8,19 +8,19 @@
 
 ## Features 💠
 
-- Recommended default theme: github-light
-- Highly performant even with a lot of plugins
-- Lazy loaded
-- Extendable LSP configuration
-- Support for [TailwindCSS](https://tailwindcss.com/) with highlighted colors
-- Support for [Tabnine](https://www.tabnine.com/) and copilot
-- JSON autocompletion for most popular Frontend config
-- NPM packages autocompletion
-- Internal [Jest](https://github.com/facebook/jest) testing
-- Treesitter-based folding
-- Git management with [Lazygit](https://github.com/jesseduffield/lazygit), custom telescope commits view with [git-delta](https://github.com/dandavison/delta), [gitsigns](https://github.com/lewis6991/gitsigns.nvim) & [diffview](https://github.com/sindrets/diffview.nvim), custom git blame
+- recommended default theme: github-light
+- highly performant even with a lot of plugins
+- lazy loaded
+- extendable lsp configuration
+- support for tailwindcss with highlighted colors
+- support for tabnine and copilot
+- json autocompletion for most popular frontend config
+- npm packages autocompletion
+- internal jest testing
+- treesitter-based folding
+- git management with lazygit gitdeta gitsigns diffview
 
-And of course usage of [telescope](https://github.com/nvim-telescope/telescope.nvim), [nvim-tree](https://github.com/kyazdani42/nvim-tree.lua), [barbar](https://github.com/romgrk/barbar.nvim), [cmp](https://github.com/hrsh7th/nvim-cmp), [treesitter](https://github.com/nvim-treesitter/nvim-treesitter) & more!
+And of course usage of telescope, barbar, cm
 
 ## Screenshots 📸
 
@@ -30,25 +30,20 @@ Dashboard
 
 ## Requirements ⚡️
 
-Copy it into your terminal:
-
 ```bash
-# install nvim 8
+# install nvim 8 or higher
 bash <(curl -s https://raw.githubusercontent.com/xotovim/xotovim/development/.install/nvim.sh)
 ```
 
 
 ## Installation ⚡️
 
-Copy it into your terminal:
-
 ```bash
-# install nvim 8
+# clone on your nvim folder
 git clone https://github.com/xotovim/xotovim.git ~/.config/nvim
 ```
  
 ## Configuration 💻
 
-To change xotovim related config use the `config.lua` file.\
+To change xotovim related config use the `config.lua` file.
 To change vim settings use the `settings.lua` file.
-
