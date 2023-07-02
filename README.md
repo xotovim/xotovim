@@ -1,5 +1,6 @@
 # xotovim
 
+```bash
 .                                                .
                      ...   ......,,**//*          
                . ...,,,,***********,,,/(#         
@@ -20,7 +21,7 @@
            @&&&&&&&&%%%%%&&%%%%%%%%%%%%%%%(       
               &&%%%%%%%%%&%%%%%%%%%#%%#*          
                    #%%%%%%%%%#####*               
-
+```
 
 ![Stars](https://img.shields.io/github/stars/xotovim/xotovim?style=for-the-badge)
 ![License](https://img.shields.io/github/license/xotovim/xotovim?style=for-the-badge)
