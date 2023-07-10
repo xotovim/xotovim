@@ -7,6 +7,9 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
+  change_detection = {
+			notify = false,
+		},
   install = { colorscheme = { "github_light" } },
   checker = { enabled = true },
   performance = { rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
