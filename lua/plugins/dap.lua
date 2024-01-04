@@ -17,7 +17,7 @@ dap_vt.setup({
   filter_references_pattern = "<module", 
   virt_text_pos = "eol", 
   all_frames = false, 
-  virt_lines = false, 
+  virt_lines = true, 
   virt_text_win_col = nil, 
 })
 
@@ -37,7 +37,7 @@ dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() 
 dap.listeners.after.event_terminated["dapui_config"] = function() dapui.close() end
 dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
-vim.g.dap_virtual_text = true
+vim.g.dap_virtual_text = false
 
 vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })

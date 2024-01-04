@@ -6,7 +6,7 @@ local function disable_cursorword()
 end
 
 -- local function highlight_cursorword()
---   if vim.g.cursorword_highlight ~= false then --     vim.cmd('highlight CursorWord term=underline cterm=underline gui=underline') --   end
+--   if vim.g.cursorword_highlight ~= false then -- vim.cmd('highlight CursorWord term=underline cterm=underline gui=underline') --   end
 -- end
 
 -- highlight_cursorword()
@@ -14,6 +14,7 @@ end
 local function matchadd()
   local disable_ft = { ['NvimTree'] = true, ['lspsagafinder'] = true, ['dashboard'] = true, }
   -- local disable_ft = { ['alpha'] = true, ['NvimTree'] = true, ['lspsagafinder'] = true, ['dashboard'] = true, }
+  
   if disable_ft[vim.bo.ft] then return end
   if vim.api.nvim_get_mode().mode == 'i' then return end
   local column = vim.api.nvim_win_get_cursor(0)[2]

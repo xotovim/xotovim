@@ -49,7 +49,9 @@ local normal_mode_mappings = {
   ['v'] = { '<C-W>v', 'split right' },
   ['V'] = { '<C-W>s', 'split below' },
   ['q'] = { 'quicklist' },
-  ['e']  = { "<cmd>Telescope file_browser<cr>", "explorer" },
+  
+  ['p']  = { "<cmd>Telescope projects<cr>", "project" },
+  ['e']  = { "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", "explorer" },
   ["x"] = { "<cmd>q!<CR>", "quit" },
   ["t"] = { '<cmd>vert sbnext<cr>', 'split right' },
   ["b"] = { '<cmd>bel sbnext<cr>', 'split right' },
@@ -187,7 +189,7 @@ local normal_mode_mappings = {
 }
 local visual_mode_mappings = {
   ["s"] = { "<cmd>'<,'>sort<CR>", 'sort' },
-  ["/"] = { "<Plug>(comment_toggle_linewise_current)", "comment" },
+  -- ["/"] = { "<Plug>(comment_toggle_linewise_current)", "comment" },
   l = { name = "lsp", a = { 'range code action' }, f = { 'range format' }},
   g = { name = "git", h = { name = "hunk", r = "reset hunk", s = "stage hunk"}, },
   p = { name = "project", r = { 'refactor' }},

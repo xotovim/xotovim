@@ -22,22 +22,29 @@ local handlers = {
 }
 
 local function on_attach(client, bufnr) end
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true, }
 
 if typescript_ok then
   typescript.setup({
     disable_commands = false,
-    debug = false,         
-    server = {
-      capabilities = require("lsp.servers.tsserver").capabilities,
-      handlers = require("lsp.servers.tsserver").handlers,
-      on_attach = require("lsp.servers.tsserver").on_attach,
-      settings = require("lsp.servers.tsserver").settings,
-    },
+    debug = false, 
+    server = { capabilities = require("lsp.servers.tsserver").capabilities, handlers = require("lsp.servers.tsserver").handlers, on_attach = require("lsp.servers.tsserver").on_attach, settings = require("lsp.servers.tsserver").settings },
   })
   
 end
+
+lspconfig.pyright.setup {
+  settings = {
+    python = {
+      analysis = {
+        extraPaths = {"path/to/desired/modules"}
+      }
+    }
+  }
+}
+
 lspconfig.tailwindcss.setup({
   capabilities = require("lsp.servers.tailwindcss").capabilities,
   filetypes = require("lsp.servers.tailwindcss").filetypes,

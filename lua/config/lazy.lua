@@ -7,11 +7,12 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
-  change_detection = {
-			notify = false,
-		},
-  install = { colorscheme = { "github_light" } },
-  checker = { enabled = true },
+	change_detection = {
+		notify = false,
+	},
+  install = { colorscheme = { "github_light_tritanopia" } },
+  checker = { enabled = false },
+  concurrency = 5,
   performance = { rtp = { disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
   -- performance = { rtp = { disabled_plugins = { "gzip", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin", }, }, },
   debug = false,

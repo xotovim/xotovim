@@ -63,7 +63,6 @@ local handlers = {
 			local filtered_result = filter(result, filterReactDTS)
 			return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
 		end
-
 		vim.lsp.handlers["textDocument/definition"](err, result, method, ...)
 	end,
 }

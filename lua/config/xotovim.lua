@@ -7,7 +7,7 @@ xotovim = {
 		ai = { chatgpt = { enabled = true}, codeium = { enabled = true}, copilot = { enabled = true}, tabnine = { enabled = true}, },
 		completion = { select_first_on_enter = true},
 		jump_by_subwords = { enabled = false},
-		rooter = { patterns = { ".git", "_darcs", ".bzr", ".svn", "Makefile" },  },
+		rooter = { patterns = { ".git", "_darcs", ".bzr", ".svn", "Makefile", "package.json" },  },
 		zen = { kitty_enabled = true, enabled = true,  },
 	},
 	icons = icons,
@@ -17,6 +17,7 @@ xotovim = {
 	},
 	lsp = {
     virtual_text = false, 
-    virtual_lines = { only_current_line = true }	
+    -- virtual_lines = { only_current_line = true }	
+    virtual_lines = true
 	},
 }

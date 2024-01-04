@@ -48,6 +48,7 @@ local options = {
   fileencoding   = "utf-8", --- the encoding written to file
   incsearch      = true, --- start searching before pressing enter
   showmode       = false, --- don't show things like insert anymore
+  linebreak = true
 }
 
   -- shiftwidth     = 2, --- change a number of space characeters inseted for indentation

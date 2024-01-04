@@ -34,8 +34,8 @@ vim.diagnostic.config({
   signs = true,
   underline = false,
   update_in_insert = false,
-  virtual_text = true, 
-  virtual_lines = false 
+  virtual_text = false, 
+  virtual_lines = true 
 })
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }

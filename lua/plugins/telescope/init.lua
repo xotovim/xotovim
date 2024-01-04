@@ -7,6 +7,7 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('repo')
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("package_info")
+require('telescope').load_extension('projects')
 -- require("telescope").load_extension("file_browser")
 require("telescope").load_extension("ui-select")
 
@@ -33,7 +34,7 @@ require('telescope').setup {
     border = {},
     selectionet =  "  ",
     entry_prefix = "  ",
-    -- initial_mode = "normal",
+    initial_mode = "normal",
     borderchars = { '─', '│', '─', '│', '┌', '┐', "┘", "└"},
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     git_icons = git_icons,

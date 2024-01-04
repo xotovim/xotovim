@@ -119,7 +119,7 @@ end }
 
 ins_right {
 	function()
-		local msg = "null"
+		local msg = "nvim"
 		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 		local clients = vim.lsp.get_active_clients()
 		if next(clients) == nil then
@@ -150,13 +150,14 @@ ins_right {
 		color_info = {
 		}
 	},
-	always_visible = true
+	always_visible = false
 }
 
 ins_right { "o:encoding", fmt = string.upper, cond = conditions.hide_in_width}
-ins_right { "fileformat", fmt = string.upper, icons_enabled = false}
+ins_right { "fileformat", fmt = string.upper, icons_enabled = true}
 ins_right { "location"}
-ins_right { "progress"}
+
+-- ins_right { "progress"}
 -- ins_right { "o:encoding", fmt = string.upper, cond = conditions.hide_in_width, color = { gui = "bold" } }
 -- ins_right { "fileformat", fmt = string.upper, icons_enabled = false, color = { gui = "bold" } }
 -- ins_right { "location", color = { gui = "bold" } }
